@@ -3,9 +3,9 @@ function source_if_present(){
   [[ -f $file ]] && source "$file"
 }
 
-pushd "$(dirname $0)" > /dev/null
+pushd "$(dirname $0)" &> /dev/null
 CONFIG_BASE="$(pwd)"
-popd > /dev/null
+popd &> /dev/null
 
 # Load Customisations for all shells
 source_if_present "$CONFIG_BASE/path"
