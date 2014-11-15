@@ -17,3 +17,6 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=default,fg=green,underline"
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=default,fg=red,underline"
 
 source $HOME/.adshell/custom
+if which direnv; then
+  eval "$(direnv hook $0)"
+fi
