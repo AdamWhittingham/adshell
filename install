@@ -9,11 +9,22 @@ append_to_file() {
   fi
 }
 
-main(){
+append_git_config(){
+  git_config="[include]
+  path = ~/.adshell/gitconfig"
+  append_to_file "$git_config" $HOME/.gitconfig
+}
+
+source_custom(){
   source_cmd="source $HOME/.adshell/custom"
 
   append_to_file "$source_cmd" $HOME/.bashrc
   append_to_file "$source_cmd" $HOME/.zshrc
+}
+
+main(){
+  append_git_config
+  source_custom
 }
 
 main

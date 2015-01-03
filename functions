@@ -41,4 +41,3 @@ function seconds_to_minutes {
   local secs="$1"
   echo "$((${secs}/60))"
 }
-

@@ -20,3 +20,5 @@ source $HOME/.adshell/custom
 if which direnv; then
   eval "$(direnv hook $0)"
 fi
+
+source /Users/adam/.adshell/custom

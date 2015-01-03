@@ -1,0 +1,49 @@
+[alias]
+  a = add
+  aa = add -A
+  b = branch
+  bl = blame -CCC
+  c = commit
+  ca = commit -a
+  caa = commit -a --amend -CHEAD
+  cl = clean -fd
+  co = checkout
+  cp = cherry-pick
+  d = diff
+  dc = diff --cached
+  dcw = diff --word-diff --cached
+  dw = diff --cached
+  dwc = diff --word-diff --cached
+  ff = merge --ff-only
+  go = checkout -B
+  l = log --graph --pretty=format:'%C(green)%h%C(reset) %<(21)%C(yellow)%ar%C(reset) %<(20)%C(bold blue)%an%Creset %C(bold red)%d%C(reset) %s' --abbrev-commit
+  ls = shortlog -sn
+  m = merge
+  mt = mergetool
+  n = checkout `git log HEAD..master --pretty=%h |tail -1`
+  rb = rebase
+  s = status -bs
+  st = status -bs
+  sb = show-branch
+  tags = tag -l
+  unstage = reset head
+  vim = !vim .git/index
+  wc = whatchanged -p --abbrev-commit --pretty=medium
+[branch]
+	autosetuprebase = always
+[core]
+  excludesfile = ~/.gitignore_global
+	pager = less -FXRS
+[color]
+	ui = auto
+[push]
+	default = matching
+[mergetool "diffmerge"]
+	cmd = diffmerge --merge\n--result=$MERGED $LOCAL $BASE $REMOTE
+	trustExitCode = true
+[mergetool]
+	keepBackup = false
+[merge]
+  keepBackup = false
+  tool = diffmerge
+  defaultToUpstream = true
