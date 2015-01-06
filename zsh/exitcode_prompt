@@ -1,0 +1,3 @@
+exitcode_prompt() {
+  echo "%(?..%{$fg[red]%}%?↵ %{$reset_color%})"
+}

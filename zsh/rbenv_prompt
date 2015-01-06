@@ -1,0 +1,3 @@
+rbenv_prompt() {
+  echo "%{$fg[green]%}‹$(rbenv version | sed -e "s/ (set.*$//")›%{$reset_color%}"
+}
