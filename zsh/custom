@@ -1,5 +1,5 @@
 # Source AWS CLI Completion
 source /usr/local/share/zsh/site-functions/_aws
 
-PROMPT="%{$fg[green]%}%n$reset_color@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%B→%b"
+PROMPT="%{$fg[green]%}%n$reset_color@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%B>%b"
 RPROMPT="%(?..%{$fg[red]%}%?↵%{$reset_color%}) $(git_prompt_status) %{$reset_color%}$(git_prompt_info)%{$reset_color%} %{$fg[green]%}‹$(rbenv version | sed -e 's/ (set.*$//')›%{$reset_color%}"
