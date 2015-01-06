@@ -98,3 +98,6 @@ __git_complete g __git_main
 
 # Source AWS CLI Completion
 complete -C aws_completer aws
+
+# Load direnv if it is available
+if which direnv > /dev/null; then eval "$(direnv hook bash)"; fi
