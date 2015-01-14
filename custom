@@ -6,7 +6,7 @@ function source_if_present(){
 CONFIG_BASE=$HOME/.adshell/
 
 # Load Customisations for all shells
-source_if_present "$CONFIG_BASE/path"
+source_if_present "$CONFIG_BASE/env"
 source_if_present "$CONFIG_BASE/functions"
 source_if_present "$CONFIG_BASE/aliases"
 

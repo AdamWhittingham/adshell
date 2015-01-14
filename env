@@ -1,0 +1,4 @@
+export ANDROID_HOME=/usr/local/Cellar/android-sdk/
+
+# Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.rvm/bin
