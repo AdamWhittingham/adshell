@@ -28,6 +28,9 @@ alias serve='echo "Starting on http://localhost:9090" && ruby -run -e httpd . -p
 
 ## Git aliases
 alias g='git'
+alias gd='g d'
+alias gl='g l'
+alias gst='g st'
 
 ## Dev aliases
 alias prp='git pull && rake && git push'
@@ -52,4 +55,4 @@ alias up-all='up-vim && up-shell && up-tmux'
 
 # Misc Aliases
 alias v='vagrant'
-
+alias gs='grunt-source'
