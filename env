@@ -1,4 +1,9 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 
+source $(brew --prefix nvm)/nvm.sh
+
 # Add RVM to PATH for scripting
-PATH=$PATH:$HOME/.rvm/bin
+export PATH=$PATH:$HOME/.rvm/bin
+
+# Add brew sbin to PATH
+export PATH=/usr/local/sbin:$PATH
