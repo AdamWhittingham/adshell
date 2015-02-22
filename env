@@ -1,9 +1,17 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 
+# Setup NVM
 source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR=~/.nvm
 
 # Add RVM to PATH for scripting
-export PATH=$PATH:$HOME/.rvm/bin
+which rvm >/dev/null && \
+  export PATH=$PATH:$HOME/.rvm/bin
 
 # Add brew sbin to PATH
-export PATH=/usr/local/sbin:$PATH
+which brew >/dev/null && \
+  export PATH=/usr/local/sbin:$PATH
+
+# Add boot2docker variables
+which boot2docker >/dev/null && \
+  eval $(boot2docker shellinit 2>/dev/null)
