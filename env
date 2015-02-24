@@ -1,8 +1,8 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 
 # Setup NVM
-source $(brew --prefix nvm)/nvm.sh
 export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # Add RVM to PATH for scripting
 which rvm >/dev/null && \
