@@ -17,22 +17,23 @@ elif [[ -n $ZSH_NAME ]] ; then
   source_if_present "$CONFIG_BASE/zsh/custom"
 fi
 
-# Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  if [[ $(uname) == 'Darwin' ]]; then
-   export EDITOR='mvim -f'
-  else
-   export EDITOR='gvim -f'
-  fi
+  case "$(uname)" in
+    "Darwin")
+      export EDITOR='mvim -f'
+      # Setup iTerm2 tab names
+      export PROMPT_COMMAND='echo -ne "\\033]0;$(basename ${PWD/#$HOME/~})\\007"'
+      ;;
+    "Linux")
+      export EDITOR='gvim -f'
+      ;;
+    *)
+      export EDITOR='vim'
+      ;;
+  esac
 fi
-
-# Setup iTerm2 tab names
-export PROMPT_COMMAND='echo -ne "\\033]0;$(basename ${PWD/#$HOME/~})\\007"'
-
-# Add rbenv loading if needed
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Force term type to stop all the stupidity in vim, tmux et. al. Not a good idea but fixes too many things not to do it for now.
 export TERM=xterm-256color

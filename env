@@ -1,14 +1,16 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 
 # Setup NVM
-if which nvm >/dev/null ; then
-  export NVM_DIR=~/.nvm
-  source $(brew --prefix nvm)/nvm.sh
-fi
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # Add RVM to PATH for scripting
 which rvm >/dev/null && \
   export PATH=$PATH:$HOME/.rvm/bin
+
+# Add rbenv loading if needed
+which rbenv > /dev/null && \
+  eval "$(rbenv init -)"
 
 # Add brew sbin to PATH
 which brew >/dev/null && \
