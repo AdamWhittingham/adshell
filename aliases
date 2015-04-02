@@ -43,6 +43,11 @@ alias tls='tmux ls'
 alias tm='tmux_create_or_attach'
 alias tma='tmux_new_attach_to_session'
 
+## rsync aliases
+alias rsync-copy='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'
+alias rsync-move='r-copy --remove-source-files'
+alias rsync-update='r-copy --update'
+
 ## Proxy aliases
 alias p='source $HOME/.adshell/proxy on'
 alias np='source $HOME/.adshell/proxy off'
