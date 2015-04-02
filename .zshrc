@@ -5,7 +5,7 @@ export UPDATE_ZSH_DAYS=3
 ZSH_THEME="alanpeabody"
 HIST_STAMPS="yyyy/mm/dd"
 
-plugins=(rails rake-fast capistrano urltools history-substring-search)
+plugins=(rails rake-fast history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
