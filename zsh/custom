@@ -10,3 +10,5 @@ fpath=( "$HOME/.adshell/zsh/plugins" "$HOME/.adshell/zsh/prompts" $fpath)
 
 autoload -U promptinit && promptinit
 prompt pure
+
+source "$HOME/.adshell/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
