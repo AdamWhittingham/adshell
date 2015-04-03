@@ -83,6 +83,8 @@ prompt_pure_precmd() {
 
 	# check async if there is anything to pull
 	(( ${PURE_GIT_PULL:-1} )) && {
+    # Bail out if we are root
+    [[ $UID -ne 0 ]] &&
 		# check if we're in a git repo
 		[[ "$(command git rev-parse --is-inside-work-tree 2>/dev/null)" == "true" ]] &&
 		# make sure working tree is not $HOME
@@ -128,7 +130,7 @@ prompt_pure_setup() {
 	[[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username=' %n@%m'
 
 	# show username@host if root, with username in white
-	[[ $UID -eq 0 ]] && prompt_pure_username=' %F{white}%n%F{242}@%m'
+	[[ $UID -eq 0 ]] && prompt_pure_username=' %F{yellow}%n%F{242}@%m'
 
 	# prompt turns red if the previous command didn't exit with 0
 	PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
