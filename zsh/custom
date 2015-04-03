@@ -59,3 +59,4 @@ zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.adshell/working/zsh-cache
 
+compdef g='git'
