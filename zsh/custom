@@ -1,12 +1,12 @@
+setopt HIST_IGNORE_DUPS
+
 # Source AWS CLI Completion
 source_if_present /usr/local/share/zsh/site-functions/_aws
 
 # Load direnv if it is available
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
-source $HOME/.adshell/zsh/git_prompt
-source $HOME/.adshell/zsh/rbenv_prompt
-source $HOME/.adshell/zsh/exitcode_prompt
+fpath=( "$HOME/.adshell/zsh/plugins" "$HOME/.adshell/zsh/prompts" $fpath)
 
-PROMPT="%{$fg[green]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}»"
-RPROMPT='$(exitcode_prompt) $(git_prompt_line) $(rbenv_prompt)'
+autoload -U promptinit && promptinit
+prompt pure
