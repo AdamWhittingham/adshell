@@ -29,5 +29,6 @@ ZSH Customisations
 ZSH users now get many (and more) benefits of oh-my-zsh without the slow start time
 - Better tab completion menus (shows commands, files, variables and users)
 - Valid commands turn green as typed to help reduce typos
-- Suggestions are made if you do typo a command
+- Suggestions are made if you typo a command
 - History substring search (type part of a command and use the up & down arrow keys to search)
+- Nicer `kill` and `ssh` completions

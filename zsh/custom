@@ -77,12 +77,11 @@ zstyle ':completion:*:messages' format ' %F{purple}%d%f'
 zstyle ':completion:*:warnings' format ' %F{red}No matches found%f'
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 
-zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*:(scp|ssh):*' ignored-patterns '_*'
 zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
 zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
 zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
 zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle '*' single-ignored show
 
 # Fuzzy match mistyped completions.
@@ -128,7 +127,7 @@ zstyle ':completion:*:rm:*' file-patterns '*:all-files'
 
 # Kill
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*' force-list always
 zstyle ':completion:*:*:kill:*' insert-ids single
