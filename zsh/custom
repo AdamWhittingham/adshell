@@ -8,7 +8,7 @@ if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 PLUGINS="$HOME/.adshell/zsh/plugins"
 
-fpath=( "$PLUGINS" "$HOME/.adshell/zsh/prompts" $fpath)
+fpath=( "$PLUGINS" "$HOME/.adshell/zsh/prompts" "$PLUGINS/zsh-completions/src" $fpath)
 
 # Setup our prompt
 autoload -U promptinit && promptinit
