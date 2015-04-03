@@ -66,6 +66,11 @@ prompt_pure_string_length() {
 	echo $(( ${#${(S%%)1//(\%([KF1]|)\{*\}|\%[Bbkf])}} - 1 ))
 }
 
+# Show rbenv version is explicitly set in the tree
+prompt_pure_rbenv_local() {
+  rbenv local &>/dev/null && echo " %{%F{198}%}‹$(rbenv local)›%{%f%}"
+}
+
 prompt_pure_precmd() {
 	# shows the full path in the title
 	print -Pn '\e]0;%~\a'
@@ -73,7 +78,7 @@ prompt_pure_precmd() {
 	# git info
 	vcs_info
 
-	local prompt_pure_preprompt="\n%F{blue}%~%F{242}$vcs_info_msg_0_`prompt_pure_git_dirty`$prompt_pure_username%f%F{yellow}`prompt_pure_cmd_exec_time`%f"
+	local prompt_pure_preprompt="\n%F{blue}%~`prompt_pure_rbenv_local`%F{242}$vcs_info_msg_0_`prompt_pure_git_dirty`$prompt_pure_username%f%F{yellow}`prompt_pure_cmd_exec_time`%f"
 	print -P $prompt_pure_preprompt
 
 	# check async if there is anything to pull
@@ -87,9 +92,9 @@ prompt_pure_precmd() {
 		# check if there is an upstream configured for this branch
 		command git rev-parse --abbrev-ref @'{u}' &>/dev/null && {
 			local arrows=''
-			(( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows='⇣'
-			(( $(command git rev-list --left-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows+='⇡'
-			print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}${arrows}%f\e8"
+			(( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows='↓'
+			(( $(command git rev-list --left-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows+='↑'
+			print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{yellow}${arrows}%f\e8"
 		}
 	} &!
 
@@ -127,7 +132,6 @@ prompt_pure_setup() {
 
 	# prompt turns red if the previous command didn't exit with 0
 	PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
-  #RPROMPT="%{%F{green}%}‹$(rbenv version | sed -e "s/ (set.*$//")›%{%f%}"
 }
 
 prompt_pure_setup "$@"
