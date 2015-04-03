@@ -29,7 +29,6 @@ setopt PUSHD_TO_HOME        # Push to home directory when no argument is given.
 setopt CDABLE_VARS          # Change directory to a path stored in a variable.
 setopt AUTO_NAME_DIRS       # Auto add variable-stored paths to ~ list.
 setopt MULTIOS              # Write to multiple descriptors.
-setopt EXTENDED_GLOB        # Use extended globbing syntax.
 
 # Setup command highlighting
 source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -57,10 +56,9 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Setup auto completion
-autoload -Uz compinit
-zstyle ':completion:*' menu select=1 _complete _ignored _approximate
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' verbose yes
+zstyle ':completion:*' menu select=2 _expand _complete _ignored _approximate
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
@@ -82,5 +80,11 @@ zstyle ':completion:*' cache-path ~/.adshell/working/zsh-cache
 
 setopt correct
 setopt correctall
+setopt completeinword
+setopt extendedglob
+unsetopt caseglob
 
 compdef g='git'
+
+autoload -Uz compinit
+compinit
