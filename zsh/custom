@@ -14,10 +14,6 @@ fpath=( "$PLUGINS" "$HOME/.adshell/zsh/prompts" "$PLUGINS/zsh-completions/src" $
 autoload -U promptinit && promptinit
 prompt pure
 
-# Setup auto completion
-autoload -U compinit && compinit
-zstyle ':completion:*' menu select
-
 # Setup decent navigation options
 setopt AUTO_CD              # Auto changes to a directory without typing cd.
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
@@ -32,6 +28,19 @@ setopt EXTENDED_GLOB        # Use extended globbing syntax.
 # Setup command highlighting
 source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# Setup History
+export HISTFILE=~/.adshell/working/zsh_history
+export HISTSIZE=50000
+export SAVEHIST=50000
+
+setopt HIST_VERIFY
+setopt SHARE_HISTORY # share history between sessions
+setopt EXTENDED_HISTORY # add timestamps to history
+
+setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
+
 # Add history substring searching
 source "$PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
 zmodload zsh/terminfo
@@ -42,3 +51,11 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+# Setup auto completion
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.adshell/working/zsh-cache
+
