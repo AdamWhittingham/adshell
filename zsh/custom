@@ -8,11 +8,17 @@ if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 PLUGINS="$HOME/.adshell/zsh/plugins"
 
-fpath=( "$PLUGINS" "$HOME/.adshell/zsh/prompts" "$PLUGINS/zsh-completions/src" $fpath)
+fpath=( "$PLUGINS" "$HOME/.adshell/zsh/prompts" "$PLUGINS/enabled-completions" $fpath)
 
 # Setup our prompt
 autoload -U promptinit && promptinit
 prompt pure
+
+# Set colours up
+export CLICOLOR=1
+export LSCOLORS=Gxfxcxdxbxegedabagacad
+
+setopt NO_BEEP
 
 # Setup decent navigation options
 setopt AUTO_CD              # Auto changes to a directory without typing cd.
@@ -32,7 +38,6 @@ source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 export HISTFILE=~/.adshell/working/zsh_history
 export HISTSIZE=50000
 export SAVEHIST=50000
-
 setopt HIST_VERIFY
 setopt SHARE_HISTORY # share history between sessions
 setopt EXTENDED_HISTORY # add timestamps to history
@@ -44,7 +49,6 @@ setopt HIST_REDUCE_BLANKS
 # Add history substring searching
 source "$PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
 zmodload zsh/terminfo
-setopt HIST_IGNORE_ALL_DUPS
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=default,fg=green,underline"
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=default,fg=red,underline"
 bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -54,9 +58,29 @@ bindkey '^[[B' history-substring-search-down
 
 # Setup auto completion
 autoload -Uz compinit
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select=1 _complete _ignored _approximate
+zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' verbose yes
+
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
+zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle '*' single-ignored show
+
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.adshell/working/zsh-cache
+
+setopt correct
+setopt correctall
 
 compdef g='git'
