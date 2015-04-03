@@ -6,15 +6,29 @@ source_if_present /usr/local/share/zsh/site-functions/_aws
 # Load direnv if it is available
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
-fpath=( "$HOME/.adshell/zsh/plugins" "$HOME/.adshell/zsh/prompts" $fpath)
+PLUGINS="$HOME/.adshell/zsh/plugins"
+
+fpath=( "$PLUGINS" "$HOME/.adshell/zsh/prompts" $fpath)
 
 # Setup our prompt
 autoload -U promptinit && promptinit
 prompt pure
 
-# Add command highlighting
-source "$HOME/.adshell/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
 # Setup auto completion
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
+
+# Setup command highlighting
+source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# Add history substring searching
+source "$PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+zmodload zsh/terminfo
+setopt HIST_IGNORE_ALL_DUPS
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=green,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,bold'
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
