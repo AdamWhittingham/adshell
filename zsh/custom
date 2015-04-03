@@ -8,7 +8,13 @@ if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 fpath=( "$HOME/.adshell/zsh/plugins" "$HOME/.adshell/zsh/prompts" $fpath)
 
+# Setup our prompt
 autoload -U promptinit && promptinit
 prompt pure
 
+# Add command highlighting
 source "$HOME/.adshell/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# Setup auto completion
+autoload -U compinit && compinit
+zstyle ':completion:*' menu select
