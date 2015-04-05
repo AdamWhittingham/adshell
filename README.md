@@ -7,7 +7,7 @@ Extra customisations for Bash and Zsh are loaded based on the active shell.
 Installation
 ------------
 ```
-git clone https://github.com/AdamWhittingham/adshell ~/.adshell && ~/.adshell/install
+git clone https://github.com/AdamWhittingham/adshell -b adshell-solo --single-branch --recursive ~/.adshell && ~/.adshell/install
 ```
 
 ZSH Prompt
