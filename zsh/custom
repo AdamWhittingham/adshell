@@ -29,6 +29,7 @@ setopt PUSHD_TO_HOME        # Push to home directory when no argument is given.
 setopt CDABLE_VARS          # Change directory to a path stored in a variable.
 setopt AUTO_NAME_DIRS       # Auto add variable-stored paths to ~ list.
 setopt MULTIOS              # Write to multiple descriptors.
+setopt INTERACTIVECOMMENTS  # Ignore everything in a command from a hash to a newline
 
 # Setup command highlighting
 source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
