@@ -1,13 +1,16 @@
-Adshell - Adam's Shell Customisations
-=====================================
+Adshell
+=======
 
-Adam's addition aliases, prompt setup and misc helpful things for POSIX shells.
-Extra customisations for Bash and Zsh are loaded based on the active shell.
+Makes your Zsh (or Bash) environment just that little bit more awesome
+----------------------------------------------------------------------
+
+Adshel is a collectiong of addition aliases, prompt setup and misc helpful things for POSIX shells.
+Offers far far more on Zsh but will also offer better aliases and prompts for Bash.
 
 Installation
 ------------
 ```
-git clone https://github.com/AdamWhittingham/adshell -b adshell-solo --single-branch --recursive ~/.adshell && ~/.adshell/install
+git clone https://github.com/AdamWhittingham/adshell --recursive ~/.adshell && ~/.adshell/install
 ```
 
 ZSH Prompt
