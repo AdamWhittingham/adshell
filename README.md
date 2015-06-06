@@ -4,7 +4,7 @@ Adshell
 Makes your Zsh (or Bash) environment just that little bit more awesome
 ----------------------------------------------------------------------
 
-Adshel is a collectiong of addition aliases, prompt setup and misc helpful things for POSIX shells.
+Adshell is a collectiong of addition aliases, prompt setup and misc helpful things for POSIX shells.
 Offers far far more on Zsh but will also offer better aliases and prompts for Bash.
 
 Installation
