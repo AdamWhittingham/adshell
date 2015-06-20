@@ -28,6 +28,8 @@ alias serve='ruby -run -e httpd . -p 8080'
 
 ## Git aliases
 alias g='git'
+alias gc='g c'
+alias gc-m='g c -m'
 alias gd='g d'
 alias gl='g l'
 alias gst='g st'
@@ -57,6 +59,11 @@ alias up-vim='git-update $HOME/.vim'
 alias up-shell='git-update $HOME/.adshell'
 alias up-tmux='git-update $HOME/.tmux-config'
 alias up-all='up-vim && up-shell && up-tmux'
+
+# Docker Aliases
+alias d='docker'
+alias dc='docker-compose'
+alias dsh="attach_shell_to_docker_container"
 
 # Misc Aliases
 alias v='vagrant'

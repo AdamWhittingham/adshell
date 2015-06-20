@@ -41,3 +41,7 @@ function seconds_to_minutes {
   local secs="$1"
   echo "$((${secs}/60))"
 }
+
+function attach_shell_to_docker_container {
+  docker exec -i -t $1 bash
+}
