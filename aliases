@@ -44,6 +44,7 @@ alias tl='tmux ls'
 alias tls='tmux ls'
 alias tm='tmux_create_or_attach'
 alias tma='tmux_new_attach_to_session'
+alias tm8r='tmuxinator'
 
 ## rsync aliases
 alias rsync-copy='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'

@@ -6,9 +6,10 @@ source_if_present /usr/local/share/zsh/site-functions/_aws
 # Load direnv if it is available
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
-PLUGINS="$HOME/.adshell/zsh/plugins"
+ADZSH="$HOME/.adshell/zsh"
+PLUGINS="$ADZSH/plugins"
 
-fpath=( "$PLUGINS" "$HOME/.adshell/zsh/prompts" "$PLUGINS/enabled-completions" $fpath)
+fpath=($PLUGINS/zsh-completions/src $ADZSH/prompts $fpath)
 
 # Setup our prompt
 autoload -U promptinit && promptinit
@@ -151,7 +152,8 @@ setopt completeinword
 setopt extendedglob
 unsetopt caseglob
 
-compdef g='git'
-
 autoload -Uz compinit
 compinit -i
+
+compdef g='git'
+compdef tm8r='tmuxinator'
