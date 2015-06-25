@@ -9,7 +9,7 @@ if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 ADZSH="$HOME/.adshell/zsh"
 PLUGINS="$ADZSH/plugins"
 
-fpath=($PLUGINS/zsh-completions/src $ADZSH/prompts $fpath)
+fpath=($PLUGINS/zsh-completions/src $PLUGINS/zsh-adams-tmux-completions $ADZSH/prompts $fpath)
 
 # Setup our prompt
 autoload -U promptinit && promptinit

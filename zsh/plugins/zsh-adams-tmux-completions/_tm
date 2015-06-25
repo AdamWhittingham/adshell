@@ -1,0 +1,16 @@
+#compdef tmux_create_or_attach tm tmux_new_attach_to_session tma
+
+_tmux_create_or_attach() {
+  local projects
+  projects=(${(f)"$(tmux ls -F "#S")"})
+
+  if (( CURRENT == 2 )); then
+    _describe -t projects "tmux sessions" projects
+  elif (( CURRENT == 3)); then
+    _arguments '1:projects:($projects)'
+  fi
+
+  return
+}
+
+_tmux_create_or_attach
