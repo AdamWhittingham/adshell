@@ -19,6 +19,7 @@
   l = log --graph --pretty=format:'%C(green)%h%C(reset) %<(21)%C(yellow)%ar%C(reset) %<(20)%C(bold blue)%an%Creset %C(bold red)%d%C(reset) %s' --abbrev-commit
   ls = shortlog -sn
   m = merge
+  mf = merge --no-ff
   mt = mergetool
   n = checkout `git log HEAD..master --pretty=%h |tail -1`
   rb = rebase
