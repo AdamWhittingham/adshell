@@ -22,7 +22,12 @@ source_custom(){
   append_to_file "$source_cmd" $HOME/.zshrc
 }
 
+symlink_ctags_config(){
+  ln -s ~/.adshell/ctags ~/.ctags
+}
+
 main(){
+  symlink_ctags_config
   append_git_config
   source_custom
 }
