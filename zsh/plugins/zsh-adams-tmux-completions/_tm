@@ -5,9 +5,9 @@ _tmux_create_or_attach() {
   projects=(${(f)"$(tmux ls -F "#S")"})
 
   if (( CURRENT == 2 )); then
-    _describe -t projects "tmux sessions" projects
-  elif (( CURRENT == 3)); then
     _arguments '1:projects:($projects)'
+  elif (( CURRENT == 3)); then
+    _describe -t projects "tmux sessions" projects
   fi
 
   return
