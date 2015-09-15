@@ -69,3 +69,6 @@ alias dsh="attach_shell_to_docker_container"
 # Misc Aliases
 alias v='vagrant'
 alias gs='grunt-source'
+
+# Remount SD card on OSX
+alias sdremount='sudo kextunload /System/Library/Extensions/AppleStorageDrivers.kext/Contents/PlugIns/AppleUSBCardReader.kext; sudo kextload /System/Library/Extensions/AppleStorageDrivers.kext/Contents/PlugIns/AppleUSBCardReader.kext'
