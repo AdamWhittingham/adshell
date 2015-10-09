@@ -37,8 +37,3 @@ fi
 
 # Force term type to stop all the stupidity in vim, tmux et. al. Not a good idea but fixes too many things not to do it for now.
 export TERM=xterm-256color
-
-# Deal with terminal-notifier freezing under tmux
-if $( which reattach-to-user-namespace > /dev/null ); then
-  alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
-fi
