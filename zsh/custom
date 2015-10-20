@@ -45,8 +45,7 @@ export SAVEHIST=50000
 setopt HIST_VERIFY
 setopt SHARE_HISTORY # share history between sessions
 setopt EXTENDED_HISTORY # add timestamps to history
-
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt INC_APPEND_HISTORY # adds history incrementally
 setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
 
@@ -65,9 +64,12 @@ zstyle ':completion:*' menu select=2 _expand _complete _ignored _approximate
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Cache auto completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.adshell/working/zsh-cache
+
 zstyle ':completion:*' format ' %F{yellow}%d%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes

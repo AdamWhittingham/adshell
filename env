@@ -1,5 +1,9 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 
+# Add brew sbin to PATH
+which brew >/dev/null && \
+  export PATH=/usr/local/sbin:$PATH
+
 # Setup NVM
 if [[ -d ~/.nvm ]]; then
   export NVM_DIR=~/.nvm
@@ -13,15 +17,7 @@ which rvm >/dev/null && \
 
 # Add rbenv loading if needed
 which rbenv > /dev/null && \
-  eval "$(rbenv init -)"
-
-# Add brew sbin to PATH
-which brew >/dev/null && \
-  export PATH=/usr/local/sbin:$PATH
-
-# Add boot2docker variables
-which boot2docker >/dev/null && \
-  eval $(boot2docker shellinit 2>/dev/null)
+  eval "$(rbenv init - --no-rehash)"
 
 # If GNU CoreUtils is installed, make them the default
 if which gls >/dev/null ; then

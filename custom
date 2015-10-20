@@ -3,7 +3,7 @@ function source_if_present(){
   [[ -f $file ]] && source "$file"
 }
 
-CONFIG_BASE=$HOME/.adshell/
+CONFIG_BASE=$HOME/.adshell
 
 # Load Customisations for all shells
 source_if_present "$CONFIG_BASE/env"
@@ -34,6 +34,3 @@ else
       ;;
   esac
 fi
-
-# Force term type to stop all the stupidity in vim, tmux et. al. Not a good idea but fixes too many things not to do it for now.
-export TERM=xterm-256color
