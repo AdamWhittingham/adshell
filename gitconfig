@@ -39,15 +39,15 @@
 	ui = auto
 [push]
 	default = matching
-[mergetool "diffmerge"]
-	cmd = diffmerge --merge\n--result=$MERGED $LOCAL $BASE $REMOTE
-	trustExitCode = true
 [mergetool]
 	keepBackup = false
 [merge]
   keepBackup = false
   tool = diffmerge
   defaultToUpstream = true
+[mergetool "diffmerge"]
+	cmd = "diffmerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+	trustExitCode = true
 
 [url "git@github.com:"]
   insteadOf = "gh:"
