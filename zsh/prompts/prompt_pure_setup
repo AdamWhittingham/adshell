@@ -71,6 +71,22 @@ prompt_pure_rbenv_local() {
   rbenv local &>/dev/null && echo " %{%F{198}%}‹$(rbenv local)›%{%f%}"
 }
 
+prompt_pure_userhost(){
+	# show username in grey, or red if root user
+  local p_user='%F{242}%n%f'
+	[[ $UID -eq 0 ]] && p_user='%F{orange}%n%f'
+
+	# show host in grey, or red if PROD_ENV is set
+	local p_host='%F{242}%m%f'
+	[[ "$PROD_ENV" != '' ]] && p_host='%F{red}%B%U%m%u%b%f'
+
+	# show username@host if logged in through SSH
+  local p_user_host=''
+	[[ "$SSH_CONNECTION" != '' || "$PROD_ENV" != '' ]] && p_user_host="${p_user}%F{242}@%f${p_host}:"
+
+  echo "$p_user_host"
+}
+
 prompt_pure_precmd() {
 	# shows the full path in the title
 	print -Pn '\e]0;%~\a'
@@ -78,7 +94,7 @@ prompt_pure_precmd() {
 	# git info
 	vcs_info
 
-	local prompt_pure_preprompt="\n$prompt_pure_username%F{blue}%~`prompt_pure_rbenv_local`%F{242}$vcs_info_msg_0_`prompt_pure_git_dirty`%f%F{yellow}`prompt_pure_cmd_exec_time`%f"
+	local prompt_pure_preprompt="\n$( prompt_pure_userhost )%F{blue}%~$( prompt_pure_rbenv_local )%F{242}$vcs_info_msg_0_`prompt_pure_git_dirty`%f%F{yellow}`prompt_pure_cmd_exec_time`%f"
 	print -P $prompt_pure_preprompt
 
 	# check async if there is anything to pull
@@ -125,12 +141,6 @@ prompt_pure_setup() {
 	zstyle ':vcs_info:*' enable git
 	zstyle ':vcs_info:git*' formats ' %b'
 	zstyle ':vcs_info:git*' actionformats ' %b|%a'
-
-	# show username@host if logged in through SSH
-	[[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username='%F{242}%n@%m:'
-
-	# show username@host if root, with username in white
-	[[ $UID -eq 0 ]] && prompt_pure_username='%F{red}%n%F{242}@%m:'
 
 	# prompt turns red if the previous command didn't exit with 0
 	PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
