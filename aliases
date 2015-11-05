@@ -74,6 +74,7 @@ alias anv='ansible-vault'
 # Misc Aliases
 alias v='vagrant'
 alias gs='grunt-source'
+alias nwd='terminal-notifier -message "Task Complete"'
 
 # Remount SD card on OSX
 alias sdremount='sudo kextunload /System/Library/Extensions/AppleStorageDrivers.kext/Contents/PlugIns/AppleUSBCardReader.kext; sudo kextload /System/Library/Extensions/AppleStorageDrivers.kext/Contents/PlugIns/AppleUSBCardReader.kext'
