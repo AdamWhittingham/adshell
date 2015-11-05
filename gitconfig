@@ -30,15 +30,20 @@
   unstage = reset head
   vim = !vim .git/index
   wc = whatchanged -p --abbrev-commit --pretty=medium
+
 [branch]
 	autosetuprebase = always
+
 [core]
   excludesfile = ~/.gitignore_global
 	pager = less -FXRS
+
 [color]
 	ui = auto
+
 [push]
 	default = matching
+
 [mergetool]
 	keepBackup = false
 [merge]
