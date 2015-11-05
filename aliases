@@ -66,6 +66,11 @@ alias d='docker'
 alias dc='docker-compose'
 alias dsh="attach_shell_to_docker_container"
 
+# Ansible Aliases
+alias anp='ansible-playbook'
+alias ang='ansible-galaxy'
+alias anv='ansible-vault'
+
 # Misc Aliases
 alias v='vagrant'
 alias gs='grunt-source'
