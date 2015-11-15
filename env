@@ -12,12 +12,16 @@ if [[ -d ~/.nvm ]]; then
 fi
 
 # Add RVM to PATH for scripting
-which rvm >/dev/null && \
+if [[ -d ~/.rvm ]]; then
   export PATH=$PATH:$HOME/.rvm/bin
+fi
 
 # Add rbenv loading if needed
-which rbenv > /dev/null && \
-  eval "$(rbenv init - --no-rehash)"
+if [[ -d ~/.rbenv ]]; then
+  export PATH=$PATH:~/.rbenv/bin
+  which rbenv > /dev/null && \
+    eval "$(rbenv init - --no-rehash)"
+fi
 
 # If GNU CoreUtils is installed, make them the default
 if which gls >/dev/null ; then
