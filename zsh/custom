@@ -12,7 +12,9 @@ PLUGINS="$ADZSH/plugins"
 
 fpath+=($FUNCTIONS $PLUGINS/zsh-completions/src $PLUGINS/zsh-adams-tmux-completions $ADZSH/prompts $FUNCTIONS)
 
+
 # Setup our prompt
+source $FUNCTIONS/prompt_parts
 autoload -Uz async && async
 autoload -U promptinit && promptinit
 prompt pure
