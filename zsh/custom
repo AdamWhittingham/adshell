@@ -1,17 +1,13 @@
 setopt HIST_IGNORE_DUPS
 
-# Source AWS CLI Completion
-source_if_present /usr/local/share/zsh/site-functions/_aws
-
-# Load direnv if it is available
-if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
-
 ADZSH="$HOME/.adshell/zsh"
 FUNCTIONS="$ADZSH/functions"
 PLUGINS="$ADZSH/plugins"
 
-fpath+=($FUNCTIONS $PLUGINS/zsh-completions/src $PLUGINS/zsh-adams-tmux-completions $ADZSH/prompts $FUNCTIONS)
+# Load direnv if it is available
+if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
+fpath+=($FUNCTIONS $PLUGINS/zsh-completions/src $PLUGINS/zsh-adams-tmux-completions $ADZSH/prompts)
 
 # Setup our prompt
 source $FUNCTIONS/prompt_parts
