@@ -133,6 +133,8 @@ prompt_pure_preprompt_render() {
 	preprompt+="$(prompt_user_and_host)"
 	# show the current path
 	preprompt+="%F{blue}%~%f"
+  # show the Ruby version if not the rbenv global one
+  preprompt+="$(rbenv_version_prompt)"
 	# git info
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows

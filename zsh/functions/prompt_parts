@@ -47,7 +47,7 @@ prompt_user_and_host(){
 rbenv_version_prompt() {
   local set_from=$( rbenv version | grep -oE '/([^\)]*)' )
   if [[ "$set_from" != "$HOME/.rbenv/version"  ]] ; then
-    echo "%{%F{198}%}‹$(rbenv version-name)›%{%f%}"
+    echo " %{%F{198}%}‹$(rbenv version-name)›%{%f%}"
   else
     echo ""
   fi
