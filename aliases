@@ -20,14 +20,18 @@ alias sau='sudo apt-get update'
 alias saup='sudo apt-get upgrade'
 
 ## Ruby aliases
+alias be='bundle exec'
 alias cucumber='bundle exec cucumber --color'
 alias guard='bundle exec guard'
+alias rackup='bundle exec rackup'
 alias rake='bundle exec rake'
 alias rspec='bundle exec rspec --color'
 alias serve='ruby -run -e httpd . -p 8080'
 
 ## Git aliases
 alias g='git'
+alias ga='g a'
+alias gaa='g aa'
 alias gc='g c'
 alias gc-m='g c -m'
 alias gd='g d'
