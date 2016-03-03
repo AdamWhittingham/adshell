@@ -68,6 +68,7 @@ alias up-all='up-vim && up-shell && up-tmux'
 # Docker Aliases
 alias d='docker'
 alias dc='docker-compose'
+alias dm='docker-machine'
 alias dsh="attach_shell_to_docker_container"
 
 # Ansible Aliases

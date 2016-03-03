@@ -19,8 +19,7 @@ fi
 # Add rbenv loading if needed
 if [[ -d ~/.rbenv ]]; then
   export PATH=$PATH:~/.rbenv/bin
-  which rbenv > /dev/null && \
-    eval "$(rbenv init - --no-rehash)"
+  which rbenv > /dev/null && eval "$(rbenv init - --no-rehash)"
 fi
 
 # If GNU CoreUtils is installed, make them the default
@@ -28,4 +27,9 @@ if which gls >/dev/null ; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   alias ls='ls --color --group-directories-first'
+fi
+
+# Setup docker-machine if installed
+if which docker-machine >/dev/null ; then
+  eval "$(docker-machine env default)"
 fi
