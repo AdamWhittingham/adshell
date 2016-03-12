@@ -77,7 +77,8 @@ alias ang='ansible-galaxy'
 alias anv='ansible-vault'
 
 # Misc Aliases
-alias v='vagrant'
+alias v='vim'
+alias vm='vagrant'
 alias gs='grunt-source'
 alias nwd='terminal-notifier -message "Task Complete"'
 
