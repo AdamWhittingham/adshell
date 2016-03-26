@@ -31,5 +31,5 @@ fi
 
 # Setup docker-machine if installed
 if which docker-machine >/dev/null ; then
-  eval "$(docker-machine env default)" &> /dev/null
+  eval "$(docker-machine env default 2>/dev/null)" &> /dev/null
 fi
