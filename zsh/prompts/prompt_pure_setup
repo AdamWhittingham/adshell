@@ -100,6 +100,24 @@ prompt_pure_set_title() {
 	print -n '\a'
 }
 
+prompt_pure_check_ruby_version(){
+	# reset ruby version
+	prompt_pure_ruby_version=
+
+	local ruby_version
+	# check git left and right arrow_status
+	ruby_version="$(rbenv version-name)"
+	ruby_global_version="$(rbenv global)"
+
+	# exit if the command failed
+	(( !$? )) || return
+
+	# left and right are tab-separated, split on tab and store as array
+	[[ -n $ruby_version ]] &&
+  [[ "$ruby_version" != "$ruby_global_version" ]] &&
+  prompt_pure_ruby_version=" ‹${ruby_version}›"
+}
+
 prompt_pure_preexec() {
 	# attempt to detect and prevent prompt_pure_async_git_fetch from interfering with user initiated git or hub fetch
 	[[ $2 =~ (git|hub)\ .*(pull|fetch) ]] && async_flush_jobs 'prompt_pure'
@@ -135,7 +153,7 @@ prompt_pure_preprompt_render() {
 	# show the current path
 	preprompt+="%F{blue}%~%f"
   # show the Ruby version if not the rbenv global one
-  preprompt+="$(rbenv_version_prompt)"
+  preprompt+="%F{198}${prompt_pure_ruby_version}%f"
 	# git info
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows
@@ -204,9 +222,6 @@ prompt_pure_precmd() {
 	# with the initial preprompt rendering
 	prompt_pure_cmd_timestamp=
 
-	# check for git arrows
-	prompt_pure_check_git_arrows
-
 	# shows the full path in the title
 	prompt_pure_set_title 'expand-prompt' '%~'
 
@@ -247,6 +262,9 @@ prompt_pure_async_git_fetch() {
 	GIT_TERMINAL_PROMPT=0 command git -c gc.auto=0 fetch
 }
 
+prompt_pure_async_ruby_version(){
+}
+
 prompt_pure_async_tasks() {
 	# initialize async worker
 	((!${prompt_pure_async_init:-0})) && {
@@ -270,6 +288,9 @@ prompt_pure_async_tasks() {
 		# set the new working tree and prefix with "x" to prevent the creation of a named path by AUTO_NAME_DIRS
 		prompt_pure_current_working_tree="x${working_tree}"
 	fi
+
+
+  async_job "prompt_pure" prompt_pure_async_ruby_version "${working_tree}"
 
 	# only perform tasks inside git working tree
 	[[ -n $working_tree ]] || return
@@ -304,10 +325,16 @@ prompt_pure_async_callback() {
 			# variable. Thus, only upon next rendering of the preprompt will the result appear in a different color.
 			(( $exec_time > 2 )) && prompt_pure_git_last_dirty_check_timestamp=$EPOCHSECONDS
 			;;
+
 		prompt_pure_async_git_fetch)
 			prompt_pure_check_git_arrows
 			prompt_pure_preprompt_render
 			;;
+
+    prompt_pure_async_ruby_version)
+      prompt_pure_check_ruby_version
+			prompt_pure_preprompt_render
+      ;;
 	esac
 }
 
