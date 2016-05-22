@@ -165,3 +165,7 @@ compinit -i
 
 compdef g='git'
 compdef tmr='tmuxinator'
+
+
+bindkey "b" backward-word
+bindkey "f" forward-word
