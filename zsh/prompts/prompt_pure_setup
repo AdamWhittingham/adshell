@@ -104,18 +104,20 @@ prompt_pure_check_ruby_version(){
 	# reset ruby version
 	prompt_pure_ruby_version=
 
-	local ruby_version
-	# check git left and right arrow_status
-	ruby_version="$(rbenv version-name)"
-	ruby_global_version="$(rbenv global)"
+  if which rbenv ; then
+    local ruby_version
+    # check git left and right arrow_status
+    ruby_version="$(rbenv version-name)"
+    ruby_global_version="$(rbenv global)"
 
-	# exit if the command failed
-	(( !$? )) || return
+    # exit if the command failed
+    (( !$? )) || return
 
-	# left and right are tab-separated, split on tab and store as array
-	[[ -n $ruby_version ]] &&
-  [[ "$ruby_version" != "$ruby_global_version" ]] &&
-  prompt_pure_ruby_version=" ‹${ruby_version}›"
+    # left and right are tab-separated, split on tab and store as array
+    [[ -n $ruby_version ]] &&
+    [[ "$ruby_version" != "$ruby_global_version" ]] &&
+    prompt_pure_ruby_version=" ‹${ruby_version}›"
+  fi
 }
 
 prompt_pure_preexec() {
