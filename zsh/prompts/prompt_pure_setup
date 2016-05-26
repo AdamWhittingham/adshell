@@ -104,7 +104,8 @@ prompt_pure_check_ruby_version(){
 	# reset ruby version
 	prompt_pure_ruby_version=
 
-  if which rbenv ; then
+  if type rbenv >/dev/null
+  then
     local ruby_version
     # check git left and right arrow_status
     ruby_version="$(rbenv version-name)"
