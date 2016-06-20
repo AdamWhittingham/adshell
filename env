@@ -1,8 +1,9 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 
 # Add brew sbin to PATH
-type brew >/dev/null && \
-  export PATH=/usr/loca/bin:/usr/local/sbin:$PATH
+if type brew >/dev/null || [[ -e /usr/local/bin/brew ]] ; then
+  export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+fi
 
 # Setup NVM
 #if [[ -d ~/.nvm ]]; then
