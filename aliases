@@ -43,7 +43,6 @@ alias prp='git pull && rake && git push'
 alias filecomp='file_composition'
 
 ## tmux aliases
-alias tmux='tmux -2' #launch tmux in 256 colours
 alias tl='tmux ls'
 alias tls='tmux ls'
 alias tm='tmux_create_or_attach'
