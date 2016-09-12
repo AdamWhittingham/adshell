@@ -166,6 +166,8 @@ compinit -i
 compdef g='git'
 compdef tmr='tmuxinator'
 
+# Set emacs/bash style key commands even when vim is the default editor
+bindkey -e
 
 bindkey "b" backward-word
 bindkey "f" forward-word
