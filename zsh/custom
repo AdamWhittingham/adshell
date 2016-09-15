@@ -23,6 +23,12 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 setopt NO_BEEP
 
+# Set emacs/bash style key commands even when vim is the default editor
+bindkey -e
+
+bindkey "b" backward-word
+bindkey "f" forward-word
+
 # Bring back ALT+. , CMD+. or ESC+. for insert-last-word from previous commands
 bindkey '\e.' insert-last-word
 
@@ -57,6 +63,8 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=default,fg=green,underline"
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=default,fg=red,underline"
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey "$terminfo[cuu1]" history-substring-search-up
+bindkey "$terminfo[cud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
@@ -165,9 +173,3 @@ compinit -i
 
 compdef g='git'
 compdef tmr='tmuxinator'
-
-# Set emacs/bash style key commands even when vim is the default editor
-bindkey -e
-
-bindkey "b" backward-word
-bindkey "f" forward-word
