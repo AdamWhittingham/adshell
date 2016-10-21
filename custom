@@ -22,7 +22,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   case "$(uname)" in
     "Darwin")
-      export EDITOR='mvim -f'
+      export EDITOR='vim'
       # Setup iTerm2 tab names
       export PROMPT_COMMAND='echo -ne "\\033]0;$(basename ${PWD/#$HOME/~})\\007"'
       ;;
