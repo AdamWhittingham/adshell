@@ -68,6 +68,7 @@ alias up-all='up-vim && up-shell && up-tmux'
 alias d='docker'
 alias dc='docker-compose'
 alias dm='docker-machine'
+alias dme='eval #(docker-machine env)'
 alias dsh="attach_shell_to_docker_container"
 
 # Ansible Aliases
@@ -80,6 +81,7 @@ alias v='vim'
 alias vm='vagrant'
 alias gs='grunt-source'
 alias nwd='terminal-notifier -message "Task Complete"'
+alias tf='terraform'
 
 # Remount SD card on OSX
 alias sdremount='sudo kextunload /System/Library/Extensions/AppleStorageDrivers.kext/Contents/PlugIns/AppleUSBCardReader.kext; sudo kextload /System/Library/Extensions/AppleStorageDrivers.kext/Contents/PlugIns/AppleUSBCardReader.kext'
