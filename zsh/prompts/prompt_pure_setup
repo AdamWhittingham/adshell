@@ -100,24 +100,27 @@ prompt_pure_set_title() {
 	print -n '\a'
 }
 
+prompt_pure_check_asdf_version(){
+  if type asdf >/dev/null
+  then
+    local app_version
+    app_version="$(asdf current $1  2>&1)"
+
+    # exit if the command failed
+    (( !$? )) || return 1
+
+    if ( echo "$app_version" | grep -qv "set by $HOME/.tool-versions" ); then
+      echo "$(echo ${app_version} | cut -d' ' -f1)"
+    fi
+  fi
+}
+
 prompt_pure_check_ruby_version(){
 	# reset ruby version
 	prompt_pure_ruby_version=
 
-  if type asdf >/dev/null
-  then
-    local ruby_version
-    asdf_rb_version="$(asdf current ruby 2>&1)"
-
-    # exit if the command failed
-    (( !$? )) || return
-
-    if ( echo "$asdf_rb_version" | grep -qv "set by $HOME/.tool-versions" ); then
-      ruby_version="$(echo ${asdf_rb_version} | cut -d' ' -f1)"
-      prompt_pure_ruby_version=" ‹${ruby_version}›"
-      return
-    fi
-  fi
+  ruby_version="$( prompt_pure_check_asdf_version 'ruby' )"
+  [[ -z "$ruby_version" ]] || prompt_pure_ruby_version=" ‹${ruby_version}›"
 
   if type rbenv >/dev/null
   then
@@ -141,20 +144,8 @@ prompt_pure_check_elixir_version(){
 	# reset elixir version
 	prompt_pure_elixir_version=
 
-  if type asdf >/dev/null
-  then
-    local elixir_version
-    asdf_elixir_version="$(asdf current elixir 2>&1)"
-
-    # exit if the command failed
-    (( !$? )) || return
-
-    if ( echo "$asdf_elixir_version" | grep -qv "set by $HOME/.tool-versions" ); then
-      elixir_version="$(echo ${asdf_elixir_version} | cut -d' ' -f1)"
-      prompt_pure_elixir_version=" ‹${elixir_version}›"
-      return
-    fi
-  fi
+  elixir_version="$( prompt_pure_check_asdf_version 'elixir' )"
+  [[ -z $elixir_version ]] || prompt_pure_elixir_version=" ‹${elixir_version}›"
 }
 
 prompt_pure_preexec() {
