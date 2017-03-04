@@ -194,7 +194,7 @@ prompt_pure_preprompt_render() {
   # show the Ruby version if not the rbenv global one
   preprompt+="%F{198}${prompt_pure_ruby_version}%f"
   # show the Elixir version if not the rbenv global one
-  preprompt+="%F{198}${prompt_pure_elixir_version}%f"
+  preprompt+="%F{99}${prompt_pure_elixir_version}%f"
 	# git info
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows
