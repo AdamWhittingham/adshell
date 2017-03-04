@@ -6,13 +6,6 @@ if type brew >/dev/null || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
-# Setup NVM
-#if [[ -d ~/.nvm ]]; then
-  #export NVM_DIR=~/.nvm
-  #type brew >/dev/null && \
-    #source $(brew --prefix nvm)/nvm.sh
-#fi
-
 # Add RVM to PATH for scripting
 if [[ -d ~/.rvm ]]; then
   export PATH=$PATH:$HOME/.rvm/bin
@@ -22,6 +15,12 @@ fi
 if [[ -d ~/.rbenv ]]; then
   export PATH=$PATH:~/.rbenv/bin
   type rbenv > /dev/null && eval "$(rbenv init - --no-rehash)"
+fi
+
+# Add asdf loading if needed
+if [[ -d ~/.asdf ]]; then
+  source $HOME/.asdf/asdf.sh
+  # source $HOME/.asdf/completions/asdf.bash
 fi
 
 # If GNU CoreUtils is installed, make them the default
