@@ -1,0 +1,6 @@
+*.swp
+*.swq
+.DS_Store
+
+.byebug_history
+tags

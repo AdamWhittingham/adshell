@@ -26,9 +26,14 @@ symlink_ctags_config(){
   ln -s ~/.adshell/ctags ~/.ctags
 }
 
+symlink_gitignore(){
+  ln -s ~/.adshell/gitignore_global ~/.gitignore_global
+}
+
 main(){
   symlink_ctags_config
   append_git_config
+  symlink_gitignore
   source_custom
 }
 
