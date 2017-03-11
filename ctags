@@ -6,14 +6,15 @@
 --exclude=log
 --exclude=tmp
 
---regex-ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/c,class,constant/
 --regex-ruby=/^[ \t]*describe ['"](.*)['"] do/\1/d,rspec describe/
---regex-ruby=/^[ \t]*context ['"](.*)['"] do/\1/C,rspec context/
+--regex-ruby=/^[ \t]*context ['"](.*)['"] do/\1/c,rspec context/
 --regex-ruby=/^[ \t]*it ['"](.*)['"] do/\1/i,rspec tests/
 --regex-ruby=/^[ \t]*specify ['"](.*)['"] do/\1/i,rspec tests/
---regex-ruby=/(^|;)[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\(? *:([[:alnum:]_]+)/\3/f,association,Active Record association/
---regex-ruby=/(^|;)[ \t]*(named_)?scope\(? *:([[:alnum:]_]+)/\3/f,scope,ActiveRecord scope/
---regex-ruby=/(^|;)[ \t]*(private|protected|public)(_class_method)?\(? def *(self.)?([[:alnum:]_]+)/\5/f,inline scoped method,inline scoped methods (Ruby 2.1+)/
+--regex-ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/C,contants,constants/
+--regex-ruby=/(^|;)[ \t]*(named_)?scope\(? *:([[:alnum:]_]+)/\3/r,scopes,ActiveRecord scope/
+--regex-ruby=/(^|;)[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\(? *:([[:alnum:]_]+)/\3/a,association,Active Record association/
+--regex-ruby=/(^|;)[ \t]*(before_|after_)([:alnum:]*):/\2/h,hooks,callbacks/
+--regex-ruby=/(^|;)[ \t]*(private|protected|public)(_class_method)?\(? def *(self.)?([[:alnum:]_?]+)/\5/f,methods,methods/
 
 --langdef=ansible
 --langmap=ansible:.yml
