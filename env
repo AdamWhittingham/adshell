@@ -2,7 +2,7 @@ export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 export NLS_LANG="ENGLISH_UNITED KINGDOM.AL32UTF8"
 
 # Add brew sbin to PATH
-if type brew >/dev/null || [[ -e /usr/local/bin/brew ]] ; then
+if command -v brew >/dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
@@ -24,14 +24,14 @@ if [[ -d ~/.asdf ]]; then
 fi
 
 # If GNU CoreUtils is installed, make them the default
-if type gls >/dev/null ; then
+if command -v gls >/dev/null 2>&1; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   alias ls='ls --color --group-directories-first'
 fi
 
 # Setup docker-machine if installed
-if type docker-machine >/dev/null ; then
+if command -v docker-machine >/dev/null 2>&1; then
   if (docker-machine status default | grep -q 'Running'); then
     eval "$(docker-machine env default)" &> /dev/null
   fi
