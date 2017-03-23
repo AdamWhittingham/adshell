@@ -14,7 +14,7 @@ fi
 # Add rbenv loading if needed
 if [[ -d ~/.rbenv ]]; then
   export PATH=$PATH:~/.rbenv/bin
-  type rbenv > /dev/null && eval "$(rbenv init - --no-rehash)"
+  command -v rbenv > /dev/null && eval "$(rbenv init - --no-rehash)"
 fi
 
 # Add asdf loading if needed

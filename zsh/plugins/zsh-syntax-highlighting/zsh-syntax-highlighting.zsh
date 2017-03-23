@@ -183,8 +183,8 @@ _zsh_highlight_load_highlighters()
     highlighter="${highlighter_dir:t}"
     [[ -f "$highlighter_dir/${highlighter}-highlighter.zsh" ]] && {
       . "$highlighter_dir/${highlighter}-highlighter.zsh"
-      type "_zsh_highlight_${highlighter}_highlighter" &> /dev/null &&
-      type "_zsh_highlight_${highlighter}_highlighter_predicate" &> /dev/null || {
+      command -v "_zsh_highlight_${highlighter}_highlighter" &> /dev/null &&
+      command -v "_zsh_highlight_${highlighter}_highlighter_predicate" &> /dev/null || {
         echo "zsh-syntax-highlighting: '${highlighter}' highlighter should define both required functions '_zsh_highlight_${highlighter}_highlighter' and '_zsh_highlight_${highlighter}_highlighter_predicate' in '${highlighter_dir}/${highlighter}-highlighter.zsh'." >&2
       }
     }

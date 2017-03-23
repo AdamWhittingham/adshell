@@ -148,7 +148,7 @@ __git_reassemble_comp_words_by_ref()
 	done
 }
 
-if ! type _get_comp_words_by_ref >/dev/null 2>&1; then
+if ! command -v _get_comp_words_by_ref >/dev/null; then
 _get_comp_words_by_ref ()
 {
 	local exclude cur_ words_ cword_
