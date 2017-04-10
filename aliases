@@ -77,7 +77,7 @@ alias ang='ansible-galaxy'
 alias anv='ansible-vault'
 
 # Misc Aliases
-if ( command -v nvim >/dev/null) ; then
+if ( type nvim > /dev/null 2>&1 ) ; then
   alias v='nvim'
 else
   alias v='vim'
