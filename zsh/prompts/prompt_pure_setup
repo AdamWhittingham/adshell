@@ -101,7 +101,7 @@ prompt_pure_set_title() {
 }
 
 prompt_pure_check_asdf_version(){
-  if type asdf >/dev/null
+  if type asdf > /dev/null 2>&1
   then
     local app_version
     app_version="$(asdf current $1  2>&1)"
@@ -122,7 +122,7 @@ prompt_pure_check_ruby_version(){
   ruby_version="$( prompt_pure_check_asdf_version 'ruby' )"
   [[ -z "$ruby_version" ]] || prompt_pure_ruby_version=" ‹${ruby_version}›"
 
-  if type rbenv >/dev/null
+  if type rbenv > /dev/null 2>&1
   then
     local ruby_version
     # check git left and right arrow_status
