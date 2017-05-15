@@ -24,6 +24,7 @@
   n = checkout `git log HEAD..master --pretty=%h |tail -1`
   punch = push -f
   rb = rebase
+  rc = rebase --continue
   s = status -bs
   sb = show-branch
   st = status -bs
