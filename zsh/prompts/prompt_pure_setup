@@ -148,6 +148,14 @@ prompt_pure_check_elixir_version(){
   [[ -z $elixir_version ]] || prompt_pure_elixir_version=" ‹${elixir_version}›"
 }
 
+prompt_pure_check_nodejs_version(){
+	# reset nodejs version
+	prompt_pure_nodejs_version=
+
+  nodejs_version="$( prompt_pure_check_asdf_version 'nodejs' )"
+  [[ -z $nodejs_version ]] || prompt_pure_nodejs_version=" ‹${nodejs_version}›"
+}
+
 prompt_pure_preexec() {
 	# attempt to detect and prevent prompt_pure_async_git_fetch from interfering with user initiated git or hub fetch
 	[[ $2 =~ (git|hub)\ .*(pull|fetch) ]] && async_flush_jobs 'prompt_pure'
@@ -178,18 +186,28 @@ prompt_pure_preprompt_render() {
 
   # construct preprompt
   local preprompt=''
+
 	# username and machine if applicable
 	preprompt+="$(prompt_user_and_host)"
+
 	# show the current path
 	preprompt+="%F{blue}%~%f"
-  # show the Ruby version if not the rbenv global one
+
+  # show the Ruby version if not the asdf global one
   preprompt+="%F{198}${prompt_pure_ruby_version}%f"
-  # show the Elixir version if not the rbenv global one
+
+  # show the Elixir version if not the asdf global one
   preprompt+="%F{99}${prompt_pure_elixir_version}%f"
+
+  # show the NodeJS version if not the asdf global one
+  preprompt+="%F{148}${prompt_pure_nodejs_version}%f"
+
 	# git info
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
+
 	# git pull/push arrows
 	preprompt+="%F{cyan}${prompt_pure_git_arrows}%f"
+
 	# execution time
 	preprompt+="%F{yellow}${prompt_pure_cmd_exec_time}%f"
 
@@ -321,6 +339,7 @@ prompt_pure_async_tasks() {
 
   async_job "prompt_pure" prompt_pure_async_ruby_version "${working_tree}"
   async_job "prompt_pure" prompt_pure_async_elixir_version "${working_tree}"
+  async_job "prompt_pure" prompt_pure_async_nodejs_version "${working_tree}"
 
 	# only perform tasks inside git working tree
 	[[ -n $working_tree ]] || return
@@ -368,6 +387,11 @@ prompt_pure_async_callback() {
 
     prompt_pure_async_elixir_version)
       prompt_pure_check_elixir_version
+			prompt_pure_preprompt_render
+      ;;
+
+    prompt_pure_async_nodejs_version)
+      prompt_pure_check_nodejs_version
 			prompt_pure_preprompt_render
       ;;
 	esac
