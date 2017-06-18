@@ -26,8 +26,11 @@ setopt NO_BEEP
 # Set emacs/bash style key commands even when vim is the default editor
 bindkey -e
 
-bindkey "b" backward-word
-bindkey "f" forward-word
+bindkey "^B" backward-word
+bindkey "^[[1;3C" forward-word
+
+bindkey "^F" forward-word
+bindkey "^[[1;3D" backward-word
 
 # Bring back ALT+. , CMD+. or ESC+. for insert-last-word from previous commands
 bindkey '\e.' insert-last-word
