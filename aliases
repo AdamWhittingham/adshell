@@ -28,6 +28,7 @@ alias rake='bundle exec rake'
 alias rspec='bundle exec rspec --color'
 alias serve='ruby -run -e httpd . -p 8080'
 alias rspec-diffs='git diff --name-only | grep _spec.rb | xargs rspec'
+alias rof='bundle exec rspec --color --only-failures'
 
 ## Git aliases
 alias g='git'
