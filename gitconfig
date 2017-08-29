@@ -12,8 +12,7 @@
   d = diff
   dc = diff --cached
   dcw = diff --word-diff --cached
-  dw = diff --cached
-  dwc = diff --word-diff --cached
+  dw = diff --color-words
   ff = merge --ff-only
   go = checkout -B
   l = log --graph --pretty=format:'%<(10)%C(bold green)%h%C(reset) %><(16)%C(yellow)%ar%C(reset) %<(16)%C(blue)%an%Creset %C(auto)%d%C(reset) %s' --abbrev-commit
