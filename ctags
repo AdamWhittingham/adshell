@@ -6,8 +6,8 @@
 --exclude=log
 --exclude=tmp
 
---regex-ruby=/^[ \t]*describe ['"](.*)['"] do/\1/d,rspec describe/
---regex-ruby=/^[ \t]*context ['"](.*)['"] do/\1/c,rspec context/
+--regex-ruby=/^[ \t]*describe ['":](.*)['"]? do/\1/d,rspec describe/
+--regex-ruby=/^[ \t]*context ['":](.*)['"]? do/\1/c,rspec context/
 --regex-ruby=/^[ \t]*it ['"](.*)['"] do/\1/i,rspec tests/
 --regex-ruby=/^[ \t]*specify ['"](.*)['"] do/\1/i,rspec tests/
 --regex-ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/C,contants,constants/

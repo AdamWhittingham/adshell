@@ -29,10 +29,3 @@ if type gls > /dev/null 2>&1; then
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   alias ls='ls --color --group-directories-first'
 fi
-
-# Setup docker-machine if installed
-if type docker-machine > /dev/null 2>&1; then
-  if (docker-machine status default | grep -q 'Running'); then
-    eval "$(docker-machine env default)" &> /dev/null
-  fi
-fi
