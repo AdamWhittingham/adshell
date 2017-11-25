@@ -30,11 +30,19 @@ symlink_gitignore(){
   ln -s ~/.adshell/gitignore_global ~/.gitignore_global
 }
 
+install_terminfo(){
+  tic ~/.adshell/terminfo/screen256.terminfo
+  tic ~/.adshell/terminfo/tmux.terminfo
+  tic ~/.adshell/terminfo/tmux256.terminfo
+  tic ~/.adshell/terminfo/xterm256.terminfo
+}
+
 main(){
   symlink_ctags_config
   append_git_config
   symlink_gitignore
   source_custom
+  install_terminfo
 }
 
 main
