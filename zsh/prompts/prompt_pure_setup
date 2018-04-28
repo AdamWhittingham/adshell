@@ -104,7 +104,7 @@ prompt_pure_check_asdf_version(){
   if type asdf > /dev/null 2>&1
   then
     local app_version
-    app_version="$(asdf current $1  2>&1)"
+    app_version="$(asdf current "$1" 2>&1)"
 
     # exit if the command failed
     (( !$? )) || return 1
@@ -156,6 +156,14 @@ prompt_pure_check_nodejs_version(){
   [[ -z $nodejs_version ]] || prompt_pure_nodejs_version=" ‹${nodejs_version}›"
 }
 
+prompt_pure_check_postgres_version(){
+	# reset postgres version
+	prompt_pure_postgres_version=
+
+  postgres_version="$( prompt_pure_check_asdf_version 'postgres' )"
+  [[ -z $postgres_version ]] || prompt_pure_postgres_version=" ‹${postgres_version}›"
+}
+
 prompt_pure_preexec() {
 	# attempt to detect and prevent prompt_pure_async_git_fetch from interfering with user initiated git or hub fetch
 	[[ $2 =~ (git|hub)\ .*(pull|fetch) ]] && async_flush_jobs 'prompt_pure'
@@ -198,6 +206,9 @@ prompt_pure_preprompt_render() {
 
   # show the Elixir version if not the asdf global one
   preprompt+="%F{99}${prompt_pure_elixir_version}%f"
+
+  # show the postgres version if not the asdf global one
+  preprompt+="%F{20}${prompt_pure_postgres_version}%f"
 
   # show the NodeJS version if not the asdf global one
   preprompt+="%F{148}${prompt_pure_nodejs_version}%f"
@@ -387,6 +398,11 @@ prompt_pure_async_callback() {
 
     prompt_pure_async_elixir_version)
       prompt_pure_check_elixir_version
+			prompt_pure_preprompt_render
+      ;;
+
+    prompt_pure_async_postgres_version)
+      prompt_pure_check_postgres_version
 			prompt_pure_preprompt_render
       ;;
 
