@@ -1,6 +1,9 @@
 source_if_present "$CONFIG_BASE/bash/git-completion"
 source_if_present "$CONFIG_BASE/bash/git-prompt"
 
+# Load FZF plugins if available
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Colour Vars
 bold="$(tput bold)"
 reset="\001$(tput sgr0)\002"

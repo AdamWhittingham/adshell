@@ -9,6 +9,9 @@ PLUGINS="$ADZSH/plugins"
 # Load direnv if it is available
 if type direnv > /dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
 
+# Load FZF plugins if available
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 fpath+=($FUNCTIONS $PLUGINS/zsh-completions/src $PLUGINS/zsh-adams-tmux-completions $ADZSH/prompts)
 
 # Setup our prompt
