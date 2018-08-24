@@ -13,6 +13,15 @@ Installation
 git clone https://github.com/AdamWhittingham/adshell --recursive ~/.adshell && ~/.adshell/install
 ```
 
+
+### Optional tools to install for more awesomeness
+
+* `bat`, cat but with colours, search and line numbers
+* `diff-so-fancy`, a much nicer diff, especially for use with `git`
+* `htop`, top with graphs, search and process tree
+* `ncdu`, a better du which automatically summarises things
+* `prettyping`, ping with graphs
+
 Customisations
 --------------
 

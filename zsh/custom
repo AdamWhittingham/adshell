@@ -174,5 +174,7 @@ unsetopt caseglob
 autoload -Uz compinit
 compinit -i
 
+compdef anp='ansible-playbook'
+compdef anv='ansible-vault'
 compdef g='git'
 compdef tmr='tmuxinator'

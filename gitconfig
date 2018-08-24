@@ -22,6 +22,7 @@
   mf = merge --no-ff
   mt = mergetool
   n = checkout `git log HEAD..master --pretty=%h |tail -1`
+  patch = !git --no-pager diff --no-color
   punch = push -f
   prune-remote = !"git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
   rb = rebase
@@ -45,9 +46,23 @@
 
 [color]
 	ui = auto
-
+  [diff]
+    meta       = "yellow"
+    frag       = "magenta bold"
+    commit     = "yellow bold"
+    old        = "red bold"
+    new        = "green bold"
+    whitespace = "red reverse"
+  [diff-highlight]
+    oldNormal    = "red bold"
+    oldHighlight = "red bold 52"
+    newNormal    = "green bold"
+    newHighlight = "green bold 22"
+[pager]
+  diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
 	default = matching
+
 
 [mergetool]
 	keepBackup = false

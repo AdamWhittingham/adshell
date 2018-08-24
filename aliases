@@ -79,6 +79,17 @@ alias anp='ansible-playbook'
 alias ang='ansible-galaxy'
 alias anv='ansible-vault'
 
+# Better CLI tools when available
+if ( type prettyping > /dev/null ) ; then
+  alias ping='prettyping'
+fi
+
+if ( type bat > /dev/null ) ; then
+  alias cat='bat'
+fi
+
+alias ncdu='ncdu -rr --color dark --exclude .git --exclude "node_modules"'
+
 # Misc Aliases
 if ( type nvim > /dev/null 2>&1 ) ; then
   alias v='nvim'
