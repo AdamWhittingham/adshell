@@ -23,7 +23,7 @@
   mt = mergetool
   n = checkout `git log HEAD..master --pretty=%h |tail -1`
   patch = !git --no-pager diff --no-color
-  punch = push -f
+  punch = push --force-with-lease
   prune-remote = !"git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
   rb = rebase
   rc = rebase --continue
