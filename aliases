@@ -70,6 +70,7 @@ alias up-all='up-vim && up-shell && up-tmux'
 # Docker Aliases
 alias d='docker'
 alias dc='docker-compose'
+alias dcrc='docker-compose up -d --no-deps --build '
 alias dm='docker-machine'
 alias dme='eval #(docker-machine env)'
 alias dsh="attach_shell_to_docker_container"
