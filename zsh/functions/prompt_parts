@@ -69,7 +69,7 @@ asdf_version(){
     (( !$? )) || return 1
 
     if ( echo "$app_version" | grep -qv "set by $HOME/.tool-versions" ); then
-      echo "$(echo ${app_version} | cut -d' ' -f1)"
+      echo -n "$(echo ${app_version} | cut -d' ' -f1)"
     fi
   fi
 }
@@ -79,26 +79,24 @@ prompt_version(){
   if [[ -n "$version" ]] ; then
     begin=${2:-‹}
     end=${3:-'› '}
-    echo "${begin}${version}${end}"
-  else
-    echo ''
+    echo -n "${begin}${version}${end}"
   fi
 }
 
 prompt_tool_versions(){
   tools=""
 
-  # show the Ruby version if not the asdf global one
-  tools+="%F{198}$(prompt_version 'ruby')%f"
+  ruby="$(prompt_version 'ruby')"
+  [[ -z "$ruby" ]] || tools+="%F{198}$(prompt_version 'ruby')%f"
 
-  # show the Elixir version if not the asdf global one
-  tools+="%F{99}$(prompt_version 'elixir')%f"
+  elixir="$(prompt_version 'elixir')"
+  [[ -z "$elixir" ]] || tools+="%F{99}$(prompt_version 'elixir')%f"
 
-  # show the postgres version if not the asdf global one
-  tools+="%F{32}$(prompt_version 'postgres')%f"
+  postgres="$(prompt_version 'postgres')"
+  [[ -z "$postgres" ]] || tools+="%F{32}$(prompt_version 'postgres')%f"
 
-  # show the NodeJS version if not the asdf global one
-  tools+="%F{148}$(prompt_version 'nodejs')%f"
+  nodejs="$(prompt_version 'nodejs')"
+  [[ -z "$nodejs" ]] || tools+="%F{148}$(prompt_version 'nodejs')%f"
 
-  echo $tools
+  echo -n "$tools"
 }

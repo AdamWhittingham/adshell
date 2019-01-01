@@ -118,7 +118,8 @@ prompt_pure_preprompt_render() {
 	preprompt_parts+=('%F{blue}%~%f')
 
   # show the versions of tools being used
-  preprompt_parts+="$(prompt_tool_versions)%f"
+  tools_versions="$(prompt_tool_versions)"
+  [[ -z "$tools_versions" ]] || preprompt_parts+="$tools_versions"
 
 	# Add git branch and dirty status info.
 	typeset -gA prompt_pure_vcs_info
