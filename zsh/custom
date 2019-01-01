@@ -26,8 +26,8 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 setopt NO_BEEP
 
-# Set emacs/bash style key commands even when vim is the default editor
-bindkey -e
+# Set vim key bindings
+bindkey -v
 
 bindkey "^B" backward-word
 bindkey "^[[1;3C" forward-word

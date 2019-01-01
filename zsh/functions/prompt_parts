@@ -59,3 +59,46 @@ rprompt_setup(){
 
   RPROMPT='${rbenv_version_prompt}'
 }
+
+asdf_version(){
+  if type asdf > /dev/null 2>&1; then
+    local app_version
+    app_version="$(asdf current "$1" 2>&1)"
+
+    # exit if the command failed
+    (( !$? )) || return 1
+
+    if ( echo "$app_version" | grep -qv "set by $HOME/.tool-versions" ); then
+      echo "$(echo ${app_version} | cut -d' ' -f1)"
+    fi
+  fi
+}
+
+prompt_version(){
+  version="$(asdf_version $1)"
+  if [[ -n "$version" ]] ; then
+    begin=${2:-‹}
+    end=${3:-'› '}
+    echo "${begin}${version}${end}"
+  else
+    echo ''
+  fi
+}
+
+prompt_tool_versions(){
+  tools=""
+
+  # show the Ruby version if not the asdf global one
+  tools+="%F{198}$(prompt_version 'ruby')%f"
+
+  # show the Elixir version if not the asdf global one
+  tools+="%F{99}$(prompt_version 'elixir')%f"
+
+  # show the postgres version if not the asdf global one
+  tools+="%F{32}$(prompt_version 'postgres')%f"
+
+  # show the NodeJS version if not the asdf global one
+  tools+="%F{148}$(prompt_version 'nodejs')%f"
+
+  echo $tools
+}
