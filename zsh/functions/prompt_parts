@@ -81,6 +81,7 @@ prompt_version(){
 }
 
 prompt_tool_versions(){
+	setopt localoptions noshwordsplit
   tools=""
 
   if type asdf > /dev/null 2>&1; then

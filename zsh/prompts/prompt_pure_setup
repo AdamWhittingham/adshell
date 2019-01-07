@@ -311,11 +311,6 @@ prompt_pure_async_git_arrows() {
 	command git rev-list --left-right --count HEAD...@'{u}'
 }
 
-prompt_pure_async_tools_versions(){
-	setopt localoptions noshwordsplit
-  prompt_tool_versions
-}
-
 prompt_pure_async_tasks() {
 	setopt localoptions noshwordsplit
 
@@ -368,7 +363,7 @@ prompt_pure_async_refresh() {
 	fi
 
 	async_job "prompt_pure" prompt_pure_async_git_arrows
-  async_job "prompt_pure" prompt_pure_async_tools_versions
+  async_job "prompt_pure" prompt_tool_versions
 
 	# do not preform git fetch if it is disabled or in home folder.
 	if (( ${PURE_GIT_PULL:-1} )) && [[ $prompt_pure_vcs_info[top] != $HOME ]]; then
@@ -457,7 +452,7 @@ prompt_pure_async_callback() {
 			# variable. Thus, only upon next rendering of the preprompt will the result appear in a different color.
 			(( $exec_time > 5 )) && prompt_pure_git_last_dirty_check_timestamp=$EPOCHSECONDS
 			;;
-		prompt_pure_async_tools_versions)
+		prompt_tool_versions)
       typeset -g prompt_pure_tools_versions="${output}"
       do_render=1
     ;;
