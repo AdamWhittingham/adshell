@@ -42,7 +42,8 @@
 	autosetuprebase = always
 
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.adshell/gitignore
+  attributesfile = ~/.adshell/gitattributes
 	pager = less -FXRS
 
 [color]
@@ -60,7 +61,7 @@
     newNormal    = "green bold"
     newHighlight = "green bold 22"
 [pager]
-  diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+  diff = diff-so-fancy | less --tabs=2 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
 	default = matching
 
