@@ -1,5 +1,5 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
-export NLS_LANG="ENGLISH_UNITED KINGDOM.AL32UTF8"
+export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
 
 # Add brew sbin to PATH
 if type brew > /dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
