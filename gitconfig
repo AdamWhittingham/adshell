@@ -64,6 +64,8 @@
 [push]
 	default = matching
 
+[diff "ansible-vault"]
+	textconv = ansible-vault view
 
 [mergetool]
 	keepBackup = false
