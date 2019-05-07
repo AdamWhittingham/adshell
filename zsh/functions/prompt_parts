@@ -62,9 +62,7 @@ rprompt_setup(){
 
 asdf_version(){
   local app_version="$(asdf current "$1" 2>&1)"
-
-  # exit if the command failed
-  [[ "$?" eq 0 ]] || return 1
+  [[ $app_version =~ ^No.such.plugin.* ]] && return 1
 
   if ( echo "$app_version" | grep -qv "set by $HOME/.tool-versions" ); then
     echo -n "$(echo ${app_version} | cut -d' ' -f1)"
@@ -85,17 +83,17 @@ prompt_tool_versions(){
   tools=""
 
   if type asdf > /dev/null 2>&1; then
-    ruby="$(prompt_version 'ruby')"
-    [[ -z "$ruby" ]] || tools+="%F{198}$(prompt_version 'ruby')%f"
+    local ruby="$(prompt_version 'ruby')"
+    [[ -z "$ruby" ]] || tools+="%F{198}${ruby}%f"
 
-    elixir="$(prompt_version 'elixir')"
-    [[ -z "$elixir" ]] || tools+="%F{99}$(prompt_version 'elixir')%f"
+    local elixir="$(prompt_version 'elixir')"
+    [[ -z "$elixir" ]] || tools+="%F{99}${elixir}%f"
 
-    postgres="$(prompt_version 'postgres')"
-    [[ -z "$postgres" ]] || tools+="%F{32}$(prompt_version 'postgres')%f"
+    local postgres="$(prompt_version 'postgres')"
+    [[ -z "$postgres" ]] || tools+="%F{32}${postgres}%f"
 
-    nodejs="$(prompt_version 'nodejs')"
-    [[ -z "$nodejs" ]] || tools+="%F{148}$(prompt_version 'nodejs')%f"
+    local nodejs="$(prompt_version 'nodejs')"
+    [[ -z "$nodejs" ]] || tools+="%F{148}${nodejs}%f"
   fi
 
   echo "$tools"
