@@ -72,8 +72,8 @@ asdf_version(){
 prompt_version(){
   version="$(asdf_version $1)"
   if [[ -n "$version" ]] ; then
-    begin=${2:-‹}
-    end=${3:-'› '}
+    local begin=${2:-‹}
+    local end=${3:-'› '}
     echo -n "${begin}${version}${end}"
   fi
 }
