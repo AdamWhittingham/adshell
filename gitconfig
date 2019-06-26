@@ -63,7 +63,7 @@
 [pager]
   diff = diff-so-fancy | less --tabs=2 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
-	default = matching
+	default = current
 
 [diff "ansible-vault"]
 	textconv = ansible-vault view
