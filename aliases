@@ -69,6 +69,7 @@ alias up-all='up-vim && up-shell && up-tmux'
 
 # Docker Aliases
 alias d='docker'
+alias dbr="docker run --rm -it $(docker build -q .)"
 alias dc='docker-compose'
 alias dcrc='docker-compose up -d --no-deps --build '
 alias dm='docker-machine'
