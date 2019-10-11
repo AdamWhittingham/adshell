@@ -30,7 +30,7 @@ symlink_gitignore(){
   ln -s ~/.adshell/gitignore_global ~/.gitignore_global
 }
 
-symlink_asdf_configs(){
+symlink_gitignore(){
   ln -s ~/.adshell/asdf/default-gems ~/.default-gems
   ln -s ~/.adshell/asdf/default-npm-packages ~/.default-npm-packages
 }
