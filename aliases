@@ -8,10 +8,10 @@ alias sshp='ssh -o"PreferredAuthentications=password"'
 alias ack='ack-grep'
 
 ## ls aliases
-alias l='ls --color -CF'
-alias la='ls --color -A'
-alias ll='ls --color -alF'
-alias lh='ls --color -alFh'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias lh='ls -alFh'
 
 ## apt-get aliases
 alias sai='sudo apt-get install'
