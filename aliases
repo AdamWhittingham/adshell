@@ -69,7 +69,7 @@ alias up-all='up-vim && up-shell && up-tmux'
 
 # Docker Aliases
 alias d='docker'
-alias dbr="docker run --rm -it $(docker build -q .)"
+alias dbr='docker run --rm -it $(docker build -q .)'
 alias dc='docker-compose'
 alias dcrc='docker-compose up -d --no-deps --build '
 alias dm='docker-machine'
@@ -90,6 +90,11 @@ if ( type bat > /dev/null ) ; then
   alias cat='bat'
 fi
 
+# If exa is installed, use it for better ls
+if type exa > /dev/null 2>&1; then
+  alias ls='exa'
+fi
+
 alias ncdu='ncdu -rr --color dark --exclude .git --exclude "node_modules"'
 
 # Misc Aliases
@@ -98,8 +103,8 @@ if ( type nvim > /dev/null 2>&1 ) ; then
 else
   alias v='vim'
 fi
+
 alias vm='vagrant'
-alias gs='grunt-source'
 alias nwd='terminal-notifier -message "Task Complete"'
 alias tf='terraform'
 
