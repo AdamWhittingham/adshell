@@ -22,8 +22,11 @@
   m = merge
   mf = merge --no-ff
   mt = mergetool
-  n = checkout `git log HEAD..master --pretty=%h |tail -1`
+  mv = branch -m
+  n = checkout -b
+  new = checkout -b
   patch = !git --no-pager diff --no-color
+  po = "!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
   punch = push --force-with-lease
   prune-remote = !"git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
   rb = rebase
@@ -33,6 +36,7 @@
   st = status -bs
   standup = !"git log --reverse --branches --since='$(if [[ "Mon" == "$(date +%a)" ]]; then echo "last friday"; else echo "yesterday"; fi)' --author=$(git config --get user.email) --format=format:'%C(cyan) %ad %C(yellow)%h %Creset %s %Cred%d' --date=local"
   upbase = !"main=$(git rev-parse develop &>/dev/null; if [[ $? == 0 ]]; then echo 'develop'; else echo 'master'; fi); echo "Updating and rebasing on top of $main" && git checkout $main && git pull && git checkout - && git rebase $main"
+  updog = upbase
   tags = tag -l
   unstage = reset head
   vim = !vim .git/index
