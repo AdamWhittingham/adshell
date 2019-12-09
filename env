@@ -1,6 +1,9 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
 
+# Add adshell/bin to the PATH
+export PATH=~/.adshell/bin:$PATH
+
 # Add brew sbin to PATH
 if type brew > /dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
