@@ -1,5 +1,5 @@
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
-export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
+export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules --ignore vendor --ignore logs -g ""'
 
 # Add adshell/bin to the PATH
 export PATH=~/.adshell/bin:$PATH
