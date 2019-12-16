@@ -22,7 +22,7 @@
   m = merge
   mf = merge --no-ff
   mt = mergetool
-  mv = branch -m
+  rename = branch -m
   n = checkout -b
   new = checkout -b
   patch = !git --no-pager diff --no-color
