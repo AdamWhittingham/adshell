@@ -1,10 +1,15 @@
 --recurse=yes
 --tag-relative=yes
+
 --exclude=.git
+--exclude=\*.min.\*
 --exclude=build
 --exclude=dist
 --exclude=log
+--exclude=node_modules
+--exclude=tags
 --exclude=tmp
+--exclude=vendor
 
 --regex-ruby=/^[ \t]*describe ['":](.*)['"]? do/\1/d,rspec describe/
 --regex-ruby=/^[ \t]*context ['":](.*)['"]? do/\1/c,rspec context/
@@ -33,3 +38,25 @@
 --regex-Elixir=/^[ \t]*defprotocol[ \t]+([A-Z][a-zA-Z0-9_]*\.)*([A-Z][a-zA-Z0-9_?!]*)/\2/p,protocols,protocols (defprotocol...)/
 --regex-Elixir=/^[ \t]*Record\.defrecord[ \t]+:([a-zA-Z0-9_]+)/\1/r,records,records (defrecord...)/
 --regex-Elixir=/^[ \t]*test[ \t]+\"([a-z_][a-zA-Z0-9_?! ]*)\"*/\1/t,tests,tests (test ...)/
+
+--langdef=scss
+--langmap=scss:.scss
+--regex-scss=/^[ \t]*@mixin ([A-Za-z0-9_-]+)/\1/m,mixin,mixins/
+--regex-scss=/^[ \t]*\$([A-Za-z0-9_-]+)/\1/v,variable,variables/
+--regex-scss=/^([A-Za-z0-9_-]*)*\.([A-Za-z0-9_-]+) *[,{]/\2/c,class,classes/
+--regex-scss=/^[ \t&]+\.([A-Za-z0-9_-]+) *[,{]/\1/c,class,classes/
+--regex-scss=/^(.*)*\#([A-Za-z0-9_-]+) *[,{]/\2/i,id,ids/
+--regex-scss=/^[ \t&]*#([A-Za-z0-9_-]+)/\1/i,id,ids/
+--regex-scss=/(^([A-Za-z0-9_-])*([A-Za-z0-9_-]+)) *[,|\{]/\1/t,tag,tags/
+--regex-scss=/(^([^\/\/])*)[ \t]+([A-Za-z0-9_-]+)) *[,|\{]/\3/t,tag,tags/
+--regex-scss=/(^(.*, *)([A-Za-z0-9_-]+)) *[,|\{]/\3/t,tag,tags/
+--regex-scss=/(^[ \t]+([A-Za-z0-9_-]+)) *[,|\{]/\1/t,tag,tags/
+--regex-scss=/^[ \t]*@media\s+([A-Za-z0-9_-]+)/\1/d,media,media/
+--regex-javascript=/\/\/[ \t]*(FIXME|TODO)[ \t]*\:*(.*)/\1/T,Tag,Tags/
+
+--regex-html=/id="([A-Za-z0-9_-]+)"/\1/i,id,ids/
+--regex-html=/class="([A-Za-z0-9_-]+)"/\1/c,class,classes/
+
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^(#+[ \t]+.*)/\1/h,heading,headings/
