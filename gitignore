@@ -1,9 +1,12 @@
-*.swp
-*.swq
-.DS_Store
-
 .byebug_history
+.DS_Store
+.swp
+.swq
+
+log
+logs
 tags
 .tags
 .tags.lock
 .tags.temp
+tmp
