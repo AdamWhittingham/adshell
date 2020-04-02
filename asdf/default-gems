@@ -1,5 +1,7 @@
 bundler
 neovim
+powder
+powprox
 pry
 solargraph
 tmuxinator
