@@ -72,6 +72,7 @@ alias d='docker'
 alias dbr='docker run --rm -it $(docker build -q .)'
 alias dc='docker-compose'
 alias dcrc='docker-compose up -d --no-deps --build '
+alias dcl='docer-compose logs -f --tail=100 '
 alias dm='docker-machine'
 alias dme='eval #(docker-machine env)'
 alias dsh="attach_shell_to_docker_container"
