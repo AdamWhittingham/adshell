@@ -46,7 +46,6 @@ main(){
   symlink_ctags_config
   append_git_config
   symlink_gitignore
-  symlink_asdf_configs
   source_custom
   install_terminfo
 }
