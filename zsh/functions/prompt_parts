@@ -64,8 +64,8 @@ asdf_version(){
   local app_version="$(asdf current "$1" 2>&1)"
   [[ $app_version =~ ^No.such.plugin.* ]] && return 1
 
-  if ( echo "$app_version" | grep -qv "set by $HOME/.tool-versions" ); then
-    echo -n "$(echo ${app_version} | cut -d' ' -f1)"
+  if $( echo "$app_version" | grep -qv "$HOME/.tool-versions" ); then
+    echo -n "$(echo ${app_version} | awk '{print $2}')"
   fi
 }
 
