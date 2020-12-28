@@ -18,7 +18,7 @@ prompt_user(){
 prompt_user_and_host(){
   if is_remote || is_root ; then
     local p_host='%F{green}%m%f'
-    echo "$( prompt_user )%F{242}@%f$( p_host ):"
+    echo "$( prompt_user )@${p_host}:"
   else
     echo ''
   fi
