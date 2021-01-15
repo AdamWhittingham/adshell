@@ -34,6 +34,7 @@
   rc = rebase --continue
   s = status -bs
   sb = show-branch
+  sl = !"git stash list | fzf --preview=\"echo {} | cut -d':' -f1 | xargs git stash show --color -p\""
   st = status -bs
   standup = !"git log --reverse --branches --since='$(if [[ "Mon" == "$(date +%a)" ]]; then echo "last friday"; else echo "yesterday"; fi)' --author=$(git config --get user.email) --format=format:'%C(cyan) %ad %C(yellow)%h %Creset %s %Cred%d' --date=local"
   upbase = !"main=$(git rev-parse develop &>/dev/null; if [[ $? == 0 ]]; then echo 'develop'; else echo 'master'; fi); echo "Updating and rebasing on top of $main" && git checkout $main && git pull && git checkout - && git rebase $main"
