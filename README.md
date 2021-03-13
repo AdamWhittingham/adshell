@@ -15,6 +15,9 @@ git clone https://github.com/AdamWhittingham/adshell --recursive ~/.adshell && ~
 
 
 ### Optional tools to install for more awesomeness
+**If you don't have brew** then the `install` script won't install some of the tools which add better output & features over some terminal stalwarts.
+
+If that's the case, you can install what you want from the following:
 
 * `bat`, cat but with colours, search and line numbers
 * `diff-so-fancy`, a much nicer diff, especially for use with `git`

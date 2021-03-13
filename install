@@ -9,6 +9,12 @@ append_to_file() {
   fi
 }
 
+install_dependencies() {
+  if which brew >/dev/null; then
+    brew bundle
+  fi
+}
+
 append_git_config(){
   git_config="[include]
   path = ~/.adshell/gitconfig"
@@ -43,12 +49,15 @@ install_terminfo(){
 }
 
 main(){
+  pushd $(dirname $0) > /dev/null
+  install_dependencies
   symlink_ctags_config
   append_git_config
   symlink_gitignore
   symlink_asdf_configs
   source_custom
   install_terminfo
+  popd > /dev/null
 }
 
 main
