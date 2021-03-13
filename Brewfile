@@ -1,16 +1,16 @@
 # Essential dev tools
-brew 'neovim'
-brew 'tmux'
 brew 'ctags'
+brew 'curl'
 brew 'fzf'
 brew 'git'
 brew 'jq'
-brew 'tldr'
+brew 'neovim'
 brew 'tig'
-
+brew 'tldr'
+brew 'tmux'
 cask 'diffmerge'
-cask 'iterm2'
 cask 'font-hasklig'
+cask 'iterm2'
 
 # Better terminal tools
 brew 'bat'
@@ -21,9 +21,13 @@ brew 'diff-so-fancy'
 brew 'htop'
 brew 'ncdu'
 brew 'prettyping'
+brew 'rpl'
 
 # Generally useful apps
 cask 'alfred', greedy: true
+cask '1password', greedy: true
+cask 'rectangle'
+
+# Browser corner
 cask 'firefox', greedy: true
 cask 'google-chrome', greedy: true
-cask '1password', greedy: true
