@@ -45,7 +45,7 @@
   wc = whatchanged -p --abbrev-commit --pretty=medium
 
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 
 [core]
   excludesfile = ~/.adshell/gitignore
@@ -53,34 +53,34 @@
   pager = delta --dark --diff-so-fancy
 
 [color]
-	ui = auto
-  [diff]
-    meta       = "yellow"
-    frag       = "magenta bold"
-    commit     = "yellow bold"
-    old        = "red bold"
-    new        = "green bold"
-    whitespace = "red reverse"
-  [diff-highlight]
-    oldNormal    = "red bold"
-    oldHighlight = "red bold 52"
-    newNormal    = "green bold"
-    newHighlight = "green bold 22"
+  ui = auto
+[diff]
+  meta       = "yellow"
+  frag       = "magenta bold"
+  commit     = "yellow bold"
+  old        = "red bold"
+  new        = "green bold"
+  whitespace = "red reverse"
+[diff-highlight]
+  oldNormal    = "red bold"
+  oldHighlight = "red bold 52"
+  newNormal    = "green bold"
+  newHighlight = "green bold 22"
 [push]
-	default = current
+  default = current
 
 [diff "ansible-vault"]
-	textconv = ansible-vault view
+  textconv = ansible-vault view
 
 [mergetool]
-	keepBackup = false
+  keepBackup = false
 [merge]
   keepBackup = false
   tool = diffmerge
   defaultToUpstream = true
 [mergetool "diffmerge"]
-	cmd = "diffmerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
-	trustExitCode = true
+  cmd = "diffmerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+  trustExitCode = true
 
 [url "git@github.com:"]
   insteadOf = "gh:"
