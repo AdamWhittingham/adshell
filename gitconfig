@@ -47,6 +47,9 @@
 [branch]
   autosetuprebase = always
 
+[rebase]
+  autostash = true
+
 [core]
   excludesfile = ~/.adshell/gitignore
   attributesfile = ~/.adshell/gitattributes
@@ -54,6 +57,10 @@
 
 [color]
   ui = auto
+
+[push]
+  default = current
+
 [diff]
   meta       = "yellow"
   frag       = "magenta bold"
@@ -66,8 +73,6 @@
   oldHighlight = "red bold 52"
   newNormal    = "green bold"
   newHighlight = "green bold 22"
-[push]
-  default = current
 
 [diff "ansible-vault"]
   textconv = ansible-vault view
