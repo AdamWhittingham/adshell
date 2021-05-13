@@ -21,6 +21,7 @@ brew 'git-delta'
 brew 'htop'
 brew 'ncdu'
 brew 'prettyping'
+brew 'ripgrep'
 brew 'rpl'
 
 # Generally useful apps
