@@ -43,7 +43,7 @@ function seconds_to_minutes {
 }
 
 function attach_shell_to_docker_container {
-  docker exec -i -t $1 bash
+  docker exec -i -t $1 /bin/sh
 }
 
 function test_24bit_colour {
