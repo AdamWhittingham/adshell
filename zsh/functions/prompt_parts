@@ -1,4 +1,4 @@
-# vim: set filetype=zsh
+#vim: set filetype=zsh
 
 is_remote(){
   test -n "${SSH_CONNECTION}${SSH_CLIENT}"
@@ -8,29 +8,8 @@ is_root(){
   test $UID -eq 0
 }
 
-is_staging(){
-  [[ -n "$STAGING_ENV" ]] || [[ "$RAILS_ENV" == 'staging' ]]
-}
-
-is_production(){
-  [[ -n "$PROD_ENV" ]]  || [[ "$RAILS_ENV" == 'production' ]]
-}
-
-prompt_host(){
-  # show host in green
-  local p_host='%F{green}%m%f'
-
-  # or in red if production, or yellow for Staging
-  is_staging    && p_host='%F{yellow}%B%m%b%f'
-  is_production && p_host='%F{red}%B%U%m%u%b%f'
-
-  echo "$p_host"
-}
-
 prompt_user(){
-  # Show username in blue
   local p_user='%F{blue}%n%f'
-  # or in yellow if root
   is_root && p_user='%F{yellow}%B%n%b%f'
 
   echo "$p_user"
@@ -38,62 +17,49 @@ prompt_user(){
 
 prompt_user_and_host(){
   if is_remote || is_root ; then
-    echo "$( prompt_user )%F{242}@%f$( prompt_host ):"
+    local p_host='%F{green}%m%f'
+    echo "$( prompt_user )@${p_host}:"
   else
     echo ''
   fi
 }
 
-rbenv_version_prompt() {
-  local set_from=$( rbenv version | grep -oE '/([^\)]*)' )
-  if [[ "$set_from" != "$HOME/.rbenv/version"  ]] ; then
-    echo " %{%F{198}%}‹$(rbenv version-name)›%{%f%}"
-  else
-    echo ""
-  fi
-}
-
-rprompt_setup(){
-  autoload -Uz add-zsh-hook
-	add-zsh-hook preexec rprompt_setup
-
-  RPROMPT='${rbenv_version_prompt}'
-}
-
-asdf_version(){
-  local app_version="$(asdf current "$1" 2>&1)"
-  [[ $app_version =~ ^No.such.plugin.* ]] && return 1
-
-  if ( echo "$app_version" | grep -qv "set by $HOME/.tool-versions" ); then
-    echo -n "$(echo ${app_version} | cut -d' ' -f1)"
-  fi
-}
-
-prompt_version(){
-  version="$(asdf_version $1)"
-  if [[ -n "$version" ]] ; then
-    local begin=${2:-‹}
-    local end=${3:-'›'}
-    echo -n "${begin}${version}${end}"
-  fi
-}
-
 prompt_tool_versions(){
-	setopt localoptions noshwordsplit
+  prompt_asdf_versions
+}
+
+asdf_version_strip(){
+  local version=$(echo $1 | grep $2 | awk '{print $2}')
+
+  if [[ -n "$version" ]] ; then
+    local begin=${3:-'‹'}
+    local end=${4:-'›'}
+    echo -n "${begin}$version${end}"
+  fi
+}
+
+prompt_asdf_versions(){
+  setopt localoptions noshwordsplit
   local tools=()
 
-  if type asdf > /dev/null 2>&1; then
-    local ruby="$(prompt_version 'ruby')"
-    [[ -z "$ruby" ]] || tools+="%F{198}${ruby}%f"
+  if type asdf 2>&1 >/dev/null; then
+    local asdf_versions="$(asdf current 2>/dev/null | grep -v "$HOME/.tool-versions")"
 
-    local elixir="$(prompt_version 'elixir')"
-    [[ -z "$elixir" ]] || tools+="%F{99}${elixir}%f"
-
-    local postgres="$(prompt_version 'postgres')"
+    local postgres=$(asdf_version_strip "$asdf_versions" "postgres" "")
     [[ -z "$postgres" ]] || tools+="%F{32}${postgres}%f"
 
-    local nodejs="$(prompt_version 'nodejs')"
+    local ruby=$(asdf_version_strip "$asdf_versions" "ruby" " ")
+    [[ -z "$ruby" ]] || tools+="%F{196}${ruby}%f"
+
+    local elixir=$(asdf_version_strip "$asdf_versions" "elixir" "")
+    [[ -z "$elixir" ]] || tools+="%F{99}${elixir}%f"
+
+    local nodejs=$(asdf_version_strip "$asdf_versions" "nodejs" "")
     [[ -z "$nodejs" ]] || tools+="%F{148}${nodejs}%f"
+
+    local golang=$(asdf_version_strip "$asdf_versions" "golang" "")
+    [[ -z "$golang" ]] || tools+="%F{39}${golang}%f"
+
   fi
 
   echo "$tools"

@@ -46,11 +46,12 @@ alias prp='git pull && rake && git push'
 alias filecomp='file_composition'
 
 ## tmux aliases
-alias tl='tmux ls'
+alias tl='tmux attach -t "$(tmux list-sessions | fzf --no-preview | cut -d':' -f1)"'
 alias tls='tmux ls'
 alias tm='tmux_create_or_attach'
 alias tma='tmux_new_attach_to_session'
 alias tmr='tmuxinator'
+alias tmls='tmuxinator_list_and_start'
 
 ## rsync aliases
 alias rsync-copy='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'

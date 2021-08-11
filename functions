@@ -43,7 +43,7 @@ function seconds_to_minutes {
 }
 
 function attach_shell_to_docker_container {
-  docker exec -i -t $1 bash
+  docker exec -i -t $1 /bin/sh
 }
 
 function test_24bit_colour {
@@ -60,4 +60,11 @@ function test_24bit_colour {
     }
     printf "\n";
   }'
+}
+
+function tmuxinator_list_and_start {
+  project=`tmuxinator list --newline | grep -v "tmuxinator projects" | fzf --no-preview`
+  if [[ -n $project ]]; then
+    tmuxinator start $project
+  fi
 }

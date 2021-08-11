@@ -7,8 +7,9 @@
   ca = commit -a
   caa = commit -a --amend -CHEAD
   cl = clean -fd
-  cleanup = "!git branch --merged | grep  -v ’\\*\\|master\\|develop’ | xargs -n 1 git branch -d"
+  cleanup = "!git branch --merged | grep -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
   co = checkout
+  col="!git checkout "$(git branch --sort=-committerdate | fzf --no-preview | tr -d '[:space:]')""
   copr = "!git fetch origin pull/$1/head:pr$1 && git checkout -q pr$1 && echo Switched to PR"
   cp = cherry-pick
   d = diff
@@ -16,7 +17,6 @@
   dcw = diff --word-diff --cached
   dw = diff --color-words
   ff = merge --ff-only
-  go = checkout -B
   l = log --graph --pretty=format:'%<(10)%C(bold green)%h%C(reset) %><(16)%C(yellow)%ar%C(reset) %<(16)%C(blue)%an%Creset %C(auto)%d%C(reset) %s' --abbrev-commit
   ls = shortlog -sn
   m = merge
@@ -33,6 +33,7 @@
   rc = rebase --continue
   s = status -bs
   sb = show-branch
+  sl = !"git stash list | fzf --preview=\"echo {} | cut -d':' -f1 | xargs git stash show --color -p\""
   st = status -bs
   standup = !"git log --reverse --branches --since='$(if [[ "Mon" == "$(date +%a)" ]]; then echo "last friday"; else echo "yesterday"; fi)' --author=$(git config --get user.email) --format=format:'%C(cyan) %ad %C(yellow)%h %Creset %s %Cred%d' --date=local"
   upbase = !"main=$(git rev-parse develop &>/dev/null; if [[ $? == 0 ]]; then echo 'develop'; else echo 'master'; fi); echo "Updating and rebasing on top of $main" && git checkout $main && git pull && git checkout - && git rebase $main"
@@ -44,42 +45,47 @@
   wc = whatchanged -p --abbrev-commit --pretty=medium
 
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
+
+[rebase]
+  autostash = true
 
 [core]
   excludesfile = ~/.adshell/gitignore
   attributesfile = ~/.adshell/gitattributes
-  pager = delta --dark --plus-color="#012800" --minus-color="#340001"
+  pager = delta --dark --diff-so-fancy
 
 [color]
-	ui = auto
-  [diff]
-    meta       = "yellow"
-    frag       = "magenta bold"
-    commit     = "yellow bold"
-    old        = "red bold"
-    new        = "green bold"
-    whitespace = "red reverse"
-  [diff-highlight]
-    oldNormal    = "red bold"
-    oldHighlight = "red bold 52"
-    newNormal    = "green bold"
-    newHighlight = "green bold 22"
+  ui = auto
+
 [push]
-	default = current
+  default = current
+
+[diff]
+  meta       = "yellow"
+  frag       = "magenta bold"
+  commit     = "yellow bold"
+  old        = "red bold"
+  new        = "green bold"
+  whitespace = "red reverse"
+[diff-highlight]
+  oldNormal    = "red bold"
+  oldHighlight = "red bold 52"
+  newNormal    = "green bold"
+  newHighlight = "green bold 22"
 
 [diff "ansible-vault"]
-	textconv = ansible-vault view
+  textconv = ansible-vault view
 
 [mergetool]
-	keepBackup = false
+  keepBackup = false
 [merge]
   keepBackup = false
   tool = diffmerge
   defaultToUpstream = true
 [mergetool "diffmerge"]
-	cmd = "diffmerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
-	trustExitCode = true
+  cmd = "diffmerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+  trustExitCode = true
 
 [url "git@github.com:"]
   insteadOf = "gh:"

@@ -9,6 +9,16 @@ append_to_file() {
   fi
 }
 
+install_dependencies() {
+  if which brew >/dev/null; then
+    brew bundle -v 
+    echo
+    echo "Common dependencies installed. Run `brew bundle --file=Brewfile.personal` for additional personal laptop setup."
+  else
+    echo "Brew not found- please install dependencies manually. See the README.md"
+  fi
+}
+
 append_git_config(){
   git_config="[include]
   path = ~/.adshell/gitconfig"
@@ -43,11 +53,14 @@ install_terminfo(){
 }
 
 main(){
+  pushd $(dirname $0) > /dev/null
+  install_dependencies
   symlink_ctags_config
   append_git_config
   symlink_gitignore
   source_custom
   install_terminfo
+  popd > /dev/null
 }
 
 main
