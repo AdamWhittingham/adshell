@@ -15,4 +15,5 @@ cask 'signal'
 # Misc
 cask 'etcher'
 cask 'obsidian'
+cask 'spotify'
 cask 'vlc'
