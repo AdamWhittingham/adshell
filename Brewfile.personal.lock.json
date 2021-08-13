@@ -1,0 +1,142 @@
+{
+  "entries": {
+    "brew": {
+      "ansible": {
+        "version": "4.4.0",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:86446a9e8d58c52de27a52664fcb01a7852d5cef58890102270b0047c7c665a6",
+              "sha256": "86446a9e8d58c52de27a52664fcb01a7852d5cef58890102270b0047c7c665a6"
+            },
+            "big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:bf9395af3a1727e892ebb5958ebcb98bd552ebc0327745e0a6c3097fb1bda806",
+              "sha256": "bf9395af3a1727e892ebb5958ebcb98bd552ebc0327745e0a6c3097fb1bda806"
+            },
+            "catalina": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:421dc51da2d835c53fd8ae728f44321429bff134fdcf54b7f4b5a56df86cee97",
+              "sha256": "421dc51da2d835c53fd8ae728f44321429bff134fdcf54b7f4b5a56df86cee97"
+            },
+            "mojave": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:57a2b78f15e3f4fcb755589a0d21608988dfc9e299c1781cc959f22fd7286ff3",
+              "sha256": "57a2b78f15e3f4fcb755589a0d21608988dfc9e299c1781cc959f22fd7286ff3"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:bdac6478cfd03e636edc73101080d32a26a3a85d626694f9a4a22f89ee3739bc",
+              "sha256": "bdac6478cfd03e636edc73101080d32a26a3a85d626694f9a4a22f89ee3739bc"
+            }
+          }
+        }
+      },
+      "terraform": {
+        "version": "1.0.4",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_big_sur": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/terraform/blobs/sha256:b8e5da1aebd83f1afcd7e51b7e6d2f421d7e2be77e24ce164b066fbb959024b9",
+              "sha256": "b8e5da1aebd83f1afcd7e51b7e6d2f421d7e2be77e24ce164b066fbb959024b9"
+            },
+            "big_sur": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/terraform/blobs/sha256:e10b91ecf7df1ceaa3b3cb543408cc825a03ea358ec94b1999f279fb6664bbcc",
+              "sha256": "e10b91ecf7df1ceaa3b3cb543408cc825a03ea358ec94b1999f279fb6664bbcc"
+            },
+            "catalina": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/terraform/blobs/sha256:d7dd8de08a632725c5aaa2a8a2e8d3b3adb9bf474639ae082f01414c87eee694",
+              "sha256": "d7dd8de08a632725c5aaa2a8a2e8d3b3adb9bf474639ae082f01414c87eee694"
+            },
+            "mojave": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/terraform/blobs/sha256:9f3b8c36ece942718bbff7f99559799a2fe98e47b653e3bea58cb404f7cabec3",
+              "sha256": "9f3b8c36ece942718bbff7f99559799a2fe98e47b653e3bea58cb404f7cabec3"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/terraform/blobs/sha256:44f1c51dbc5657e50f670843662ab6e87aa50ce4647f74e2d259d186b1dc5276",
+              "sha256": "44f1c51dbc5657e50f670843662ab6e87aa50ce4647f74e2d259d186b1dc5276"
+            }
+          }
+        }
+      }
+    },
+    "cask": {
+      "home-assistant": {
+        "version": "2021.8,2021.216",
+        "options": {
+          "full_name": "home-assistant"
+        }
+      },
+      "keybase": {
+        "version": "5.7.0,20210622193735:e3826b703a",
+        "options": {
+          "full_name": "keybase"
+        }
+      },
+      "mqtt-explorer": {
+        "version": "0.3.5",
+        "options": {
+          "full_name": "mqtt-explorer"
+        }
+      },
+      "nextcloud": {
+        "version": "3.3.1",
+        "options": {
+          "full_name": "nextcloud"
+        }
+      },
+      "discord": {
+        "version": "0.0.263",
+        "options": {
+          "full_name": "discord"
+        }
+      },
+      "signal": {
+        "version": "5.13.0",
+        "options": {
+          "full_name": "signal"
+        }
+      },
+      "etcher": {
+        "version": "1.4.4",
+        "options": {
+          "full_name": "etcher"
+        }
+      },
+      "obsidian": {
+        "version": "0.12.12",
+        "options": {
+          "full_name": "obsidian"
+        }
+      },
+      "vlc": {
+        "version": "3.0.16",
+        "options": {
+          "full_name": "vlc"
+        }
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "big_sur": {
+        "HOMEBREW_VERSION": "3.2.6",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "97b2d73318378374cca2517ef30af88c7298c471",
+        "CLT": "12.5.0.22.9",
+        "Xcode": "12.4",
+        "macOS": "11.4"
+      }
+    }
+  }
+}

@@ -78,6 +78,10 @@ alias dm='docker-machine'
 alias dme='eval #(docker-machine env)'
 alias dsh="attach_shell_to_docker_container"
 
+# Kubernetes Aliases
+alias k='kubectl'
+alias mk='minikube'
+
 # Ansible Aliases
 alias anp='ansible-playbook'
 alias ang='ansible-galaxy'

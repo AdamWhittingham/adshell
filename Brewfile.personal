@@ -1,12 +1,18 @@
-# vim: set ft=brewfile:
+# vim: set ft=brewfile
 
+# HomeOps
 brew 'ansible'
 brew 'terraform'
-cask 'discord'
-cask 'etcher'
 cask 'home-assistant'
 cask 'keybase'
 cask 'mqtt-explorer'
 cask 'nextcloud'
+
+# Comms
+cask 'discord'
 cask 'signal'
+
+# Misc
+cask 'etcher'
+cask 'obsidian'
 cask 'vlc'
