@@ -52,6 +52,10 @@ install_terminfo(){
   tic ~/.adshell/terminfo/xterm256.terminfo
 }
 
+symlink_configs(){
+  ln -s ~/.adshell/config/kitty ~/.config/kitty
+}
+
 main(){
   pushd $(dirname $0) > /dev/null
   install_dependencies
@@ -61,6 +65,7 @@ main(){
   symlink_asdf_configs
   source_custom
   install_terminfo
+  symlink_configs
   popd > /dev/null
 }
 
