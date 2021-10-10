@@ -88,23 +88,23 @@ alias ang='ansible-galaxy'
 alias anv='ansible-vault'
 
 # Better CLI tools when available
-if ( type prettyping > /dev/null ) ; then
+if ( type prettyping &>/dev/null ) ; then
   alias ping='prettyping'
 fi
 
-if ( type bat > /dev/null ) ; then
+if ( type bat &>/dev/null ) ; then
   alias cat='bat'
 fi
 
 # If exa is installed, use it for better ls
-if type exa > /dev/null 2>&1; then
+if type exa &>/dev/null; then
   alias ls='exa'
 fi
 
 alias ncdu='ncdu -rr --color dark --exclude .git --exclude "node_modules"'
 
 # Misc Aliases
-if ( type nvim > /dev/null 2>&1 ) ; then
+if ( type nvim &>/dev/null) ; then
   alias v='nvim'
 else
   alias v='vim'
