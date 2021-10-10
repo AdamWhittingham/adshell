@@ -3,10 +3,10 @@
 .swp
 .swq
 
-log
-logs
+log/
+logs/
 tags
 .tags
 .tags.lock
 .tags.temp
-tmp
+tmp/
