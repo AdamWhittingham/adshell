@@ -22,15 +22,13 @@ if type brew > /dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
+if type brew >/dev/null 2>&1; then
+  source $(brew --prefix asdf)/asdf.sh
+fi
+
 # Add RVM to PATH for scripting
 if [[ -d ~/.rvm ]]; then
   export PATH=$PATH:$HOME/.rvm/bin
-fi
-
-# Add rbenv loading if needed
-if [[ -d ~/.rbenv ]]; then
-  export PATH=~/.rbenv/shims:$PATH
-  type rbenv > /dev/null 2>&1
 fi
 
 # If GNU CoreUtils is installed, make them the default
