@@ -33,19 +33,6 @@ if [[ -d ~/.rbenv ]]; then
   type rbenv > /dev/null 2>&1
 fi
 
-# Add asdf loading if needed
-if [[ -f /usr/local/opt/asdf/asdf.sh ]]; then
-  export ASDF_DIR=/usr/local/opt/asdf
-fi
-
-if [[ -f ~/.asdf/asdf.sh ]]; then
-  export ASDF_DIR=$HOME/.asdf
-fi
-
-if [[ -n "$ASDF_DIR" ]]; then
-  source $ASDF_DIR/asdf.sh
-fi
-
 # If GNU CoreUtils is installed, make them the default
 if type gls > /dev/null 2>&1; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
