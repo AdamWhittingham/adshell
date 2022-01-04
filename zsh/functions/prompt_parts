@@ -32,8 +32,7 @@ asdf_version_strip(){
   local version=$(echo $1 | grep $2 | awk '{print $2}')
 
   if [[ -n "$version" ]] ; then
-    local begin=${3:-'‹'}
-    local end=${4:-'›'}
+    local begin=${3:-'*'}
     echo -n "${begin}$version${end}"
   fi
 }
@@ -48,7 +47,7 @@ prompt_asdf_versions(){
     local postgres=$(asdf_version_strip "$asdf_versions" "postgres" "")
     [[ -z "$postgres" ]] || tools+="%F{32}${postgres}%f"
 
-    local ruby=$(asdf_version_strip "$asdf_versions" "ruby" " ")
+    local ruby=$(asdf_version_strip "$asdf_versions" "ruby" "")
     [[ -z "$ruby" ]] || tools+="%F{196}${ruby}%f"
 
     local elixir=$(asdf_version_strip "$asdf_versions" "elixir" "")
