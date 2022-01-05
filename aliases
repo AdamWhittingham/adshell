@@ -63,7 +63,7 @@ alias p='source $HOME/.adshell/proxy on'
 alias np='source $HOME/.adshell/proxy off'
 
 ## Super lazy-time update functions
-alias up-vim='git-update $HOME/.vim'
+alias up-vim='git-update $HOME/.config/nvim'
 alias up-shell='git-update $HOME/.adshell'
 alias up-tmux='git-update $HOME/.tmux-config'
 alias up-all='up-vim && up-shell && up-tmux'
