@@ -9,7 +9,7 @@
   cl = clean -fd
   cleanup = "!git branch --merged | grep -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
   co = checkout
-  col="!git checkout "$(git branch --sort=-committerdate | fzf --no-preview | tr -d '[:space:]')""
+  col="! source $HOME/.adshell/functions && git_checkout_fzf"
   copr = "!git fetch origin pull/$1/head:pr$1 && git checkout -q pr$1 && echo Switched to PR"
   cp = cherry-pick
   d = diff

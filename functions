@@ -23,7 +23,7 @@ function file_composition {
   find . -type f | perl -n -e'/(\.\w+$)/ && print "$1\n"' | sort | uniq -c | sort -n
 }
 
-function git-update {
+function git_update {
   local updir=$1
   echo "git pull (in $updir)"
   if pushd $updir >/dev/null ; then
@@ -67,4 +67,19 @@ function tmuxinator_list_and_start {
   if [[ -n $project ]]; then
     tmuxinator start $project
   fi
+}
+
+function git_branch_fzf() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  local branch_format='%(refname:short)|%(color:green)%(committerdate:relative)%(color:reset)|%(color:yellow)%(committername)%(color:reset)' 
+  git for-each-ref --color --sort='-committerdate:iso8601' --format=${branch_format} refs/heads | column -s '|' -t |
+    grep -v HEAD |
+    fzf --height 50% --ansi --no-multi --preview-window right:55% \
+        --preview 'git log -n 20 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(cut -f1 -d" " <<< {})' |
+    cut -f1 -d' '
+}
+
+function git_checkout_fzf() {
+  git checkout "$(git_branch_fzf)"
 }
