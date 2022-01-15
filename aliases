@@ -5,7 +5,6 @@
 alias psg='ps -ef|grep '
 alias ssh='TERM=xterm-256color ssh'
 alias sshp='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
-alias ack='ack-grep'
 
 ## ls aliases
 alias l='ls -CF'
@@ -42,25 +41,21 @@ alias gl='g l'
 alias gst='g st'
 
 ## Dev aliases
-alias prp='git pull && rake && git push'
-alias filecomp='file_composition'
+alias fcomp='file_composition'
 
 ## tmux aliases
 alias tl='tmux attach -t "$(tmux list-sessions | fzf --no-preview | cut -d':' -f1)"'
 alias tls='tmux ls'
 alias tm='tmux_create_or_attach'
 alias tma='tmux_new_attach_to_session'
+alias tk='tmux kill-session -t'
 alias tmr='tmuxinator'
 alias tmls='tmuxinator_list_and_start'
 
 ## rsync aliases
 alias rsync-copy='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'
-alias rsync-move='r-copy --remove-source-files'
-alias rsync-update='r-copy --update'
-
-## Proxy aliases
-alias p='source $HOME/.adshell/proxy on'
-alias np='source $HOME/.adshell/proxy off'
+alias rsync-move='rsync-copy --remove-source-files'
+alias rsync-update='rsync-copy --update'
 
 ## Super lazy-time update functions
 alias up-vim='git_update $HOME/.config/nvim'
