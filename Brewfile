@@ -1,5 +1,4 @@
 # Essential dev tools
-brew 'ctags'
 brew 'curl'
 brew 'fzf'
 brew 'git'

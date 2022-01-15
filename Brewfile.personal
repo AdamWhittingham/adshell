@@ -6,7 +6,7 @@ brew 'terraform'
 cask 'home-assistant'
 cask 'keybase'
 cask 'mqtt-explorer'
-cask 'nextcloud'
+cask 'syncthing'
 
 # Comms
 cask 'discord'
