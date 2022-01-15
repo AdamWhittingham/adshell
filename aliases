@@ -63,9 +63,9 @@ alias p='source $HOME/.adshell/proxy on'
 alias np='source $HOME/.adshell/proxy off'
 
 ## Super lazy-time update functions
-alias up-vim='git-update $HOME/.config/nvim'
-alias up-shell='git-update $HOME/.adshell'
-alias up-tmux='git-update $HOME/.tmux-config'
+alias up-vim='git_update $HOME/.config/nvim'
+alias up-shell='git_update $HOME/.adshell'
+alias up-tmux='git_update $HOME/.tmux-config'
 alias up-all='up-vim && up-shell && up-tmux'
 
 # Docker Aliases

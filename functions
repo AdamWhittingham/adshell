@@ -1,4 +1,21 @@
-#Tmux Functions
+# Git functions
+#
+function git_branch_fzf() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  local branch_format='%(refname:short)|%(color:green)%(committerdate:relative)%(color:reset)|%(color:yellow)%(committername)%(color:reset)' 
+  git for-each-ref --color --sort='-committerdate:iso8601' --format=${branch_format} refs/heads | column -s '|' -t |
+    grep -v HEAD |
+    fzf --height 50% --ansi --no-multi --preview-window right:55% \
+        --preview 'git log -n 20 --graph --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(cut -f1 -d" " <<< {})' |
+    cut -f1 -d' '
+}
+
+function git_checkout_fzf() {
+  git checkout "$(git_branch_fzf)"
+}
+
+# Tmux Functions
 function tmux_create_or_attach(){
   session="$1"
   if ! $(tmux has-session -t "=$session" &>/dev/null)
@@ -69,17 +86,3 @@ function tmuxinator_list_and_start {
   fi
 }
 
-function git_branch_fzf() {
-  git rev-parse HEAD > /dev/null 2>&1 || return
-
-  local branch_format='%(refname:short)|%(color:green)%(committerdate:relative)%(color:reset)|%(color:yellow)%(committername)%(color:reset)' 
-  git for-each-ref --color --sort='-committerdate:iso8601' --format=${branch_format} refs/heads | column -s '|' -t |
-    grep -v HEAD |
-    fzf --height 50% --ansi --no-multi --preview-window right:55% \
-        --preview 'git log -n 20 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(cut -f1 -d" " <<< {})' |
-    cut -f1 -d' '
-}
-
-function git_checkout_fzf() {
-  git checkout "$(git_branch_fzf)"
-}
