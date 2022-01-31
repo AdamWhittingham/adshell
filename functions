@@ -1,3 +1,5 @@
+# vim: ft=bash
+
 # Git functions
 
 function git_branch_fzf() {
