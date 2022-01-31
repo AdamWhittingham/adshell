@@ -86,3 +86,6 @@ function tmuxinator_list_and_start {
   fi
 }
 
+function detect_zoom_meeting() {
+  ps -ef | grep -Eq 'zoom.*\-key [0-9]+'
+}
