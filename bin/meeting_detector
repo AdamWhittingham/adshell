@@ -10,8 +10,8 @@ function log() {
 }
 
 function call_webhook() {
-  if [[ -ne $ZOOM_STATUS_WEBOOK_URL ]] ; then
-    curl -x POST --data "{\"zoom_status\": \"$1\"}" -H "Content-Type: application/json" $ZOOM_STATUS_WEBOOK_URL
+  if [[ -ne $MEETING_STATUS_WEBOOK_URL ]] ; then
+    curl -X POST --data "{\"status\": \"$1\"}" -H "Content-Type: application/json" $MEETING_STATUS_WEBOOK_URL
   fi
 }
 
