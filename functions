@@ -9,7 +9,7 @@ function git_branch_fzf() {
   git for-each-ref --color --sort='-committerdate:iso8601' --format=${branch_format} refs/heads | column -s '|' -t |
     grep -v HEAD |
     fzf --height 50% --ansi --no-multi --preview-window right:55% \
-        --preview 'git log -n 20 --graph --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(cut -f1 -d" " <<< {})' |
+        --preview 'git log -n 20 --graph --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" master..$(cut -f1 -d" " <<< {})' |
     cut -f1 -d' '
 }
 
