@@ -1,0 +1,13 @@
+#!/bin/bash
+
+pushd $(dirname $0) &>/dev/null
+
+open AppSwitcher.alfredworkflow
+
+open alfred://customsearch/Can%20I%20Use%3F/ciu/utf8/nospace/http%3A%2F%2Fcaniuse.com%2F%23search%3D%7Bquery%7D
+open alfred://customsearch/Docker%20Hub/d/utf8/nospace/https%3A%2F%2Fhub.docker.com%2Fsearch%3Fq%3D%7Bquery%7D%26type%3Dimage
+open alfred://customsearch/Giphy/gif/utf8/nospace/https%3A%2F%2Fgiphy.com%2Fsearch%2F%7Bquery%7D
+open alfred://customsearch/Github/gh/utf8/nospace/https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3D%7Bquery%7D
+open alfred://customsearch/Ruby%20Gems/gem/utf8/nospace/https%3A%2F%2Frubygems.org%2Fsearch%3Futf8%3D%E2%9C%93%26query%3D%7Bquery%7D
+
+popd &>/dev/null
