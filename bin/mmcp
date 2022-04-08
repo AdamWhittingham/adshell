@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pbpaste | mmdc --output /tmp/tmp.png && cpimg /tmp/tmp.png
