@@ -1,6 +1,6 @@
 # vim: ft=bash
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='rg --files --ignore-file ~/.adshell/rgignore'
 export FZF_DEFAULT_OPTS="
 --layout=reverse
 --info=inline
