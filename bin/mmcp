@@ -2,5 +2,13 @@
 
 set -e
 
-pbpaste | mmdc --output /tmp/tmp.png && cpimg /tmp/tmp.png
-echo "Diagram ready to paste"
+pbpaste | mmdc --output /tmp/tmp.png
+
+md5=$(md5 -q /tmp/tmp.png)
+if [[ "$md5" == "b730bd147dab9aa96d8d636f53f4ec1b" ]]; then
+  echo "Syntax error in diagram"
+  exit 1
+else
+  cpimg /tmp/tmp.png
+  echo "Diagram ready to paste"
+fi
