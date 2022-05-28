@@ -45,7 +45,7 @@ alias gst='g st'
 alias fcomp='file_composition'
 
 ## tmux aliases
-alias tl='tmux attach -t "$(tmux list-sessions | fzf --no-preview | cut -d':' -f1)"'
+alias tl='tmux attach -t "$(tmux list-sessions | fzf --no-preview --select-1 | cut -d':' -f1)"'
 alias tls='tmux ls'
 alias tm='tmux_create_or_attach'
 alias tma='tmux_new_attach_to_session'
