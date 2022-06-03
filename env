@@ -28,9 +28,9 @@ if type brew >/dev/null 2>&1; then
   source $(brew --prefix asdf)/asdf.sh
 fi
 
-# Add RVM to PATH for scripting
-if [[ -d ~/.rvm ]]; then
-  export PATH=$PATH:$HOME/.rvm/bin
+# Add GOBIN to PATH
+if [[ -d $HOME/go/bin ]]; then
+  export PATH=$PATH:$HOME/go/bin
 fi
 
 # If GNU CoreUtils is installed, make them the default
