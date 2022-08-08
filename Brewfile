@@ -35,4 +35,4 @@ cask 'google-chrome', greedy: true
 
 # Better fonts for dev
 tap "homebrew/cask-fonts"
-cask 'font-hasklig', greedy: true
+cask 'font-hasklug-nerd-font', greedy: true
