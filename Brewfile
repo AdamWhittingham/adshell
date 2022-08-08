@@ -1,27 +1,26 @@
 # Essential dev tools
-brew 'curl'
-brew 'fzf'
-brew 'git'
-brew 'jq'
-brew 'neovim'
-brew 'tig'
-brew 'tldr'
-brew 'tmux'
+brew 'curl', greedy: true
+brew 'fzf', greedy: true
+brew 'git', greedy: true
+brew 'jq', greedy: true
+brew 'neovim', greedy: true
+brew 'tig', greedy: true
+brew 'tldr', greedy: true
+brew 'tmux', greedy: true
 cask 'diffmerge', greedy: true
-cask 'font-hasklig', greedy: true
 cask 'kitty', greedy: true
 
 # Better terminal tools
-brew 'bat'
-brew 'bpytop'
-brew 'fd'
-brew 'exa'
-brew 'git-delta'
-brew 'htop'
-brew 'ncdu'
-brew 'prettyping'
-brew 'ripgrep'
-brew 'rpl'
+brew 'bat', greedy: true
+brew 'bpytop', greedy: true
+brew 'fd', greedy: true
+brew 'exa', greedy: true
+brew 'git-delta', greedy: true
+brew 'htop', greedy: true
+brew 'ncdu', greedy: true
+brew 'prettyping', greedy: true
+brew 'ripgrep', greedy: true
+brew 'rpl', greedy: true
 
 # Generally useful apps
 cask 'alfred', greedy: true
@@ -33,3 +32,7 @@ cask 'spotify', greedy: true
 # Browser corner
 cask 'firefox', greedy: true
 cask 'google-chrome', greedy: true
+
+# Better fonts for dev
+tap "homebrew/cask-fonts"
+cask 'font-hasklig', greedy: true
