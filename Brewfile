@@ -7,9 +7,9 @@ brew 'neovim'
 brew 'tig'
 brew 'tldr'
 brew 'tmux'
-cask 'diffmerge'
-cask 'font-hasklig'
-cask 'kitty'
+cask 'diffmerge', greedy: true
+cask 'font-hasklig', greedy: true
+cask 'kitty', greedy: true
 
 # Better terminal tools
 brew 'bat'
@@ -26,7 +26,9 @@ brew 'rpl'
 # Generally useful apps
 cask 'alfred', greedy: true
 cask '1password', greedy: true
-cask 'rectangle'
+cask 'rectangle', greedy: true
+cask 'obsidian', greedy: true
+cask 'spotify', greedy: true
 
 # Browser corner
 cask 'firefox', greedy: true
