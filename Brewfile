@@ -9,7 +9,7 @@ brew 'tldr'
 brew 'tmux'
 cask 'diffmerge'
 cask 'font-hasklig'
-cask 'iterm2'
+cask 'kitty'
 
 # Better terminal tools
 brew 'bat'
