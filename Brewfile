@@ -28,6 +28,7 @@ cask '1password', greedy: true
 cask 'rectangle', greedy: true
 cask 'obsidian', greedy: true
 cask 'spotify', greedy: true
+cask 'flameshot', greedy: true
 
 # Browser corner
 cask 'firefox', greedy: true
