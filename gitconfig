@@ -55,6 +55,9 @@
   attributesfile = ~/.adshell/gitattributes
   pager = delta --dark --diff-so-fancy
 
+[commit]
+  verbose = true
+
 [color]
   ui = auto
 
