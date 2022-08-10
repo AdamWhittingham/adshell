@@ -9,10 +9,10 @@ Offers far far more on Zsh but will also offer better aliases and prompts for Ba
 
 Installation
 ------------
+
 ```
 git clone https://github.com/AdamWhittingham/adshell --recursive ~/.adshell && ~/.adshell/install
 ```
-
 
 ### Optional tools to install for more awesomeness
 **If you don't have brew** then the `install` script won't install some of the tools which add better output & features over some terminal stalwarts.
@@ -24,6 +24,13 @@ If that's the case, you can install what you want from the following:
 * `htop`, top with graphs, search and process tree
 * `ncdu`, a better du which automatically summarises things
 * `prettyping`, ping with graphs
+
+# Optional: Work/Personal
+There are some tools I only use at work or on a personal machine.
+These also rely on [Homebrew](https://brew.sh/) but can be triggered with:
+`make work`
+`make personal`
+
 
 Customisations
 --------------
