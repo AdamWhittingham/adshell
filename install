@@ -42,24 +42,13 @@ symlink_gitignore(){
   ln -s ~/.adshell/gitignore_global ~/.gitignore_global
 }
 
-symlink_kitty_config(){
-  ln -s ~/.adshell/kitty ~/.config/
-}
-
 symlink_asdf_configs(){
   ln -s ~/.adshell/asdf/default-gems ~/.default-gems
   ln -s ~/.adshell/asdf/default-npm-packages ~/.default-npm-packages
 }
 
-install_terminfo(){
-  tic ~/.adshell/terminfo/screen256.terminfo
-  tic ~/.adshell/terminfo/tmux.terminfo
-  tic ~/.adshell/terminfo/tmux256.terminfo
-  tic ~/.adshell/terminfo/xterm256.terminfo
-}
-
 symlink_configs(){
-  ln -s ~/.adshell/config/kitty ~/.config/kitty
+  ln -s ~/.adshell/config/kitty ~/.config/
 }
 
 main(){
@@ -71,7 +60,6 @@ main(){
   symlink_asdf_configs
   symlink_kitty_config
   source_custom
-  install_terminfo
   symlink_configs
   popd > /dev/null
 }
