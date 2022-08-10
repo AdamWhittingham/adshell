@@ -11,9 +11,11 @@ append_to_file() {
 
 install_dependencies() {
   if which brew >/dev/null; then
-    brew bundle -v 
+    brew bundle --no-lock -v 
     echo
-    echo "Common dependencies installed. Run `brew bundle --file=Brewfile.personal` for additional personal laptop setup."
+    echo "Common dependencies installed."
+    echo "Run `brew bundle --no-lock --file=Brewfile.personal` for additional personal laptop setup."
+    echo "Run `brew bundle --no-lock --file=Brewfile.work` for additional work laptop setup."
   else
     echo "Brew not found- please install dependencies manually. See the README.md"
   fi

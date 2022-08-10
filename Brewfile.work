@@ -1,1 +1,6 @@
-cask 'postman', greedy: true
+# vim: set ft=brewfile
+
+cask 'pgadmin4'
+cask 'postman'
+cask 'slack'
+cask 'tailscale'

@@ -4,7 +4,6 @@
 brew 'ansible'
 brew 'terraform'
 cask 'home-assistant'
-cask 'keybase'
 cask 'mqtt-explorer'
 cask 'syncthing'
 
