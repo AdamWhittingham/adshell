@@ -30,6 +30,7 @@ cask 'obsidian'
 cask 'spotify'
 cask 'flameshot'
 cask 'keybase'
+cask 'secretive'
 
 # Browser corner
 cask 'firefox'
