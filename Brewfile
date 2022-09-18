@@ -7,7 +7,6 @@ brew 'neovim'
 brew 'tig'
 brew 'tldr'
 brew 'tmux'
-cask 'diffmerge'
 cask 'kitty'
 
 # Better terminal tools
