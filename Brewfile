@@ -20,6 +20,7 @@ brew 'ncdu'
 brew 'prettyping'
 brew 'ripgrep'
 brew 'rpl'
+brew 'gum'
 
 # Generally useful apps
 cask 'alfred'
