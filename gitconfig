@@ -31,6 +31,7 @@
   prune-remote = !"git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
   rb = rebase
   rc = rebase --continue
+  rom = reset --hard origin/master
   s = status -bs
   sb = show-branch
   sl = !"git stash list | fzf --preview=\"echo {} | cut -d':' -f1 | xargs git stash show --color -p\""
@@ -91,7 +92,7 @@
 	cmd = nvim -d "$LOCAL" "$MERGED" "$REMOTE" -c ":DiffviewOpen" -c "wincmd l"
   trustExitCode = true
 [mergetool "diffmerge"]
-  cmd = "diffmerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+  cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
   trustExitCode = true
 
 [url "git@github.com:"]
