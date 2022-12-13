@@ -1,5 +1,6 @@
 # Essential dev tools
 brew 'curl'
+brew 'diff-so-fancy'
 brew 'fzf'
 brew 'git'
 brew 'jq'
@@ -7,6 +8,7 @@ brew 'neovim'
 brew 'tig'
 brew 'tldr'
 brew 'tmux'
+brew 'watch'
 cask 'kitty'
 
 # Better terminal tools

@@ -2,7 +2,9 @@
 
 # HomeOps
 brew 'ansible'
+brew 'qmk'
 brew 'terraform'
+brew 'wireguard-go'
 cask 'home-assistant'
 cask 'mqtt-explorer'
 cask 'syncthing'
@@ -14,3 +16,7 @@ cask 'signal'
 # Misc
 cask 'etcher'
 cask 'vlc'
+
+# Hardware messin'
+cask 'cubicsdr'
+cask 'wireshark'
