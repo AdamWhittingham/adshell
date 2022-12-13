@@ -38,4 +38,5 @@ cask 'google-chrome'
 
 # Better fonts for dev
 tap "homebrew/cask-fonts"
-cask 'font-hasklug-nerd-font'
+cask 'font-hasklig'
+cask 'font-symbols-only-nerd-font'
