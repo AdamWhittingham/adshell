@@ -1,7 +1,6 @@
 # vim: ft=bash
 
 # Git functions
-
 function git_branch_fzf() {
   git rev-parse HEAD > /dev/null 2>&1 || return
 
