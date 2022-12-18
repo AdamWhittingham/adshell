@@ -12,10 +12,8 @@
   col="! source $HOME/.adshell/functions && git_checkout_fzf"
   copr = "!git fetch origin pull/$1/head:pr$1 && git checkout -q pr$1 && echo Switched to PR"
   cp = cherry-pick
-  d = diff
-  dc = diff --cached
-  dcw = diff --word-diff --cached
-  dw = diff --color-words
+  d="! source $HOME/.adshell/functions && git_diff_fzf"
+  dc="! source $HOME/.adshell/functions && git_diff_fzf --cached"
   ff = merge --ff-only
   l = log --graph --pretty=format:'%<(10)%C(bold green)%h%C(reset) %><(16)%C(yellow)%ar%C(reset) %<(16)%C(blue)%an%Creset %C(auto)%d%C(reset) %s' --abbrev-commit
   ls = shortlog -sn

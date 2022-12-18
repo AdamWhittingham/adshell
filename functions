@@ -17,6 +17,31 @@ function git_checkout_fzf() {
   git checkout "$(git_branch_fzf)"
 }
 
+function git_diff_fzf () {
+  PREVIEW_PAGER="less --tabs=2 -Rc"
+  ENTER_PAGER=${PREVIEW_PAGER}
+  if [ -x "$(command -v delta)" ]; then
+    PREVIEW_PAGER="delta | ${PREVIEW_PAGER}"
+    ENTER_PAGER="delta | sed -e '1,4d' | ${ENTER_PAGER}"
+  fi
+
+  # Don't just diff the selected file alone, get related files first using
+  # '--name-status -R' in order to include moves and renames in the diff.
+  # See for reference: https://stackoverflow.com/q/71268388/3018229
+  PREVIEW_COMMAND='git diff --color=always '$@' -- \
+    $(echo $(git diff --name-status -R '$@' | grep {}) | cut -d" " -f 2-) \
+    | '$PREVIEW_PAGER
+
+  # Show additional context compared to preview
+  ENTER_COMMAND='git diff --color=always '$@' -U10000 -- \
+    $(echo $(git diff --name-status -R '$@' | grep {}) | cut -d" " -f 2-) \
+    | '$ENTER_PAGER
+
+  git diff $1 --name-only $@ | \
+    fzf --ansi --height=100% --exit-0 --preview "${PREVIEW_COMMAND}" \
+    --preview-window=top:85% --bind "enter:execute:${ENTER_COMMAND}"
+}
+
 # Tmux Functions
 function tmux_create_or_attach(){
   session="$1"
