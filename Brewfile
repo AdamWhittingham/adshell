@@ -14,15 +14,16 @@ cask 'kitty'
 # Better terminal tools
 brew 'bat'
 brew 'bpytop'
-brew 'fd'
 brew 'exa'
+brew 'fd'
 brew 'git-delta'
+brew 'gum'
 brew 'htop'
 brew 'ncdu'
 brew 'prettyping'
 brew 'ripgrep'
 brew 'rpl'
-brew 'gum'
+brew 'vale'
 
 # Generally useful apps
 cask 'alfred'

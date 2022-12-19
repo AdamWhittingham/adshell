@@ -49,6 +49,7 @@ symlink_asdf_configs(){
 
 symlink_configs(){
   ln -s ~/.adshell/config/kitty ~/.config/
+  ln -s ~/.adshell/config/vale.ini ~/.vale.ini
 }
 
 main(){
