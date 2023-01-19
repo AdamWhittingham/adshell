@@ -23,7 +23,9 @@ brew 'ncdu'
 brew 'prettyping'
 brew 'ripgrep'
 brew 'rpl'
+brew 'tree'
 brew 'vale'
+brew 'watch'
 
 # Generally useful apps
 cask 'alfred'
