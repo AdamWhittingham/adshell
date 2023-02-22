@@ -1,3 +1,4 @@
+# vim:ft=toml
 [alias]
   a = add
   aa = add -A
@@ -81,14 +82,11 @@
 
 [merge]
   keepBackup = false
-  tool = nvim
   defaultToUpstream = true
+  tool = nvimdiff
 [mergetool]
   keepBackup = false
   prompt = false
-[mergetool "nvim"]
-	cmd = nvim -d "$LOCAL" "$MERGED" "$REMOTE" -c ":DiffviewOpen" -c "wincmd l"
-  trustExitCode = true
 [mergetool "diffmerge"]
   cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
   trustExitCode = true
