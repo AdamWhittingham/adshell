@@ -1,6 +1,14 @@
 # vim: ft=bash
 
 # Git functions
+function _master_branch() {
+  if git rev-parse --quiet --verify master > /dev/null; then
+    echo 'master'
+  else
+    echo 'main';
+  fi
+}
+
 function git_branch_fzf() {
   git rev-parse HEAD > /dev/null 2>&1 || return
 
