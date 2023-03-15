@@ -28,14 +28,15 @@ brew 'vale'
 brew 'watch'
 
 # Generally useful apps
-cask 'alfred'
 cask '1password'
-cask 'rectangle'
-cask 'obsidian'
-cask 'spotify'
+cask 'alfred'
 cask 'flameshot'
 cask 'keybase'
+cask 'monitorcontrol'
+cask 'obsidian'
+cask 'rectangle'
 cask 'secretive'
+cask 'spotify'
 
 # Browser corner
 cask 'firefox'
