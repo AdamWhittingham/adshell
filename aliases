@@ -43,6 +43,7 @@ alias gst='g st'
 
 ## Dev aliases
 alias fcomp='file_composition'
+alias mt='make test'
 
 ## tmux aliases
 alias tl='tmux attach -t "$(tmux list-sessions | fzf --no-preview --select-1 | cut -d':' -f1)"'
