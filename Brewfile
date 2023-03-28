@@ -13,7 +13,7 @@ cask 'kitty'
 
 # Better terminal tools
 brew 'bat'
-brew 'bpytop'
+brew 'btop'
 brew 'exa'
 brew 'fd'
 brew 'git-delta'
