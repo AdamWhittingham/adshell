@@ -30,6 +30,9 @@
   punch = push --force-with-lease
   prune-remote = !"git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
   rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbm = rebase -i origin/master
   rc = rebase --continue
   rom = reset --hard origin/master
   s = status -bs
