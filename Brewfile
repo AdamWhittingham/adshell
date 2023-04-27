@@ -28,6 +28,7 @@ brew 'vale'
 brew 'watch'
 
 # Generally useful apps
+brew 'graphviz'
 cask '1password'
 cask 'alfred'
 cask 'flameshot'
