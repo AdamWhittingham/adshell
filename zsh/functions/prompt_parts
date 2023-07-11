@@ -29,7 +29,7 @@ prompt_tool_versions(){
 }
 
 asdf_version_strip(){
-  local version=$(echo $1 | grep $2 | awk '{print $2}')
+  local version=$(echo $1 | grep "^$2" | awk '{print $2}')
 
   if [[ -n "$version" ]] ; then
     local begin=${3:-'*'}
