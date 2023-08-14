@@ -21,13 +21,13 @@ brights = [
   '#ffffff',
 ]
 compose_cursor = '#dd7878'
-cursor_bg = '#cccccc'
+cursor_bg = '#202090'
 cursor_border = '#cccccc'
 cursor_fg = '#dce0e8'
-foreground = '#4c4f69'
+foreground = '#dddddd'
 scrollbar_thumb = '#acb0be'
-selection_bg = '#acb0be'
-selection_fg = '#4c4f69'
+selection_bg = '#806803'
+selection_fg = '#ffffff'
 split = '#9ca0b0'
 visual_bell = '#ccd0da'
 

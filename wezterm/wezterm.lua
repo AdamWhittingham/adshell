@@ -13,7 +13,7 @@ config.window_decorations = "RESIZE"
 config.font = wezterm.font('Hasklig', { weight = 'Medium' })
 config.font_size = 14.0
 config.line_height = 1.1
-
+config.cursor_thickness = 2.0
 
 -- Key bindings
 config.keys = {
