@@ -18,6 +18,16 @@ config.cursor_thickness = 2.0
 -- Key bindings
 config.keys = {
   {
+    key = 'r',
+    mods = 'SUPER',
+    action = wezterm.action.ReloadConfiguration,
+  },
+  {
+    key = 'n',
+    mods = 'SUPER',
+    action = wezterm.action.SpawnWindow,
+  },
+  {
     key = 'c',
     mods = 'CMD',
     action = wezterm.action.CopyTo 'Clipboard',
