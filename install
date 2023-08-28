@@ -11,7 +11,7 @@ append_to_file() {
 
 install_dependencies() {
   if which brew >/dev/null; then
-    brew bundle --no-lock -v 
+    brew bundle --no-lock -v
     echo
     echo "Common dependencies installed."
     echo "Run `brew bundle --no-lock --file=Brewfile.personal` for additional personal laptop setup."
@@ -50,8 +50,8 @@ symlink_asdf_configs(){
 
 symlink_configs(){
   ln -s ~/.adshell/config/kitty ~/.config/
-  ln -s ~/.adshell/config/vale.ini ~/.vale.ini
   ln -s ~/.adshell/config/wezterm ~/.config/
+  ln -s ~/.adshell/config/vale.ini ~/.vale.ini
 }
 
 main(){
@@ -61,7 +61,6 @@ main(){
   append_git_config
   symlink_gitignore
   symlink_asdf_configs
-  symlink_kitty_config
   source_custom
   symlink_configs
   popd > /dev/null
