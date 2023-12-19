@@ -7,6 +7,9 @@ end
 
 config.enable_tab_bar = false
 
+-- STFU
+config.audible_bell = "Disabled"
+
 -- Window Look & Feel
 config.color_scheme = "adTerm"
 config.window_decorations = "RESIZE"
