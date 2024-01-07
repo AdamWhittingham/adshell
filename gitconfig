@@ -68,6 +68,9 @@
 [push]
   default = current
 
+[init]
+	defaultBranch = master
+
 [diff]
   meta       = "yellow"
   frag       = "magenta bold"
