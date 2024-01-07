@@ -10,15 +10,21 @@ append_to_file() {
 }
 
 install_dependencies() {
-  if which brew >/dev/null; then
-    brew bundle --no-lock -v
-    echo
-    echo "Common dependencies installed."
-    echo "Run `brew bundle --no-lock --file=Brewfile.personal` for additional personal laptop setup."
-    echo "Run `brew bundle --no-lock --file=Brewfile.work` for additional work laptop setup."
-  else
+  if ! which brew >/dev/null; then
     echo "Brew not found- please install dependencies manually. See the README.md"
+    exit 1
   fi
+
+  brew bundle --no-lock -v
+  echo
+  echo 'Common dependencies installed'
+  echo
+  echo 'What other apps templates would you like to install?'
+  ADDS=$(gum choose --cursor-prefix "[ ] " --selected-prefix "[✓] " --no-limit "personal" "work" )
+  for add in $ADDS; do
+    echo "Installing $add dependencies"
+    brew bundle --no-lock --file=Brewfile.${add}
+  done
 }
 
 append_git_config(){
