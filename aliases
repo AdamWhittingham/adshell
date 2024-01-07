@@ -103,7 +103,7 @@ alias ncdu='ncdu -rr --color dark --exclude .git --exclude "node_modules"'
 
 # Misc Aliases
 if ( type nvim &>/dev/null) ; then
-  alias v='nvim'
+  alias v='env TERM=wezterm nvim'
 else
   alias v='vim'
 fi

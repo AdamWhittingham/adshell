@@ -54,6 +54,12 @@ symlink_configs(){
   ln -s ~/.adshell/config/vale.ini ~/.vale.ini
 }
 
+update_terminfo(){
+  if type wezterm >/dev/null; then
+    ~/.adshell/config/wezterm/install
+  fi
+}
+
 main(){
   pushd $(dirname $0) > /dev/null
   install_dependencies
@@ -63,6 +69,7 @@ main(){
   symlink_asdf_configs
   source_custom
   symlink_configs
+  update_terminfo
   popd > /dev/null
 }
 
