@@ -34,10 +34,6 @@ source_custom(){
   append_to_file "$source_cmd" $HOME/.zshrc
 }
 
-symlink_ctags_config(){
-  ln -s ~/.adshell/ctags ~/.ctags
-}
-
 symlink_gitignore(){
   ln -s ~/.adshell/gitignore_global ~/.gitignore_global
 }
@@ -63,7 +59,6 @@ update_terminfo(){
 main(){
   pushd $(dirname $0) > /dev/null
   install_dependencies
-  symlink_ctags_config
   append_git_config
   symlink_gitignore
   symlink_asdf_configs
