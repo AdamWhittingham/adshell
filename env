@@ -3,20 +3,20 @@ export NERDFONT=1
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
 export FZF_DEFAULT_COMMAND='rg --files --ignore-file ~/.adshell/rgignore'
 export FZF_DEFAULT_OPTS="\
---layout=reverse\
---info=inline\
---height=90%\
---multi\
---preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'\
---prompt='∼ '\
---bind '?:toggle-preview'\
---bind 'shift-down:preview-down'\
---bind s'hift-up:preview-up'\
---bind pg'dn:preview-page-down'\
---bind pgu'p:preview-page-up'\
---bind 'ctrl-a:select-all'\
---bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'\
---bind 'ctrl-e:execute(echo {+} | xargs -o vim)'\
+--layout=reverse \
+--info=inline \
+--height=90% \
+--multi \
+--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
+--prompt='∼ ' \
+--bind '?:toggle-preview' \
+--bind 'shift-down:preview-down' \
+--bind s'hift-up:preview-up' \
+--bind pg'dn:preview-page-down' \
+--bind pgu'p:preview-page-up' \
+--bind 'ctrl-a:select-all' \
+--bind 'ctrl-y:execute-silent(echo {+} | pbcopy)' \
+--bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
 "
 
 # Add adshell/bin to the PATH
