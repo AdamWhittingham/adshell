@@ -53,6 +53,10 @@
 
 [rebase]
   autostash = true
+	updateRefs = true
+
+[rerere]
+	enabled = true
 
 [core]
   excludesfile = ~/.adshell/gitignore
