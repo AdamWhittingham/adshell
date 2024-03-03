@@ -11,6 +11,7 @@ cask 'wezterm'
 # Better terminal tools
 brew 'bat'
 brew 'btop'
+brew 'dust'
 brew 'diff-so-fancy'
 brew 'dog'
 brew 'exa'
