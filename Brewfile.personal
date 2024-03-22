@@ -2,7 +2,6 @@
 
 # HomeOps
 brew 'ansible'
-brew 'qmk'
 brew 'terraform'
 brew 'wireguard-go'
 cask 'home-assistant'
@@ -14,7 +13,7 @@ cask 'discord'
 cask 'signal'
 
 # Misc
-cask 'etcher'
+cask 'balentaetcher'
 cask 'vlc'
 
 # Hardware messin'

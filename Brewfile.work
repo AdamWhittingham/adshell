@@ -1,5 +1,6 @@
 # vim: set ft=brewfile
 
+cask 'google-chrome'
 cask 'pgadmin4'
 cask 'postman'
 cask 'slack'

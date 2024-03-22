@@ -1,4 +1,5 @@
-# Essential dev tools
+# Dev tools
+brew 'asdf'
 brew 'curl'
 brew 'fzf'
 brew 'git'
@@ -29,20 +30,16 @@ brew 'tree'
 brew 'vale'
 brew 'watch'
 
-# Generally useful apps
+# Essentials
 cask '1password'
 cask 'alfred'
+cask 'firefox'
 cask 'flameshot'
 cask 'keybase'
-cask 'monitorcontrol'
 cask 'obsidian'
 cask 'rectangle'
 cask 'secretive'
 cask 'spotify'
-
-# Browser corner
-cask 'firefox'
-cask 'google-chrome'
 
 # Better fonts for dev
 tap "homebrew/cask-fonts"
