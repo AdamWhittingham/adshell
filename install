@@ -15,22 +15,23 @@ install_dependencies() {
     exit 1
   fi
 
-  brew bundle --no-lock -v
-  echo
-  echo 'Common dependencies installed'
-  echo
+  gum spin --title "Installing favourite apps" -- brew bundle --no-lock -v
+
   echo 'What other apps templates would you like to install?'
-  ADDS=$(gum choose --cursor-prefix "[ ] " --selected-prefix "[✓] " --no-limit "personal" "work" )
+  echo '(Use space to select, press return when done)'
+  ADDS=$(gum choose --no-limit "personal" "work" )
   for add in $ADDS; do
-    echo "Installing $add dependencies"
-    brew bundle --no-lock --file=Brewfile.${add}
+    gum spin --title "Installing $add apps" -- brew bundle --no-lock --file=Brewfile.${add}
   done
 }
 
-append_git_config(){
+setup_git(){
+  echo "Setting up git"
   git_config="[include]
   path = ~/.adshell/gitconfig"
   append_to_file "$git_config" $HOME/.gitconfig
+
+  ln -s ~/.adshell/gitignore_global ~/.gitignore_global &>/dev/null
 }
 
 source_custom(){
@@ -40,36 +41,43 @@ source_custom(){
   append_to_file "$source_cmd" $HOME/.zshrc
 }
 
-symlink_gitignore(){
-  ln -s ~/.adshell/gitignore_global ~/.gitignore_global
-}
+setup_asdf(){
+  echo "Installing via ASDF"
+  ln -s ~/.adshell/asdf/asdfrc ~/.asdfrc &>/dev/null
+  ln -s ~/.adshell/asdf/default-gems ~/.default-gems &>/dev/null
+  ln -s ~/.adshell/asdf/default-npm-packages ~/.default-npm-packages &>/dev/null
 
-symlink_asdf_configs(){
-  ln -s ~/.adshell/asdf/asdfrc ~/.asdfrc
-  ln -s ~/.adshell/asdf/default-gems ~/.default-gems
-  ln -s ~/.adshell/asdf/default-npm-packages ~/.default-npm-packages
+  asdf plugin-add ruby &> /dev/null
+  asdf plugin-add golang &> /dev/null
+  asdf plugin-add nodejs &> /dev/null
+
+  gum spin --title "Installing ruby" -- asdf install ruby 3.3.0
+  asdf global ruby 3.3.0
+
+  gum spin --title "Installing golang" -- asdf install golang 1.22.1
+  asdf global golang 1.22.1
 }
 
 symlink_configs(){
-  ln -s ~/.adshell/config/kitty ~/.config/
-  ln -s ~/.adshell/config/wezterm ~/.config/
-  ln -s ~/.adshell/config/vale.ini ~/.vale.ini
+  echo "Symlinking configs"
+  ln -s ~/.adshell/config/kitty ~/.config/ &>/dev/null
+  ln -s ~/.adshell/config/wezterm ~/.config/ &>/dev/null
+  ln -s ~/.adshell/config/vale.ini ~/.vale.ini &>/dev/null
 }
 
 update_terminfo(){
   if type wezterm >/dev/null; then
-    ~/.adshell/config/wezterm/install
+    gum spin --title "Setting up terminfo" -- ~/.adshell/config/wezterm/install
   fi
 }
 
 main(){
   pushd $(dirname $0) > /dev/null
   install_dependencies
-  append_git_config
-  symlink_gitignore
-  symlink_asdf_configs
-  source_custom
+  setup_git
   symlink_configs
+  source_custom
+  setup_asdf
   update_terminfo
   popd > /dev/null
 }
