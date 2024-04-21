@@ -23,10 +23,24 @@ class Color
     "\e[0m"
   end
 
+  def self.from_hex(value)
+    rgb = value
+      .sub("#", '')
+      .chars
+      .each_slice(2)
+      .map{ |val| val.join.to_i(16) }
+
+    new(*rgb)
+  end
+
   def initialize(r, g, b)
     @r = r
     @g = g
     @b = b
+  end
+
+  def to_rgb
+    [@r, @g, @b]
   end
 
   def mode(mode)

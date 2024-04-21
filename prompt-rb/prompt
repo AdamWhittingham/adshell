@@ -1,17 +1,19 @@
 #!/usr/bin/env ruby
 
-require_relative 'lib/color'
+require_relative 'lib/theme'
+
+@theme = Theme.new
 
 def prompt_char
   exit_code = `echo $?`
 
   if exit_code && exit_code.to_i != 0
-    color = Color.fg(200, 0, 0)
+    color = @theme.red
   else
-    color = Color.fg(0, 200, 0)
+    color = @theme.blue
   end
 
-  "#{color}❯#{Color.reset}"
+  "#{color.to_24bit}❯#{Color.reset}"
 end
 
 puts "#{prompt_char}"

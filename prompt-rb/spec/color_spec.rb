@@ -40,4 +40,14 @@ describe Color do
       expect(described_class.new(95, 175, 175).to_24bit).to eq "\e[38;2;95;175;175m"
     end
   end
+
+  describe "from_hex" do
+    it "converts to RGB" do
+      expect(Color.from_hex("#ff0000").to_rgb).to eq [255, 0, 0]
+      expect(Color.from_hex("#00ff00").to_rgb).to eq [0, 255, 0]
+      expect(Color.from_hex("#0000ff").to_rgb).to eq [0, 0, 255]
+
+      expect(Color.from_hex("#80ff40").to_rgb).to eq [128, 255, 64]
+    end
+  end
 end
