@@ -7,9 +7,8 @@ theme = Theme.new
 PromptModules.init(theme)
 
 lines = []
-lines << [
-  Cursor.new
-]
+lines << [ Path.new ]
+lines << [ Cursor.new ]
 
 lines.each do |line|
   puts line.join
