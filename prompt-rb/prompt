@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require_relative 'lib/color'
+
+def prompt_char
+  exit_code = `echo $?`
+
+  if exit_code && exit_code.to_i != 0
+    color = Color.fg(200, 0, 0)
+  else
+    color = Color.fg(0, 200, 0)
+  end
+
+  "#{color}❯#{Color.reset}"
+end
+
+puts "#{prompt_char}"
