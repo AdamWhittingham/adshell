@@ -5,11 +5,12 @@ require_relative 'lib/prompt_modules'
 
 theme = Theme.new
 PromptModules.init(theme)
+c = theme.to_24bit
 
 lines = []
-lines << [ Path.new ]
-lines << [ Cursor.new ]
+lines << [Path.new, c.purple, Git.new]
+lines << [Cursor.new]
 
 lines.each do |line|
-  puts line.join
+  puts line.join(' ')
 end

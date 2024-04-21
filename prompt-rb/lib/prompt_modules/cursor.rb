@@ -1,5 +1,6 @@
 class Cursor < PromptModule
   def initialize(char: "❯")
+    super()
     @char = char
   end
 

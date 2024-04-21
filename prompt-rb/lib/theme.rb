@@ -8,13 +8,16 @@ class Theme
     blue:   "#2244FE",
     green:  "#33DD00",
     purple: "#9130F0",
+    grey:   "#333333",
+    white:  "#E0E0E0",
   }
 
-  attr_reader :red
-  attr_reader :yellow
-  attr_reader :blue
-  attr_reader :green
-  attr_reader :purple
+  DEFAULT.keys.map { |key| attr_reader key }
+  ColorStrings = Struct.new(*DEFAULT.keys) do
+    def reset
+      Color.reset
+    end
+  end
 
   def initialize(file: nil)
     if file
@@ -23,10 +26,18 @@ class Theme
       theme = DEFAULT
     end
 
-    @red    = Color.from_hex(theme[:red])
-    @yellow = Color.from_hex(theme[:yellow])
-    @blue   = Color.from_hex(theme[:blue])
-    @green  = Color.from_hex(theme[:green])
-    @purple = Color.from_hex(theme[:purple])
+    DEFAULT.keys.map do |key|
+      instance_variable_set "@#{key}", Color.from_hex(theme[key])
+    end
+  end
+
+  def to_24bit
+    values = DEFAULT.keys.map { |key| send(key)  }
+    ColorStrings.new(*values.map(&:to_24bit))
+  end
+
+  def to_256
+    values = DEFAULT.keys.map { |key| send(key)  }
+    ColorStrings.new(*values.map(&:to_256))
   end
 end

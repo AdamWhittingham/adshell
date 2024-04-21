@@ -1,7 +1,8 @@
 require 'pathname'
 
-class Path
-  def initialize(mode = nil, max_length: 3)
+class Path < PromptModule
+  def initialize(mode = nil, max_length: 200)
+    super()
     @mode = mode || :default
     @max_length = max_length
   end
