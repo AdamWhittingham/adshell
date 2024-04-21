@@ -1,19 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative 'lib/theme'
+require_relative 'lib/prompt_modules'
 
-@theme = Theme.new
+theme = Theme.new
+PromptModules.init(theme)
 
-def prompt_char
-  exit_code = `echo $?`
+lines = []
+lines << [
+  Cursor.new
+]
 
-  if exit_code && exit_code.to_i != 0
-    color = @theme.red
-  else
-    color = @theme.blue
-  end
-
-  "#{color.to_24bit}❯#{Color.reset}"
+lines.each do |line|
+  puts line.join
 end
-
-puts "#{prompt_char}"
