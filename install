@@ -15,6 +15,12 @@ install_dependencies() {
     exit 1
   fi
 
+
+  if ! which gum >/dev/null; then
+    echo "Gum not found, installing"
+    brew install gum &>/dev/null
+  fi
+
   gum spin --title "Installing favourite apps" -- brew bundle --no-lock -v
 
   echo 'What other apps templates would you like to install?'
