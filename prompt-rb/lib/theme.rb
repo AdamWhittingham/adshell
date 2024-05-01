@@ -3,13 +3,14 @@ require_relative 'color'
 
 class Theme
   DEFAULT = {
-    red:    "#E80000",
-    yellow: "#E8A800",
-    blue:   "#2244FE",
-    green:  "#33DD00",
-    purple: "#9130F0",
-    grey:   "#333333",
-    white:  "#E0E0E0",
+    red:        "#E80000",
+    yellow:     "#E8A800",
+    blue:       "#2244FE",
+    light_blue: "#4488FE",
+    green:      "#33DD00",
+    purple:     "#9130F0",
+    grey:       "#444444",
+    white:      "#E0E0E0",
   }
 
   DEFAULT.keys.map { |key| attr_reader key }

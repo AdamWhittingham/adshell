@@ -8,7 +8,7 @@ PromptModules.init(theme)
 c = theme.to_24bit
 
 lines = []
-lines << [Path.new, c.purple, Git.new]
+lines << [c.light_blue, Path.new, c.grey, Git.new]
 lines << [Cursor.new]
 
 lines.each do |line|

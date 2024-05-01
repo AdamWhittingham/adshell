@@ -1,11 +1,19 @@
 class Git < PromptModule
-  def initialize
+  def initialize(show_icon: true)
     super()
+    @show_icon = show_icon
   end
 
   def to_s
-    branch = `git rev-parse --abbrev-ref HEAD`
+    icon = @show_icon ? ' ' : ''
+    branch = `git rev-parse --abbrev-ref HEAD`.chomp
+    unstaged_changes = !system('git diff-index --quiet HEAD --')
+    modified = unstaged_changes ? '' : ''
 
-    " #{branch}"
+    [
+      icon,
+      branch,
+      modified,
+    ].join
   end
 end
