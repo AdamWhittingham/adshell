@@ -13,8 +13,8 @@ config.audible_bell = "Disabled"
 -- Window Look & Feel
 config.color_scheme = "adTerm"
 config.window_decorations = "RESIZE"
-config.font = wezterm.font('Hasklig', { weight = 'Medium' })
-config.font_size = 14.0
+config.font = wezterm.font('Hasklig')
+config.font_size = 15.0
 config.line_height = 1.1
 config.cursor_thickness = 2.0
 
