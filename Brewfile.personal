@@ -15,6 +15,7 @@ cask 'signal'
 # Misc
 cask 'balenaetcher'
 cask 'vlc'
+cask 'steam'
 
 # Hardware messin'
 cask 'cubicsdr'
