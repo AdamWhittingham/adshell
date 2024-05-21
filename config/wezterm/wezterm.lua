@@ -18,6 +18,17 @@ config.font_size = 16.0
 config.line_height = 1.1
 config.cursor_thickness = 4.0
 
+config.window_background_gradient = {
+  colors = {
+    '#000b28',
+    '#000723',
+  },
+  orientation = 'Vertical',
+  interpolation = 'Linear',
+  blend = 'Hsv',
+  noise = 32,
+}
+
 -- Key bindings
 config.keys = {
   {
