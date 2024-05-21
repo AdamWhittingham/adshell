@@ -13,10 +13,10 @@ config.audible_bell = "Disabled"
 -- Window Look & Feel
 config.color_scheme = "adTerm"
 config.window_decorations = "RESIZE"
-config.font = wezterm.font('Hasklig')
-config.font_size = 15.0
+config.font = wezterm.font('Hasklig', { weight = 'Medium' })
+config.font_size = 16.0
 config.line_height = 1.1
-config.cursor_thickness = 2.0
+config.cursor_thickness = 4.0
 
 -- Key bindings
 config.keys = {
