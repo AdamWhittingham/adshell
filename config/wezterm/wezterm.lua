@@ -16,7 +16,7 @@ config.window_decorations = "RESIZE"
 config.font = wezterm.font('Hasklig', { weight = 'Medium' })
 config.font_size = 16.0
 config.line_height = 1.1
-config.cursor_thickness = 4.0
+config.cursor_thickness = 2.0
 
 config.window_background_gradient = {
   colors = {
