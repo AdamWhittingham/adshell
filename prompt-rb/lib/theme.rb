@@ -33,12 +33,12 @@ class Theme
   end
 
   def to_24bit
-    values = DEFAULT.keys.map { |key| send(key)  }
+    values = DEFAULT.keys.map { |key| send(key) }
     ColorStrings.new(*values.map(&:to_24bit))
   end
 
   def to_256
-    values = DEFAULT.keys.map { |key| send(key)  }
+    values = DEFAULT.keys.map { |key| send(key) }
     ColorStrings.new(*values.map(&:to_256))
   end
 end

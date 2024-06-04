@@ -1,7 +1,11 @@
 class Color
   ANSI_COLORS = 16
 
-  def self.fg(r,g,b, output: :_24bit)
+  def self.set_color_depth(value)
+    @@color_depth = value
+  end
+
+  def self.fg(r,g,b, output: @@color_depth)
     case output
     when :_24bit
       new(r,g,b).to_24bit
@@ -10,7 +14,7 @@ class Color
     end
   end
 
-  def self.bg(r,g,b, output: :_24bit)
+  def self.bg(r,g,b, output: @@color_depth)
     case output
     when :_24bit
       new(r,g,b).to_24bit(mode: :bg)

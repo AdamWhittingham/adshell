@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require_relative 'lib/deep_merge'
 require_relative 'lib/theme'
 require_relative 'lib/prompt_modules'
 
@@ -8,7 +9,13 @@ PromptModules.init(theme)
 c = theme.to_24bit
 
 lines = []
-lines << [c.light_blue, Path.new(:from_home), c.grey, Git.new]
+lines << [
+  c.light_blue,
+  Path.new(:from_home),
+  c.grey,
+  Git.new,
+  Asdf.new(mode: :only_set),
+]
 lines << [Cursor.new]
 
 
