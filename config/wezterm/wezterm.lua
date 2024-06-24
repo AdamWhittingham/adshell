@@ -5,6 +5,33 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- wezterm.gui is not available to the mux server, so take care to
+-- do something reasonable when this config is evaluated by the mux
+local function get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return 'Dark'
+end
+
+local function scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    config.window_background_gradient = {
+      colors = {
+        '#000b28',
+        '#000723',
+      },
+      orientation = 'Vertical',
+      interpolation = 'Linear',
+      blend = 'Hsv',
+      noise = 32,
+    }
+    return 'adTerm'
+  else
+    return 'Tokyo Night Day'
+  end
+end
+
 config.enable_tab_bar = false
 
 -- STFU
@@ -18,16 +45,7 @@ config.font_size = 16.0
 config.line_height = 1.1
 config.cursor_thickness = 2.0
 
-config.window_background_gradient = {
-  colors = {
-    '#000b28',
-    '#000723',
-  },
-  orientation = 'Vertical',
-  interpolation = 'Linear',
-  blend = 'Hsv',
-  noise = 32,
-}
+config.color_scheme = scheme_for_appearance(get_appearance())
 
 -- Key bindings
 config.keys = {
