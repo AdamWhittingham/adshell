@@ -18,8 +18,8 @@ local function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
     config.window_background_gradient = {
       colors = {
-        '#000b28',
-        '#000723',
+        '#000124',
+        '#00061A',
       },
       orientation = 'Vertical',
       interpolation = 'Linear',
@@ -46,6 +46,13 @@ config.line_height = 1.1
 config.cursor_thickness = 2.0
 
 config.color_scheme = scheme_for_appearance(get_appearance())
+
+config.window_padding = {
+  left = 2,
+  right = 0,
+  top = 2,
+  bottom = 0,
+}
 
 -- Key bindings
 config.keys = {
