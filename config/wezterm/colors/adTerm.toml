@@ -21,9 +21,9 @@ brights = [
   '#ffffff',
 ]
 compose_cursor = '#dd7878'
-cursor_bg = '#202090'
+cursor_bg = '#2020D0'
 cursor_border = '#cccccc'
-cursor_fg = '#dce0e8'
+cursor_fg = '#C0C0FF'
 foreground = '#dddddd'
 scrollbar_thumb = '#acb0be'
 selection_bg = '#806803'
