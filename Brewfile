@@ -1,6 +1,7 @@
 # Dev tools
 brew 'asdf'
 brew 'curl'
+brew 'curlie'
 brew 'fzf'
 brew 'git'
 brew 'jq'
