@@ -98,6 +98,9 @@ fi
 # If eza is installed, use it for better ls
 if type eza &>/dev/null; then
   alias ls='eza'
+  alias l="eza --icons --group-directories-first --git"
+  alias la="eza --icons --group-directories-first --all --git"
+  alias ll="eza --icons --group-directories-first -l"
 fi
 
 alias ncdu='ncdu -rr --color dark --exclude .git --exclude "node_modules"'

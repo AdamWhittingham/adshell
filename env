@@ -1,6 +1,7 @@
 # vim: ft=bash
 export NERDFONT=1
 export ANDROID_HOME=/usr/local/Cellar/android-sdk/
+export EZA_CONFIG_DIR=${HOME}/.config/eza
 export FZF_DEFAULT_COMMAND='rg --files --ignore-file ~/.adshell/rgignore'
 export FZF_DEFAULT_OPTS="\
 --layout=reverse \
