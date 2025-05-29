@@ -28,9 +28,8 @@ if type brew > /dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
-if type brew >/dev/null 2>&1; then
-  source $(brew --prefix asdf)/libexec/asdf.sh
-fi
+# Add ASDF shims
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Add GOBIN to PATH
 if [[ -d $HOME/go/bin ]]; then
