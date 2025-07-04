@@ -72,6 +72,7 @@ alias d='docker'
 alias dbr='docker run --rm -it $(docker build -q .)'
 alias dc='docker compose'
 alias dcl='docker compose logs -f --tail=100 '
+alias dcup='docker compose pull && docker compose up --force-recreate --detach'
 alias dsh="attach_shell_to_docker_container"
 
 # Kubernetes Aliases
