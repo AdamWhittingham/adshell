@@ -78,6 +78,32 @@ update_terminfo(){
   fi
 }
 
+setup_tmux(){
+  if [[ -d ~/.tmux-config ]] ; then
+    echo "Installing tmux config"
+    pushd ~/.tmux-config >/dev/null
+    git pull
+    popd >/dev/null
+  else
+    echo "Updating tmux config"
+    git clone https://github.com/AdamWhittingham/tmux-config.git ~/.tmux-config
+    ln -s ~/.tmux-config/tmux.conf ~/.tmux.conf
+  fi
+}
+
+setup_vim(){
+  if [[ -d ~/.config/nvim ]] ; then
+    echo "Installing vim config"
+    pushd ~/.config/nvim >/dev/null
+    git pull
+    popd >/dev/null
+  else
+    echo "Updating vim config"
+    git clone -b nvim https://github.com/AdamWhittingham/vim-config.git ~/.config/nvim
+    cd ~/.config/nvim; ./install
+  fi
+}
+
 main(){
   pushd $(dirname $0) > /dev/null
   install_dependencies
@@ -86,6 +112,8 @@ main(){
   source_custom
   setup_asdf
   update_terminfo
+  setup_tmux
+  setup_vim
   popd > /dev/null
 }
 
