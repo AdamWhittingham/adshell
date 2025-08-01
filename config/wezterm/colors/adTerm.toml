@@ -1,23 +1,23 @@
 [colors]
 ansi = [
-  '#dddddd',
+  '#000000',
   '#cf3d40',
   '#0fca5c',
-  '#fec418',
+  '#fec440',
   '#248ae3',
   '#815ba4',
-  '#3bc4bf',
+  '#40c4e0',
   '#dddddd',
 ]
 background = '#101020'
 brights = [
-  '#ffffff',
+  '#222222',
   '#ef6155',
   '#4fd369',
-  '#fed448',
+  '#fed478',
   '#1792fc',
-  '#945ac2',
-  '#3bd4df',
+  '#945cc2',
+  '#3bd4ff',
   '#ffffff',
 ]
 compose_cursor = '#dd7878'
