@@ -1,7 +1,6 @@
 # Dev tools
 brew 'asdf'
 brew 'curl'
-brew 'curlie'
 brew 'fzf'
 brew 'git'
 brew 'jq'
@@ -34,15 +33,14 @@ brew 'watch'
 # Essentials
 cask '1password'
 cask 'alfred'
-cask 'firefox'
 cask 'flameshot'
 cask 'keybase'
+cask 'librewolf', args: {"--no-quarantine" => true }
 cask 'obsidian'
 cask 'rectangle'
 cask 'secretive'
 cask 'spotify'
 
 # Better fonts for dev
-tap "homebrew/cask-fonts"
 cask 'font-hasklig'
 cask 'font-symbols-only-nerd-font'
