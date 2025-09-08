@@ -20,9 +20,6 @@ export FZF_DEFAULT_OPTS="\
 --bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
 "
 
-# Add adshell/bin to the PATH
-export PATH=~/.adshell/bin:$PATH
-
 # Add brew sbin to PATH
 if type brew > /dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
@@ -33,9 +30,8 @@ if [[ -d $HOME/go/bin ]]; then
   export PATH=$PATH:$HOME/go/bin
 fi
 
-# If GNU CoreUtils is installed, make them the default
-if type gls > /dev/null 2>&1; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  alias ls='ls --color --group-directories-first'
-fi
+# Add asdf/bin to the PATH
+export PATH=~/.asdf/shims:$PATH
+
+# Add adshell/bin to the PATH
+export PATH=~/.adshell/bin:$PATH
