@@ -13,9 +13,10 @@ cask 'discord'
 cask 'signal'
 
 # Misc
+cask 'affinity'
 cask 'balenaetcher'
-cask 'vlc'
 cask 'steam'
+cask 'vlc'
 
 # Hardware messin'
 cask 'cubicsdr'
