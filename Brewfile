@@ -28,6 +28,7 @@ brew 'tldr'
 brew 'tree'
 brew 'vale'
 brew 'watch'
+brew 'yazi'
 
 # Essentials
 cask '1password'
