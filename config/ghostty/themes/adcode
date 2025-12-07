@@ -1,0 +1,25 @@
+palette = 0=#000000
+palette = 1=#cf3d40
+palette = 2=#0fca5c
+palette = 3=#fec440
+palette = 4=#248ae3
+palette = 5=#815ba4
+palette = 6=#40c4e0
+palette = 7=#dddddd
+
+palette = 8=#222222
+palette = 9=#ff6155
+palette = 10=#4fd369
+palette = 11=#fed478
+palette = 12=#1792fc
+palette = 13=#945cc2
+palette = 14=#3bd4ff
+palette = 15=#ffffff
+
+background = #101020
+foreground = #dddddd
+cursor-color = #2020d0
+cursor-text = #c0c0ff
+
+selection-background = #B0A833
+selection-foreground = #ffffff
