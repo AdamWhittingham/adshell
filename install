@@ -58,10 +58,10 @@ setup_asdf(){
   asdf plugin-add nodejs &> /dev/null
 
   gum spin --title "Installing ruby" -- asdf install ruby 3.3.0
-  asdf set -u ruby 3.3.0
+  asdf set -u ruby 3.4.7
 
   gum spin --title "Installing golang" -- asdf install golang 1.22.1
-  asdf set -u golang 1.22.1
+  asdf set -u golang 1.25.4
 }
 
 symlink_configs(){
