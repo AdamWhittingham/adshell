@@ -20,6 +20,9 @@ export FZF_DEFAULT_OPTS="\
 --bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
 "
 
+# Add adshell/bin to the PATH
+export PATH=~/.adshell/bin:$PATH
+
 # Add brew sbin to PATH
 if type brew > /dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
