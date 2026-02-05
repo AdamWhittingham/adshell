@@ -1,4 +1,4 @@
-palette = 0=#000000
+palette = 0=#888888
 palette = 1=#cf3d40
 palette = 2=#0fca5c
 palette = 3=#fec440
@@ -7,7 +7,7 @@ palette = 5=#815ba4
 palette = 6=#40c4e0
 palette = 7=#dddddd
 
-palette = 8=#222222
+palette = 8=#888888
 palette = 9=#ff6155
 palette = 10=#4fd369
 palette = 11=#fed478
