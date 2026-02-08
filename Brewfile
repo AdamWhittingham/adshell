@@ -2,12 +2,11 @@
 brew 'asdf'
 brew 'curl'
 brew 'fzf'
+cask 'ghostty'
 brew 'git'
 brew 'jq'
 brew 'neovim'
 brew 'tmux'
-brew 'watch'
-cask 'wezterm'
 
 # Better terminal tools
 brew 'bat'
@@ -28,7 +27,7 @@ brew 'tldr'
 brew 'tree'
 brew 'vale'
 brew 'watch'
-brew 'yazi'
+brew 'witr'
 
 # Essentials
 cask '1password'
