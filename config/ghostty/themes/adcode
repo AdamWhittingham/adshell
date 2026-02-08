@@ -18,6 +18,7 @@ palette = 15=#ffffff
 
 background = #101020
 foreground = #dddddd
+
 cursor-color = #2020d0
 cursor-text = #c0c0ff
 

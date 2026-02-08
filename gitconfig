@@ -97,13 +97,16 @@
 [merge]
   keepBackup = false
   defaultToUpstream = true
-  tool = nvimdiff
+  # tool = nvimdiff
+  tool = codediff
 [mergetool]
   keepBackup = false
   prompt = false
 [mergetool "diffmerge"]
   cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
   trustExitCode = true
+[mergetool "codediff"]
+	cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
 
 [url "git@github.com:"]
   insteadOf = "gh:"
