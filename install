@@ -9,7 +9,19 @@ append_to_file() {
   fi
 }
 
+i_use_arch_btw() {
+  uname -a | grep -q archlinux
+}
+
 install_dependencies() {
+  if i_use_arch_btw; then
+    sudo pacman -Sy neovim ghostty tmux gum
+  else
+    install_dependencies_via_brew
+  fi
+}
+
+install_dependencies_via_brew() {
   if ! which brew >/dev/null; then
     echo "Brew not found- please install dependencies manually. See the README.md"
     exit 1
