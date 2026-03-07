@@ -15,7 +15,7 @@ i_use_arch_btw() {
 
 install_dependencies() {
   if i_use_arch_btw; then
-    sudo pacman -Sy neovim ghostty tmux gum
+    sudo pacman -Sy neovim ghostty tmux gum rg
   else
     install_dependencies_via_brew
   fi
@@ -80,9 +80,9 @@ symlink_configs(){
   echo "Symlinking configs"
   ln -s ~/.adshell/config/eza ~/.config/ &>/dev/null
   ln -s ~/.adshell/config/ghostty ~/.config/ &>/dev/null
+  ln -s ~/.adshell/config/hypr/ ~/.config/ &>/dev/null
   ln -s ~/.adshell/config/kitty ~/.config/ &>/dev/null
   ln -s ~/.adshell/config/wezterm ~/.config/ &>/dev/null
-  ln -s ~/.adshell/config/vale.ini ~/.vale.ini &>/dev/null
 }
 
 update_terminfo(){
