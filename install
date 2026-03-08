@@ -15,7 +15,7 @@ i_use_arch_btw() {
 
 install_dependencies() {
   if i_use_arch_btw; then
-    sudo pacman -Sy neovim ghostty tmux gum rg
+    sudo pacman -Sy neovim ghostty tmux gum rofi
   else
     install_dependencies_via_brew
   fi
