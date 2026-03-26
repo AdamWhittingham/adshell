@@ -44,3 +44,8 @@ cask 'spotify'
 # Better fonts for dev
 cask 'font-hasklig'
 cask 'font-symbols-only-nerd-font'
+
+# Handy Dev tooling
+brew 'lua-language-server'
+brew 'yaml-language-server'
+brew 'vscode-langservers-extracted'
