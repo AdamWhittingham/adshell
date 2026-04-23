@@ -117,6 +117,13 @@ setup_vim(){
   fi
 }
 
+setup_llms() {
+  if [[ -d ~/.claude ]] ; then
+    echo "Symlinking Claude files"
+    ln -sf ~/.adshell/skills ~/.claude/skills 
+  fi
+}
+
 main(){
   pushd $(dirname $0) > /dev/null
   install_dependencies
@@ -127,6 +134,7 @@ main(){
   update_terminfo
   setup_tmux
   setup_vim
+  setup_llms
   popd > /dev/null
 }
 
