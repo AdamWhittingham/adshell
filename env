@@ -23,6 +23,11 @@ export FZF_DEFAULT_OPTS="\
 # Add adshell/bin to the PATH
 export PATH=~/.adshell/bin:$PATH
 
+# Set up Todo.txt tool vars
+export TODO_DIR="$HOME/Notes/00 - Meta/tasks/"
+export TODO_FILE="$TODO_DIR/todo.todotxt"
+export DONE_FILE="$TODO_DIR/done.todotxt"
+
 # Add brew sbin to PATH
 if type brew > /dev/null 2>&1 || [[ -e /usr/local/bin/brew ]] ; then
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH

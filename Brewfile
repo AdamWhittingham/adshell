@@ -40,6 +40,7 @@ cask 'proton-mail'
 cask 'rectangle'
 cask 'secretive'
 cask 'spotify'
+cask 'webstonehq/tap/tuxedo'
 
 # Better fonts for dev
 cask 'font-hasklig'

@@ -57,6 +57,9 @@ alias tk='tmux kill-session -t'
 alias tmr='tmuxinator'
 alias tml='tmuxinator_list_and_start'
 
+## tuxedo aliases
+alias todo='tuxedo'
+
 ## rsync aliases
 alias rsync-copy='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'
 alias rsync-move='rsync-copy --remove-source-files'
