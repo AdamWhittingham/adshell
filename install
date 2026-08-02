@@ -60,20 +60,31 @@ source_custom(){
 }
 
 setup_asdf(){
-  echo "Installing via ASDF"
+  echo "Installing ASDF"
   ln -s ~/.adshell/asdf/asdfrc ~/.asdfrc &>/dev/null
   ln -s ~/.adshell/asdf/default-gems ~/.default-gems &>/dev/null
   ln -s ~/.adshell/asdf/default-npm-packages ~/.default-npm-packages &>/dev/null
 
-  asdf plugin-add ruby &> /dev/null
-  asdf plugin-add golang &> /dev/null
-  asdf plugin-add nodejs &> /dev/null
+  asdf plugin add golang &> /dev/null
+  asdf plugin add nodejs &> /dev/null
+  asdf plugin add ruby &> /dev/null
 
-  gum spin --title "Installing ruby" -- asdf install ruby 3.3.0
-  asdf set -u ruby 3.4.7
+  asdf plugin update --all
 
-  gum spin --title "Installing golang" -- asdf install golang 1.22.1
-  asdf set -u golang 1.25.4
+  echo "Installing Languages"
+
+  V_RUBY="3.4.10"
+  V_GOLANG="1.26.5"
+  V_NODEJS="26.5.1"
+  
+  gum spin --title "Installing golang" -- asdf install golang "$V_GOLANG"
+  asdf set -u golang "$V_GOLANG"
+
+  gum spin --title "Installing nodejs" -- asdf install golang "$V_NODEJS"
+  asdf set -u nodejs "$V_NODEJS"
+
+  gum spin --title "Installing ruby" -- asdf install ruby "$V_RUBY"
+  asdf set -u ruby "$V_RUBY"
 }
 
 symlink_configs(){
