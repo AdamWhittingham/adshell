@@ -80,12 +80,19 @@ setup_asdf(){
   
   gum spin --title "Installing golang" -- asdf install golang "$V_GOLANG"
   asdf set -u golang "$V_GOLANG"
+  asdf set golang "$V_GOLANG"
 
-  gum spin --title "Installing nodejs" -- asdf install golang "$V_NODEJS"
+  gum spin --title "Installing nodejs" -- asdf install nodejs "$V_NODEJS"
   asdf set -u nodejs "$V_NODEJS"
+  asdf set nodejs "$V_NODEJS"
+  gum spin --title "Installing nodejs packages" -- npm install -g $(cat ~/.default-npm-packages)
 
   gum spin --title "Installing ruby" -- asdf install ruby "$V_RUBY"
   asdf set -u ruby "$V_RUBY"
+  asdf set ruby "$V_RUBY"
+  gum spin --title "Installing gems" -- gem install $(cat ~/.default-gems)
+
+  asdf reshim &> /dev/null
 }
 
 symlink_configs(){
