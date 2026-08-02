@@ -53,6 +53,7 @@ setup_git(){
 }
 
 source_custom(){
+  echo "Setting up custom shell"
   source_cmd="source $HOME/.adshell/custom"
 
   append_to_file "$source_cmd" $HOME/.bashrc
@@ -69,7 +70,7 @@ setup_asdf(){
   asdf plugin add nodejs &> /dev/null
   asdf plugin add ruby &> /dev/null
 
-  asdf plugin update --all
+  asdf plugin update --all &> /dev/null
 
   echo "Installing Languages"
 
@@ -89,12 +90,12 @@ setup_asdf(){
 
 symlink_configs(){
   echo "Symlinking configs"
-  ln -s ~/.adshell/config/eza ~/.config/ &>/dev/null
-  ln -s ~/.adshell/config/ghostty ~/.config/ &>/dev/null
-  ln -s ~/.adshell/config/herdr/ ~/.config/ &>/dev/null
-  ln -s ~/.adshell/config/hypr/ ~/.config/ &>/dev/null
-  ln -s ~/.adshell/config/kitty ~/.config/ &>/dev/null
-  ln -s ~/.adshell/config/wezterm ~/.config/ &>/dev/null
+  for config in $(ls -1 ~/.adshell/config/) ; do 
+    echo "  - $config"
+    ln -sf ~/.adshell/config/$config ~/.config/ &>/dev/null
+  done
+
+  ln -sTf ~/.adshell/config/claude ~/.claude &>/dev/null
 }
 
 update_terminfo(){
@@ -105,14 +106,14 @@ update_terminfo(){
 
 setup_tmux(){
   if [[ -d ~/.tmux-config ]] ; then
+    echo "Updating tmux config"
+    git clone https://github.com/AdamWhittingham/tmux-config.git ~/.tmux-config &>/dev/null
+    ln -sf ~/.tmux-config/tmux.conf ~/.tmux.conf &>/dev/null
+  else
     echo "Installing tmux config"
     pushd ~/.tmux-config >/dev/null
-    git pull
+    git pull &>/dev/null
     popd >/dev/null
-  else
-    echo "Updating tmux config"
-    git clone https://github.com/AdamWhittingham/tmux-config.git ~/.tmux-config
-    ln -s ~/.tmux-config/tmux.conf ~/.tmux.conf
   fi
 }
 
@@ -120,34 +121,26 @@ setup_vim(){
   if [[ -d ~/.config/nvim ]] ; then
     echo "Installing vim config"
     pushd ~/.config/nvim >/dev/null
-    git pull
+    git pull &>/dev/null
     popd >/dev/null
   else
     echo "Updating vim config"
-    git clone -b nvim https://github.com/AdamWhittingham/vim-config.git ~/.config/nvim
+    git clone -b nvim https://github.com/AdamWhittingham/vim-config.git ~/.config/nvim &>/dev/null
     cd ~/.config/nvim; ./install
   fi
 }
 
-setup_llms() {
-  if [[ -d ~/.claude ]] ; then
-    echo "Symlinking Claude files"
-    ln -sf ~/.adshell/skills ~/.claude/skills 
-  fi
-}
-
-main(){
-  pushd $(dirname $0) > /dev/null
-  install_dependencies
-  setup_git
-  symlink_configs
-  source_custom
-  setup_asdf
-  update_terminfo
-  setup_tmux
-  setup_vim
-  setup_llms
+pushd $(dirname $0) > /dev/null
+cleanup() {
   popd > /dev/null
 }
+trap cleanup EXIT
 
-main
+install_dependencies
+setup_git
+symlink_configs
+source_custom
+setup_asdf
+update_terminfo
+setup_tmux
+setup_vim

@@ -1,0 +1,48 @@
+2026-06-27T13:43:43.766143Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=88183
+2026-06-27T13:43:43.766195Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-06-27T13:43:44.007960Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-06-27T13:59:17.240489Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=88183
+2026-06-27T13:59:39.372588Z  WARN herdr::config::keybinds: config diagnostic invalid keybinding: keys.split_horizontal = "prefix+shift-s"; disabling binding
+2026-06-27T13:59:39.372691Z  WARN herdr::config::keybinds: config diagnostic prefix+z: kept keys.reload_config, disabled keys.zoom
+2026-06-27T13:59:39.372754Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=89508
+2026-06-27T13:59:39.372766Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-06-27T13:59:39.474107Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-06-27T14:10:20.059954Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=89508
+2026-06-27T14:10:41.611258Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=90970
+2026-06-27T14:10:41.611311Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-06-27T14:10:41.734057Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-06-27T14:17:47.791489Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=90970
+2026-06-27T14:17:49.696543Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=91995
+2026-06-27T14:17:49.696594Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-06-27T14:17:49.826828Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-06-27T14:22:59.303469Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=91995
+2026-06-27T14:23:05.843607Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=92751
+2026-06-27T14:23:05.843835Z  INFO herdr::client: connecting to server path=/var/folders/ky/zx3mrg9x4698_vgdkv0_6mg00000gn/T/herdr-remote-92709-moxdox-default.sock
+2026-06-27T14:23:06.664375Z  INFO herdr::client: handshake succeeded version=14 encoding=TerminalAnsi
+2026-06-27T14:27:58.250861Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=92985
+2026-06-27T14:27:58.251122Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-06-27T14:27:58.382176Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-06-27T14:33:12.648678Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=92985
+2026-06-27T14:33:15.322096Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=93410
+2026-06-27T14:33:15.322176Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-06-27T14:33:15.384170Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-06-27T14:33:17.841936Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=93410
+2026-06-27T14:33:23.661679Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=93474
+2026-06-27T14:33:23.661891Z  INFO herdr::client: connecting to server path=/private/tmp/herdr-remote-93433-moxdox-default.sock
+2026-06-27T14:33:24.140404Z  INFO herdr::client: handshake succeeded version=14 encoding=TerminalAnsi
+2026-06-27T14:34:54.481371Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=93474
+2026-07-02T11:19:11.229623Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=21254
+2026-07-02T11:19:11.230082Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-07-02T11:19:11.346845Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-07-02T16:23:52.838640Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=21254
+2026-07-18T18:55:08.490651Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=89405
+2026-07-18T18:55:08.490910Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-07-18T18:55:08.699931Z  INFO herdr::client: handshake succeeded version=16 encoding=SemanticFrame
+2026-07-18T19:02:26.620973Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=89405
+2026-08-02T19:54:40.319643Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=43932
+2026-08-02T19:54:40.319777Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-08-02T19:54:40.564723Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-08-02T19:54:49.236049Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=43932
+2026-08-02T19:55:21.660201Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=44321
+2026-08-02T19:55:21.660273Z  INFO herdr::client: connecting to server path=/Users/adamwhittingham/.config/herdr/herdr-client.sock
+2026-08-02T19:55:21.808269Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
