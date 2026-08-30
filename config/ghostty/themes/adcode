@@ -16,11 +16,11 @@ palette = 13=#945cc2
 palette = 14=#3bd4ff
 palette = 15=#ffffff
 
-background = #101020
+background = #0a0e1a
 foreground = #dddddd
 
 cursor-color = #2020d0
 cursor-text = #c0c0ff
 
-selection-background = #B0A833
+selection-background = #3d1e6d
 selection-foreground = #ffffff
