@@ -11,6 +11,7 @@ cask 'syncthing'
 # Comms
 cask 'discord'
 cask 'signal'
+cask 'proton-mail'
 
 # Misc
 cask 'affinity'
