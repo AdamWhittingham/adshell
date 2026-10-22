@@ -113,7 +113,7 @@ function test_24bit_colour {
   }'
 }
 
-ssh-on-boot() {
+function ssh-on-boot {
     local host="$1"
     shift
     local delay="${SSH_RETRY_DELAY:-2}"

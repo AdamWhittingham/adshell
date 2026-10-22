@@ -15,7 +15,7 @@ i_use_arch_btw() {
 
 install_dependencies() {
   if i_use_arch_btw; then
-    sudo pacman -Sy neovim ghostty tmux gum rofi
+    sudo pacman -Sy neovim ghostty tmux gum rofi jq
   else
     install_dependencies_via_brew
   fi
@@ -101,8 +101,18 @@ symlink_configs(){
     echo "  - $config"
     ln -sf ~/.adshell/config/$config ~/.config/ &>/dev/null
   done
+}
 
-  ln -sTf ~/.adshell/config/claude ~/.claude &>/dev/null
+setup_claude(){
+  echo "Linking Claude Code config"
+  mkdir -p ~/.claude/skills
+  for f in CLAUDE.md settings.json statusline-command.sh; do
+    ln -sf ~/.adshell/config/claude/$f ~/.claude/$f
+  done
+
+  for skill in ~/.adshell/config/claude/skills/*; do
+    ln -sfn "$skill" ~/.claude/skills/
+  done
 }
 
 update_terminfo(){
@@ -146,6 +156,7 @@ trap cleanup EXIT
 install_dependencies
 setup_git
 symlink_configs
+setup_claude
 source_custom
 setup_asdf
 update_terminfo
