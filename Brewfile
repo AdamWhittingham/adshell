@@ -7,6 +7,7 @@ brew 'git'
 brew 'jq'
 brew 'neovim'
 brew 'tmux'
+brew 'tuicr'
 
 # Better terminal tools
 brew 'bat'
