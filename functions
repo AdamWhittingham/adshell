@@ -113,7 +113,7 @@ function test_24bit_colour {
   }'
 }
 
-function ssh-on-boot {
+function ssh_on_boot {
     local host="$1"
     shift
     local delay="${SSH_RETRY_DELAY:-2}"
@@ -130,6 +130,7 @@ function ssh-on-boot {
         sleep "$delay"
     done
 }
+alias ssh-on-boot=ssh_on_boot
 
 function tmuxinator_list_and_start {
   project=`tmuxinator list --newline | grep -v "tmuxinator projects" | fzf --no-preview`
