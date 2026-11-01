@@ -74,7 +74,7 @@ setup_asdf(){
 
   echo "Installing Languages"
 
-  V_RUBY="3.4.10"
+  V_RUBY="4.0.6"
   V_GOLANG="1.26.5"
   V_NODEJS="26.5.1"
   
