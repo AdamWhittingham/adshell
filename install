@@ -106,9 +106,16 @@ symlink_configs(){
 setup_claude(){
   echo "Linking Claude Code config"
   mkdir -p ~/.claude/skills
-  for f in CLAUDE.md settings.json statusline-command.sh; do
+  for f in CLAUDE.md statusline-command.sh; do
     ln -sf ~/.adshell/config/claude/$f ~/.claude/$f
   done
+
+  # Work and home settings differ, so only overwrite the status line
+  settings=~/.claude/settings.json
+  [ -L "$settings" ] && rm "$settings"
+  [ -f "$settings" ] || echo '{}' > "$settings"
+  jq '.statusLine = {"type": "command", "command": "~/.claude/statusline-command.sh"}' "$settings" > "$settings.tmp" \
+    && mv "$settings.tmp" "$settings"
 
   for skill in ~/.adshell/config/claude/skills/*; do
     ln -sfn "$skill" ~/.claude/skills/
