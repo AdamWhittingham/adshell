@@ -10,3 +10,4 @@
 - Create a local commit with a descriptive name when completing each step of a plan
 - Where appropriate, add a short summary of the changes to the commit message
 - The `gh` tool is not available. If asked about changes on a PR or branch, diff the current HEAD against main or master
+- Prioritise making diffs simple and easy to review, so we can be confident with the changes we make
