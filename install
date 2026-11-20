@@ -120,6 +120,9 @@ setup_claude(){
   for skill in ~/.adshell/config/claude/skills/*; do
     ln -sfn "$skill" ~/.claude/skills/
   done
+
+  claude plugin marketplace add honeycombio/agent-skill
+  claude plugin install honeycomb
 }
 
 update_terminfo(){

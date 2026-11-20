@@ -1,7 +1,7 @@
 # vim: set ft=brewfile
 
+cask 'bruno'
 cask 'google-chrome'
 cask 'pgadmin4'
-cask 'postman'
 cask 'slack'
 cask 'tailscale'
