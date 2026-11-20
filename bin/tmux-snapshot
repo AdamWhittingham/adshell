@@ -1,0 +1,225 @@
+#!/usr/bin/python3
+"""Save and restore tmux sessions, including the Claude Code session in each pane.
+
+  tmux-snapshot save             Save every session, window and pane
+  tmux-snapshot list             List saved snapshots
+  tmux-snapshot show [FILE]      Summarise a snapshot (default: the latest)
+  tmux-snapshot restore [FILE]   Recreate sessions that are not running
+
+Restore resumes each Claude pane with `claude -r <session id>`. Other panes
+get their command typed but not run, so you choose what to start. Pass
+--run to run those commands as well.
+"""
+
+import argparse
+import glob
+import json
+import os
+import subprocess
+import sys
+import time
+
+STATE_DIR = os.path.expanduser("~/.local/state/tmux-snapshot")
+LATEST = os.path.join(STATE_DIR, "latest.json")
+SHELLS = {"zsh", "-zsh", "bash", "-bash", "sh", "fish", "login"}
+SEP = "\x1f"
+
+
+SOCKET = []
+
+
+def tmux(*args, check=True):
+    result = subprocess.run(["tmux", *SOCKET, *args], capture_output=True, text=True)
+    if check and result.returncode != 0:
+        raise SystemExit(f"tmux {' '.join(args)} failed: {result.stderr.strip()}")
+    return result.stdout
+
+
+def rows(*args, fields):
+    out = tmux(*args, "-F", SEP.join("#{%s}" % f for f in fields))
+    return [dict(zip(fields, line.split(SEP))) for line in out.splitlines() if line]
+
+
+def pid_alive(pid):
+    try:
+        os.kill(pid, 0)
+        return True
+    except (ProcessLookupError, PermissionError):
+        return False
+
+
+def claude_sessions_by_pane():
+    sessions = {}
+    for path in glob.glob(os.path.expanduser("~/.claude/sessions/*.json")):
+        try:
+            with open(path) as f:
+                data = json.load(f)
+        except (OSError, ValueError):
+            continue
+        pane = (data.get("tmux") or "").rpartition(".")[2]
+        if not pane.startswith("%") or not data.get("sessionId") or not pid_alive(data.get("pid", 0)):
+            continue
+        if pane not in sessions or data.get("startedAt", 0) > sessions[pane].get("startedAt", 0):
+            sessions[pane] = data
+    return sessions
+
+
+def foreground_command(tty):
+    out = subprocess.run(["ps", "-o", "pgid=,tpgid=,args=", "-t", tty], capture_output=True, text=True).stdout
+    for line in out.splitlines():
+        parts = line.split(None, 2)
+        if len(parts) == 3 and parts[0] == parts[1]:
+            command = parts[2].strip()
+            program, _, rest = command.partition(" ")
+            if os.path.basename(program) in SHELLS:
+                return None
+            if os.path.basename(program) in {"make", "gnumake"}:
+                program = "make"
+            return f"{program} {rest}".strip()
+    return None
+
+
+def save(_args):
+    if subprocess.run(["tmux", *SOCKET, "has-session"], capture_output=True).returncode != 0:
+        raise SystemExit("tmux is not running, so there is nothing to save.")
+
+    claude = claude_sessions_by_pane()
+    snapshot = {"saved_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "sessions": []}
+
+    for s in rows("list-sessions", fields=["session_name"]):
+        session = {"name": s["session_name"], "windows": []}
+        for w in rows("list-windows", "-t", s["session_name"],
+                      fields=["window_index", "window_name", "window_layout", "window_active", "window_id"]):
+            window = {"index": int(w["window_index"]), "name": w["window_name"],
+                      "layout": w["window_layout"], "active": w["window_active"] == "1", "panes": []}
+            for p in rows("list-panes", "-t", w["window_id"],
+                          fields=["pane_id", "pane_index", "pane_current_path", "pane_tty", "pane_active"]):
+                pane = {"index": int(p["pane_index"]), "cwd": p["pane_current_path"], "active": p["pane_active"] == "1"}
+                c = claude.get(p["pane_id"])
+                if c:
+                    pane["claude"] = {"session_id": c["sessionId"], "name": c.get("name"), "cwd": c.get("cwd")}
+                else:
+                    pane["command"] = foreground_command(p["pane_tty"])
+                window["panes"].append(pane)
+            session["windows"].append(window)
+        snapshot["sessions"].append(session)
+
+    os.makedirs(STATE_DIR, exist_ok=True)
+    path = os.path.join(STATE_DIR, time.strftime("%Y-%m-%d-%H%M%S") + ".json")
+    with open(path, "w") as f:
+        json.dump(snapshot, f, indent=2)
+    if os.path.lexists(LATEST):
+        os.remove(LATEST)
+    os.symlink(os.path.basename(path), LATEST)
+
+    print(f"Saved {path}")
+    summarise(snapshot)
+
+
+def load(path):
+    path = path or LATEST
+    if not os.path.exists(path):
+        raise SystemExit(f"No snapshot at {path}. Run `tmux-snapshot save` first.")
+    with open(path) as f:
+        return json.load(f)
+
+
+def summarise(snapshot):
+    for session in snapshot["sessions"]:
+        print(f"{session['name']}:")
+        for window in session["windows"]:
+            for pane in window["panes"]:
+                if "claude" in pane:
+                    what = f"claude -r {pane['claude']['session_id']}"
+                else:
+                    what = pane.get("command") or "shell"
+                print(f"  {window['index']}.{pane['index']} {window['name']:<28} {what[:60]:<60} {pane['cwd']}")
+
+
+def list_snapshots(_args):
+    for path in sorted(glob.glob(os.path.join(STATE_DIR, "2*.json"))):
+        print(path)
+
+
+def show(args):
+    snapshot = load(args.file)
+    print(f"Saved at {snapshot['saved_at']}")
+    summarise(snapshot)
+
+
+def pane_command(pane):
+    if "claude" in pane:
+        return f"claude -r {pane['claude']['session_id']}", True
+    return pane.get("command"), False
+
+
+def restore(args):
+    snapshot = load(args.file)
+    running = set()
+    if subprocess.run(["tmux", *SOCKET, "has-session"], capture_output=True).returncode == 0:
+        running = {s["session_name"] for s in rows("list-sessions", fields=["session_name"])}
+
+    for session in snapshot["sessions"]:
+        name = session["name"]
+        if name in running:
+            print(f"Skipped {name}: a session with this name is already running.")
+            continue
+
+        active_window = None
+        for i, window in enumerate(sorted(session["windows"], key=lambda w: w["index"])):
+            panes = sorted(window["panes"], key=lambda p: p["index"])
+            first_cwd = panes[0]["cwd"] if os.path.isdir(panes[0]["cwd"]) else os.path.expanduser("~")
+            if i == 0:
+                window_id, pane_id = tmux("new-session", "-d", "-s", name, "-n", window["name"], "-c", first_cwd,
+                                          "-x", "250", "-y", "60", "-P", "-F", "#{window_id} #{pane_id}").split()
+            else:
+                window_id, pane_id = tmux("new-window", "-d", "-t", f"{name}:", "-n", window["name"], "-c", first_cwd,
+                                          "-P", "-F", "#{window_id} #{pane_id}").split()
+            tmux("set-option", "-w", "-t", window_id, "automatic-rename", "off", check=False)
+
+            pane_ids = [pane_id]
+            for pane in panes[1:]:
+                cwd = pane["cwd"] if os.path.isdir(pane["cwd"]) else first_cwd
+                pane_ids.append(tmux("split-window", "-d", "-t", pane_ids[-1], "-c", cwd, "-P", "-F", "#{pane_id}").strip())
+                tmux("select-layout", "-t", window_id, "tiled", check=False)
+            tmux("select-layout", "-t", window_id, window["layout"], check=False)
+
+            for pane, pid in zip(panes, pane_ids):
+                command, is_claude = pane_command(pane)
+                if command:
+                    tmux("send-keys", "-t", pid, "-l", command)
+                    if is_claude or args.run:
+                        tmux("send-keys", "-t", pid, "Enter")
+                if pane.get("active"):
+                    tmux("select-pane", "-t", pid, check=False)
+            if window.get("active"):
+                active_window = window_id
+
+        if active_window:
+            tmux("select-window", "-t", active_window, check=False)
+        print(f"Restored {name} ({len(session['windows'])} windows)")
+
+    print("Attach with: tmux attach -t <session>")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("-L", dest="socket", help="tmux socket name, for testing on a separate server")
+    sub = parser.add_subparsers(dest="action", required=True)
+    sub.add_parser("save").set_defaults(func=save)
+    sub.add_parser("list").set_defaults(func=list_snapshots)
+    p = sub.add_parser("show")
+    p.add_argument("file", nargs="?")
+    p.set_defaults(func=show)
+    p = sub.add_parser("restore")
+    p.add_argument("file", nargs="?")
+    p.add_argument("--run", action="store_true", help="also run the non-Claude commands")
+    p.set_defaults(func=restore)
+    args = parser.parse_args()
+    if args.socket:
+        SOCKET.extend(["-L", args.socket])
+    args.func(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
