@@ -5,10 +5,17 @@
   tmux-snapshot list             List saved snapshots
   tmux-snapshot show [FILE]      Summarise a snapshot (default: the latest)
   tmux-snapshot restore [FILE]   Recreate sessions that are not running
+  tmux-snapshot autosave         Save in the background after a short pause
+                                 (for tmux and Claude Code hooks)
 
 Restore resumes each Claude pane with `claude -r <session id>`. Other panes
 get their command typed but not run, so you choose what to start. Pass
 --run to run those commands as well.
+
+Each snapshot records which tmux server it came from. With no FILE, restore
+uses the newest snapshot from a server that is no longer running, so the
+autosaves of a new server (after a reboot) do not replace the state you
+want back.
 """
 
 import argparse
@@ -21,6 +28,10 @@ import time
 
 STATE_DIR = os.path.expanduser("~/.local/state/tmux-snapshot")
 LATEST = os.path.join(STATE_DIR, "latest.json")
+PENDING = os.path.join(STATE_DIR, "autosave.pending")
+RESTORING = os.path.join(STATE_DIR, "restoring")
+AUTOSAVE_DELAY_SECONDS = 5
+KEEP_SNAPSHOTS = 200
 SHELLS = {"zsh", "-zsh", "bash", "-bash", "sh", "fish", "login"}
 SEP = "\x1f"
 
@@ -79,12 +90,29 @@ def foreground_command(tty):
     return None
 
 
-def save(_args):
-    if subprocess.run(["tmux", *SOCKET, "has-session"], capture_output=True).returncode != 0:
-        raise SystemExit("tmux is not running, so there is nothing to save.")
+def tmux_running():
+    return subprocess.run(["tmux", *SOCKET, "has-session"], capture_output=True).returncode == 0
 
+
+def server_id():
+    return tmux("display-message", "-p", "#{pid}-#{start_time}").strip()
+
+
+def snapshot_paths():
+    return sorted(glob.glob(os.path.join(STATE_DIR, "2*.json")))
+
+
+def read_json(path):
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def capture():
     claude = claude_sessions_by_pane()
-    snapshot = {"saved_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "sessions": []}
+    snapshot = {"saved_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "server": server_id(), "sessions": []}
 
     for s in rows("list-sessions", fields=["session_name"]):
         session = {"name": s["session_name"], "windows": []}
@@ -103,25 +131,91 @@ def save(_args):
                 window["panes"].append(pane)
             session["windows"].append(window)
         snapshot["sessions"].append(session)
+    return snapshot
 
+
+def write(snapshot):
     os.makedirs(STATE_DIR, exist_ok=True)
-    path = os.path.join(STATE_DIR, time.strftime("%Y-%m-%d-%H%M%S") + ".json")
+    paths = snapshot_paths()
+    newest = read_json(paths[-1]) if paths else None
+    if newest and newest.get("server") == snapshot["server"] and newest.get("sessions") == snapshot["sessions"]:
+        if not os.path.exists(LATEST):
+            if os.path.lexists(LATEST):
+                os.remove(LATEST)
+            os.symlink(os.path.basename(paths[-1]), LATEST)
+        return None
+
+    now = time.time()
+    path = os.path.join(STATE_DIR, time.strftime("%Y-%m-%d-%H%M%S", time.localtime(now)) + "-%03d.json" % (now % 1 * 1000))
     with open(path, "w") as f:
         json.dump(snapshot, f, indent=2)
     if os.path.lexists(LATEST):
         os.remove(LATEST)
     os.symlink(os.path.basename(path), LATEST)
 
-    print(f"Saved {path}")
+    for old in snapshot_paths()[:-KEEP_SNAPSHOTS]:
+        os.remove(old)
+    return path
+
+
+def save(_args):
+    if not tmux_running():
+        raise SystemExit("tmux is not running, so there is nothing to save.")
+
+    snapshot = capture()
+    path = write(snapshot)
+    print(f"Saved {path}" if path else "Nothing has changed since the last snapshot.")
     summarise(snapshot)
 
 
+def autosave(_args):
+    os.makedirs(STATE_DIR, exist_ok=True)
+    token = str(time.time_ns())
+    with open(PENDING, "w") as f:
+        f.write(token)
+
+    if os.fork() != 0:
+        return
+    os.setsid()
+    devnull = os.open(os.devnull, os.O_RDWR)
+    for fd in (0, 1, 2):
+        os.dup2(devnull, fd)
+
+    time.sleep(AUTOSAVE_DELAY_SECONDS)
+    try:
+        with open(PENDING) as f:
+            if f.read() != token:
+                os._exit(0)
+        if os.path.exists(RESTORING) and time.time() - os.path.getmtime(RESTORING) < 600:
+            os._exit(0)
+        if tmux_running():
+            write(capture())
+    finally:
+        os._exit(0)
+
+
+def default_snapshot():
+    paths = snapshot_paths()
+    if not paths:
+        return None
+    if not tmux_running():
+        return paths[-1]
+    current = server_id()
+    for path in reversed(paths):
+        snapshot = read_json(path)
+        if snapshot and snapshot.get("server") != current:
+            return path
+    return None
+
+
 def load(path):
-    path = path or LATEST
-    if not os.path.exists(path):
-        raise SystemExit(f"No snapshot at {path}. Run `tmux-snapshot save` first.")
+    path = path or default_snapshot()
+    if not path or not os.path.exists(path):
+        raise SystemExit("No snapshot from an earlier tmux server. Pass a FILE (see `tmux-snapshot list`).")
     with open(path) as f:
-        return json.load(f)
+        snapshot = json.load(f)
+    snapshot["path"] = path
+    return snapshot
 
 
 def summarise(snapshot):
@@ -142,8 +236,8 @@ def list_snapshots(_args):
 
 
 def show(args):
-    snapshot = load(args.file)
-    print(f"Saved at {snapshot['saved_at']}")
+    snapshot = load(args.file or (LATEST if os.path.exists(LATEST) else None))
+    print(f"{snapshot['path']} (saved at {snapshot['saved_at']})")
     summarise(snapshot)
 
 
@@ -155,10 +249,22 @@ def pane_command(pane):
 
 def restore(args):
     snapshot = load(args.file)
+    print(f"Restoring {snapshot['path']} (saved at {snapshot['saved_at']})")
     running = set()
-    if subprocess.run(["tmux", *SOCKET, "has-session"], capture_output=True).returncode == 0:
+    if tmux_running():
         running = {s["session_name"] for s in rows("list-sessions", fields=["session_name"])}
 
+    os.makedirs(STATE_DIR, exist_ok=True)
+    open(RESTORING, "w").close()
+    try:
+        restore_sessions(snapshot, running, args.run)
+    finally:
+        os.remove(RESTORING)
+    autosave(args)
+    print("Attach with: tmux attach -t <session>")
+
+
+def restore_sessions(snapshot, running, run_commands):
     for session in snapshot["sessions"]:
         name = session["name"]
         if name in running:
@@ -188,7 +294,7 @@ def restore(args):
                 command, is_claude = pane_command(pane)
                 if command:
                     tmux("send-keys", "-t", pid, "-l", command)
-                    if is_claude or args.run:
+                    if is_claude or run_commands:
                         tmux("send-keys", "-t", pid, "Enter")
                 if pane.get("active"):
                     tmux("select-pane", "-t", pid, check=False)
@@ -199,8 +305,6 @@ def restore(args):
             tmux("select-window", "-t", active_window, check=False)
         print(f"Restored {name} ({len(session['windows'])} windows)")
 
-    print("Attach with: tmux attach -t <session>")
-
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -208,6 +312,7 @@ def main():
     sub = parser.add_subparsers(dest="action", required=True)
     sub.add_parser("save").set_defaults(func=save)
     sub.add_parser("list").set_defaults(func=list_snapshots)
+    sub.add_parser("autosave").set_defaults(func=autosave)
     p = sub.add_parser("show")
     p.add_argument("file", nargs="?")
     p.set_defaults(func=show)
@@ -218,6 +323,9 @@ def main():
     args = parser.parse_args()
     if args.socket:
         SOCKET.extend(["-L", args.socket])
+        global STATE_DIR, LATEST, PENDING, RESTORING
+        STATE_DIR = os.path.join(STATE_DIR, "socket-" + args.socket)
+        LATEST, PENDING, RESTORING = (os.path.join(STATE_DIR, n) for n in ("latest.json", "autosave.pending", "restoring"))
     args.func(args)
 
 

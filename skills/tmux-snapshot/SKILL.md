@@ -14,6 +14,16 @@ description: Save or restore the user's tmux sessions, windows and panes, includ
 | `tmux-snapshot list` | List the saved snapshots |
 | `tmux-snapshot restore [FILE] [--run]` | Recreate the sessions that are not running |
 
+## Autosave
+
+Snapshots are saved automatically, so a manual save is only a final check:
+- tmux hooks in `~/.tmux-config/tmux.conf` run `tmux-snapshot autosave` when a session or window is created, split or renamed.
+- A `SessionStart` hook in `~/.claude/settings.json` runs it when a Claude session starts in tmux, which records the new session id.
+
+`autosave` waits 5 seconds and saves once for a burst of events. It skips a save when nothing has changed, and keeps the newest 200 snapshots. Closing a window or session does not save, so that a shutdown does not save a half-closed state; a closed window stays in the snapshot until the next change or manual save.
+
+Each snapshot records its tmux server. With no FILE, `restore` uses the newest snapshot from a server that is no longer running, so autosaves from the new server after a reboot do not replace the state to restore.
+
 ## Before a reboot
 
 1. Run `tmux-snapshot save` and show the user the summary, so they can check every Claude pane has a session id.
@@ -28,4 +38,4 @@ On restore:
 - Other panes get their command typed at the prompt but not run (for example `make logs`), so the user chooses what to start. `--run` runs them all.
 - A directory that no longer exists (a removed worktree) falls back to the window's first pane directory, or `~`.
 
-`-L <socket>` restores into a separate tmux server, for testing without touching the user's sessions. When testing, replace the Claude panes in a copy of the snapshot first (`jq '(.sessions[].windows[].panes[] | select(.claude)) |= (del(.claude) + {command: "echo would resume"})'`), so the test does not resume live Claude sessions a second time.
+`-L <socket>` uses a separate tmux server (and a separate snapshot folder), for testing without touching the user's sessions. When testing, replace the Claude panes in a copy of the snapshot first (`jq '(.sessions[].windows[].panes[] | select(.claude)) |= (del(.claude) + {command: "echo would resume"})'`), so the test does not resume live Claude sessions a second time.
