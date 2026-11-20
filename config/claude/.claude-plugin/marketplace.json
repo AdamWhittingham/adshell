@@ -1,0 +1,11 @@
+{
+  "name": "adshell",
+  "owner": { "name": "Adam Whittingham" },
+  "plugins": [
+    {
+      "name": "workstreams-pane",
+      "source": "./plugins/workstreams-pane",
+      "description": "Sidebar of open Obsidian workstreams with live PR status and stale work"
+    }
+  ]
+}

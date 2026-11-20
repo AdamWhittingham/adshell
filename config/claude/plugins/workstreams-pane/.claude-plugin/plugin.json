@@ -1,0 +1,9 @@
+{
+  "name": "workstreams-pane",
+  "version": "0.1.0",
+  "description": "Sidebar of open Obsidian workstreams with live PR status and stale work",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "Adam Whittingham"
+  }
+}

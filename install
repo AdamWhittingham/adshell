@@ -123,6 +123,10 @@ setup_claude(){
 
   claude plugin marketplace add honeycombio/agent-skill
   claude plugin install honeycomb
+
+  # Mods in config/claude/plugins are read from this folder, so edits need only /reload-plugins
+  claude plugin marketplace add ~/.adshell/config/claude
+  claude plugin install workstreams-pane@adshell
 }
 
 update_terminfo(){
