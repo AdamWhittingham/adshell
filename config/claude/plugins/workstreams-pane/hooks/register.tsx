@@ -13,6 +13,7 @@ const CLOSED_STATUSES = ['done', 'abandoned']
 const REFRESH_MS = 2 * 60 * 1000
 const STALE_DAYS = 3
 const DAY_MS = 24 * 60 * 60 * 1000
+const GROUP_BACKGROUND = '#30363d'
 
 const snapshot = atom(
   { plugin: 'workstreams-pane', key: 'snapshot' } as const,
@@ -394,9 +395,11 @@ export const register: Register = on => {
       if (threads.length === 0) return null
       return (
         <Box flexDirection="column" marginTop={1}>
-          <Text weight="bold" color="claude" wrap="truncate-end">
-            ▾ {one.title} <Text dimColor>{threads.length} threads</Text>
-          </Text>
+          <Box backgroundColor={GROUP_BACKGROUND} paddingX={1}>
+            <Text weight="bold" color="white" wrap="truncate-end">
+              {one.title} <Text dimColor>{threads.length} threads</Text>
+            </Text>
+          </Box>
           {threads.map(thread => card(thread, '  '))}
         </Box>
       )
