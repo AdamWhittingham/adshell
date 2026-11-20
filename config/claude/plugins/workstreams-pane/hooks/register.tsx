@@ -159,11 +159,15 @@ const refresh = async ($: EngineInterface): Promise<void> => {
   }
 }
 
+const awaitingReview = (pr: PullRequest): boolean =>
+  pr.state === 'OPEN' && !pr.isDraft && (pr.review === 'REVIEW_REQUIRED' || pr.review === 'NONE')
+
 const prColor = (pr: PullRequest): string => {
   if (pr.state === 'MERGED') return 'merged'
   if (pr.state === 'CLOSED') return 'inactive'
   if (pr.review === 'CHANGES_REQUESTED' || pr.checks === 'fail') return 'error'
   if (pr.review === 'APPROVED') return 'success'
+  if (awaitingReview(pr)) return 'warning'
   return 'text'
 }
 
@@ -173,7 +177,7 @@ const prLabel = (pr: PullRequest): string => {
   const parts = [pr.isDraft ? 'draft' : 'open']
   if (pr.review === 'APPROVED') parts.push('approved')
   if (pr.review === 'CHANGES_REQUESTED') parts.push('changes requested')
-  if (pr.review === 'REVIEW_REQUIRED') parts.push('needs review')
+  if (awaitingReview(pr)) parts.push('awaiting review')
   if (pr.checks !== 'none') parts.push(`checks ${pr.checks}`)
   return parts.join(', ')
 }
