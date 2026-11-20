@@ -5,6 +5,8 @@ import type { PaneView, PullRequest, Snapshot, StatusChange, Workstream } from '
 
 const PANE = 'workstreams'
 const TRIAGE_PANE = 'workstreams-triage'
+// Only the manager session in the primary checkout opens the pane by itself; workstream sessions run in worktrees
+const MAIN_SESSION_CWD = '/Users/adam/code/cronofy'
 const WORKSTREAMS_DIR =
   '/Users/adam/Library/Mobile Documents/iCloud~md~obsidian/Documents/Work/20 - Product/workstreams'
 const CLOSED_STATUSES = ['done', 'abandoned']
@@ -32,6 +34,7 @@ const view = atom(
 
 let previousPrs: Map<string, PullRequest> | undefined
 let refreshing = false
+let refreshTimerStarted = false
 
 const frontmatterField = (text: string, field: string): string => {
   const match = text.match(new RegExp(`^${field}:[ \\t]*(.*)$`, 'm'))
@@ -230,6 +233,13 @@ const runSafely = ($: EngineInterface, work: () => Promise<void>): void => {
   work().catch(error => $.ui.toast(`Workstreams: ${String(error)}`))
 }
 
+const startRefreshing = ($: EngineInterface): void => {
+  void refresh($)
+  if (refreshTimerStarted) return
+  refreshTimerStarted = true
+  $.clock.every(REFRESH_MS, () => void refresh($))
+}
+
 const STATUS_ORDER = ['in-review', 'active', 'blocked', 'waiting', 'monitoring', 'paused']
 const statusRank = (status: string): number => {
   const rank = STATUS_ORDER.indexOf(status)
@@ -246,16 +256,17 @@ export const register: Register = on => {
       name: 'workstreams-triage',
       description: 'Open, pause or close workstreams from a pane',
     })
-    void $.ui.open({ id: PANE, title: 'Workstreams', columns: 56 })
-    void refresh($)
-    $.clock.every(REFRESH_MS, () => void refresh($))
+    if (e.cwd === MAIN_SESSION_CWD) {
+      void $.ui.open({ id: PANE, title: 'Workstreams', columns: 56 })
+      startRefreshing($)
+    }
 
     return next(e)
   })
 
   on('command.run', { command: 'workstreams-pane' }, async $ => {
     await $.ui.open({ id: PANE, title: 'Workstreams', columns: 56 })
-    void refresh($)
+    startRefreshing($)
 
     return { text: 'Workstreams pane opened and refreshing.' }
   })
