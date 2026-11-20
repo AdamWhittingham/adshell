@@ -344,7 +344,7 @@ export const register: Register = on => {
   })
 
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
-    const { Box, Text, Button } = $.ui.resolve(e)
+    const { Box, Text, Button, Link } = $.ui.resolve(e)
     const { workstreams, refreshedAt, error } = await read($, snapshot)
     const current = await read($, view)
 
@@ -373,7 +373,7 @@ export const register: Register = on => {
         </Text>
         {one.prs.map(pr => (
           <Text color={prColor(pr)} wrap="truncate-end">
-            {indent}{'  '}{pr.repo}#{pr.number} {prLabel(pr)}
+            {indent}{'  '}<Link href={pr.url}>{pr.repo}#{pr.number}</Link> {prLabel(pr)}
           </Text>
         ))}
         {one.prs.length === 0 && <Text dimColor>{indent}{'  '}no PR</Text>}
